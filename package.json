@@ -1,0 +1,26 @@
+{
+  "name": "discord-command-editor",
+  "version": "1.0.0",
+  "description": "Discord Bot Command List Editor.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TinyPudding/Discord-Command-Editor.git"
+  },
+  "keywords": [
+    "discord"
+  ],
+  "author": "Yasmin Seidel (JasminDreasond)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TinyPudding/Discord-Command-Editor/issues"
+  },
+  "homepage": "https://github.com/TinyPudding/Discord-Command-Editor#readme",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
