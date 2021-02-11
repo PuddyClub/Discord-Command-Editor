@@ -1,1 +1,5 @@
-var pudding = true;
+$(() => {
+
+    $.LoadingOverlay("hide");
+
+});
