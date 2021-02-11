@@ -128,7 +128,7 @@ $(() => {
     };
 
     // Default Page
-    if (typeof queryURL.code !== "string" && typeof queryURL.type !== "string") {
+    if (typeof queryURL.code !== "string" || typeof queryURL.type !== "string") {
 
         // Login Animation
         divBase.title.fadeIn(1000);
