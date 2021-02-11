@@ -214,6 +214,4 @@ class InteractionsClient {
 
     }
 
-}
-
-module.exports = InteractionsClient;
+};
