@@ -18,7 +18,7 @@ const readFile = function(file) {
 const homepageCallback = (req, res) => {
 
     // Webpage
-    const webpage = fs.readFileSync(path.join(__dirname, './public/index.html'));
+    const webpage = fs.readFileSync(path.join(__dirname, './public/index.html'), 'utf-8');
 
     // Render Page
     res.send(
