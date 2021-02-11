@@ -1,5 +1,7 @@
 $(() => {
 
+    // Template made by dimi130473 (https://bootsnipp.com/snippets/bxzmb)
+
     // Div Base
     const divBase = {};
 
@@ -100,20 +102,24 @@ $(() => {
 
     );
 
-    // Load Login Base
-    // Template made by dimi130473 (https://bootsnipp.com/snippets/bxzmb)
+    // Root
     divBase.root = $('<div>', { id: 'login' }).append(
 
         // Title
-        divBase.title,
+        divBase.title.css('display', 'none'),
 
         // Container
-        divBase.container
+        divBase.container.css('display', 'none')
 
     );
 
     // Start Login Form
     $('body').append(divBase.root);
-    $.LoadingOverlay("hide");
+    /* $.LoadingOverlay("hide");
+    $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"}); */
+
+    // Login Animation
+    divBase.title.fadeIn(1000);
+    divBase.container.fadeIn(1500);
 
 });
