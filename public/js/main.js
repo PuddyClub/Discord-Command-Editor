@@ -54,16 +54,24 @@ $(() => {
         $('<div>', { class: 'form-group' }).append(
             $('<center>').append(
 
-                // Remember
-                divBase.remember,
+                // Div
+                $('<div>', {class: 'mb-4'}).append(
 
-                // BR
-                $('<br>'),
-                
-                // Buttons
-                divBase.buttons.oauth2,
-                $('<input>', { type: 'submit', name: 'submit', class: 'btn btn-primary btn-md' }).val('Login'),
-                divBase.buttons.tokenList,
+                    // Remember
+                    divBase.remember,
+
+                    // BR
+                    $('<br>'),
+
+                    // Buttons
+                    divBase.buttons.oauth2,
+                    $('<input>', { type: 'submit', name: 'submit', class: 'btn btn-primary btn-md' }).val('Login'),
+                    divBase.buttons.tokenList,
+
+                ),
+
+                // Privacy Info
+                $('<span>', { class: 'text-white' }).text('All data on this website will be stored in your computer. Your data will only be shared with Discord, Inc.\'s official domain. (https://discord.com)')
 
             )
         ),
