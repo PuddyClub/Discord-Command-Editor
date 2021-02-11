@@ -62,6 +62,26 @@ $(() => {
         $('<a>', { href: '#', class: 'text-white' }).text('Register here')
     );
 
+    // Form
+    divBase.loginForm = $('<form>', { id: 'login-form', class: 'form' }).append(
+
+        // Sub Title
+        divBase.subTitle,
+
+        // Username
+        divBase.username,
+
+        // Password
+        divBase.password,
+
+        // Remember Me
+        divBase.remember,
+
+        // Register
+        divBase.register
+
+    );
+
     // Container
     divBase.container = $('<div>', { class: 'container' }).append(
 
@@ -75,24 +95,7 @@ $(() => {
                 $('<div>', { id: 'login-box', class: 'col-md-12 mb-5' }).append(
 
                     // Form
-                    $('<form>', { id: 'login-form', class: 'form' }).append(
-
-                        // Sub Title
-                        divBase.subTitle,
-
-                        // Username
-                        divBase.username,
-
-                        // Password
-                        divBase.password,
-
-                        // Remember Me
-                        divBase.remember,
-
-                        // Register
-                        divBase.register
-
-                    )
+                    divBase.loginForm
 
                 )
 
@@ -118,8 +121,37 @@ $(() => {
     /* $.LoadingOverlay("hide");
     $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"}); */
 
-    // Login Animation
-    divBase.title.fadeIn(1000);
-    divBase.container.fadeIn(1500);
+    // Get Query
+    const queryURL = {
+        code: Url.queryString('code'),
+        type: Url.queryString('type')
+    };
+
+    // Default Page
+    if (typeof queryURL.code !== "string" && typeof queryURL.type !== "string") {
+
+        // Login Animation
+        divBase.title.fadeIn(1000);
+        divBase.container.fadeIn(1500);
+
+        // Form Login
+        divBase.loginForm.submit(function () {
+
+            // Nothing
+            return false;
+
+        });
+
+    }
+
+    // Login the Code
+    else {
+
+
+        
+    }
+
+    // Remove Query
+    Url.removeQuery(false);
 
 });
