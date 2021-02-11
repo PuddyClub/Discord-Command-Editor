@@ -72,7 +72,7 @@ $(() => {
             $('<div>', { id: 'login-column', class: 'col-md-6' }).append(
 
                 // Box
-                $('<div>', { id: 'login-box', class: 'col-md-12' }).append(
+                $('<div>', { id: 'login-box', class: 'col-md-12 mb-5' }).append(
 
                     // Form
                     $('<form>', { id: 'login-form', class: 'form' }).append(
