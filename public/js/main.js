@@ -11,55 +11,34 @@ $(() => {
     // Sub Title
     divBase.subTitle = $('<h3>', { class: 'text-center text-white' }).text('Login');
 
-    // Username
-    divBase.username = $('<div>', { class: 'form-group' }).append(
+    // Bot Token
+    divBase.bottoken = $('<div>', { class: 'form-group' }).append(
 
         // Label
-        $('<label>', { for: 'username', class: 'text-white' }).text('Username:'),
+        $('<label>', { for: 'bottoken', class: 'text-white' }).text('Bot Token:'),
 
         // Input
-        $('<input>', { type: 'text', name: 'username', id: 'username', class: 'form-control' })
+        $('<input>', { type: 'text', name: 'bottoken', id: 'bottoken', class: 'form-control' })
 
     );
 
-    // Password
-    divBase.password = $('<div>', { class: 'form-group' }).append(
-
-        // Label
-        $('<label>', { for: 'password', class: 'text-white' }).text('Password:'),
-
-        // Input
-        $('<input>', { type: 'password', name: 'password', id: 'password', class: 'form-control' })
-
-    );
+    // Buttons
+    divBase.buttons = {
+        tokenList: $('<input>', { type: 'button', name: 'submit', class: 'btn btn-info btn-md ml-4' }).val('Token List'),
+        oauth2: $('<input>', { type: 'button', name: 'submit', class: 'btn btn-secondary btn-md mr-4' }).val('OAuth2 Login')
+    };
 
     // Remember
-    divBase.remember = $('<div>', { class: 'form-group' }).append(
+    divBase.remember = $('<label>', { for: 'remember-me', class: 'text-white' }).append(
 
-        // Label
-        $('<label>', { for: 'remember-me', class: 'text-white' }).append(
+        // Text
+        $('<span>', { class: 'mr-2' }).text('Save Token'),
 
-            // Text
-            $('<span>', { class: 'mr-2' }).text('Remember me'),
+        // Input
+        $('<span>').append(
+            $('<input>', { id: 'remember-me', name: 'remeber-me', type: 'checkbox' })
+        )
 
-            // Input
-            $('<span>').append(
-                $('<input>', { id: 'remember-me', name: 'remeber-me', type: 'checkbox' })
-            )
-
-        ),
-
-        // BR
-        $('<br>'),
-
-        // Submit
-        $('<input>', { type: 'submit', name: 'submit', class: 'btn btn-info btn-md' }).val('Submit')
-
-    );
-
-    // Register
-    divBase.register = $('<div>', { id: 'register-link', class: 'text-right' }).append(
-        $('<a>', { href: '#', class: 'text-white' }).text('Register here')
     );
 
     // Form
@@ -69,16 +48,25 @@ $(() => {
         divBase.subTitle,
 
         // Username
-        divBase.username,
+        divBase.bottoken,
 
-        // Password
-        divBase.password,
+        // Options
+        $('<div>', { class: 'form-group' }).append(
+            $('<center>').append(
 
-        // Remember Me
-        divBase.remember,
+                // Remember
+                divBase.remember,
 
-        // Register
-        divBase.register
+                // BR
+                $('<br>'),
+                
+                // Buttons
+                divBase.buttons.oauth2,
+                $('<input>', { type: 'submit', name: 'submit', class: 'btn btn-primary btn-md' }).val('Login'),
+                divBase.buttons.tokenList,
+
+            )
+        ),
 
     );
 
@@ -148,7 +136,7 @@ $(() => {
     else {
 
 
-        
+
     }
 
     // Remove Query
