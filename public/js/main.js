@@ -6,16 +6,16 @@ $(() => {
     const divBase = {};
 
     // Title
-    divBase.title = $('<h3>', { class: 'text-center text-white pt-5' }).text('Discord App Login');
+    divBase.title = $('<h3>', { class: 'title-base text-center text-white pt-5' }).text('Discord Command Editor');
 
     // Sub Title
-    divBase.subTitle = $('<h3>', { class: 'text-center text-info' }).text('Login');
+    divBase.subTitle = $('<h3>', { class: 'text-center text-white' }).text('Login');
 
     // Username
     divBase.username = $('<div>', { class: 'form-group' }).append(
 
         // Label
-        $('<label>', { for: 'username', class: 'text-info' }).text('Username:'),
+        $('<label>', { for: 'username', class: 'text-white' }).text('Username:'),
 
         // Input
         $('<input>', { type: 'text', name: 'username', id: 'username', class: 'form-control' })
@@ -26,7 +26,7 @@ $(() => {
     divBase.password = $('<div>', { class: 'form-group' }).append(
 
         // Label
-        $('<label>', { for: 'password', class: 'text-info' }).text('Password:'),
+        $('<label>', { for: 'password', class: 'text-white' }).text('Password:'),
 
         // Input
         $('<input>', { type: 'password', name: 'password', id: 'password', class: 'form-control' })
@@ -37,7 +37,7 @@ $(() => {
     divBase.remember = $('<div>', { class: 'form-group' }).append(
 
         // Label
-        $('<label>', { for: 'remember-me', class: 'text-info' }).append(
+        $('<label>', { for: 'remember-me', class: 'text-white' }).append(
 
             // Text
             $('<span>', { class: 'mr-2' }).text('Remember me'),
@@ -59,7 +59,7 @@ $(() => {
 
     // Register
     divBase.register = $('<div>', { id: 'register-link', class: 'text-right' }).append(
-        $('<a>', { href: '#', class: 'text-info' }).text('Register here')
+        $('<a>', { href: '#', class: 'text-white' }).text('Register here')
     );
 
     // Container
