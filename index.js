@@ -10,7 +10,7 @@ const app = express();
 app.set('view engine', 'nunjucks');
 
 // Read File
-const readFile = function(file) {
+const readFile = function (file) {
     return '<script>' + fs.readFileSync(path.join(jsFolder, './' + file), 'utf-8') + '</script>';
 };
 
@@ -26,10 +26,13 @@ const homepageCallback = (req, res) => {
         // Web File
         webpage
 
-        // main.js
+            // main.js
             .replace(`<script src="/js/main.js"></script>`, readFile('main.js'))
-    
-            );
+
+            // client.js
+            .replace(`<script src="/js/client.js"></script>`, readFile('client.js'))
+
+    );
 
     // Complete
     return;
