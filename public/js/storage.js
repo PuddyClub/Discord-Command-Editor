@@ -6,8 +6,18 @@ class tinyStorage {
 
         // Validate
         if (typeof varName === "string" && (varName === "localStorage" || varName === "sessionStorage")) {
-            this.Storage = window[varName];
-            return this;
+
+            // Exist Storage
+            if (typeof (window[varName]) !== "undefined") {
+
+                this.Storage = window[varName];
+                return this;
+
+            }
+
+            // Nope
+            else { return null; }
+
         }
 
         // Nope
