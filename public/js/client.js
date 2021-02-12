@@ -1,8 +1,8 @@
 // Forked from https://github.com/MatteZ02/discord-interactions
-const apiUrl = "https://discord.com/api/v8";
+dsCommandEditor.apiURL = "https://discord.com/api/v8";
 
 // Prepare Module
-const objType = function (obj, type) {
+var objType = function (obj, type) {
 
     // Is Defined
     if (typeof obj !== "undefined") {
@@ -106,8 +106,8 @@ class InteractionsClient {
 
         // URL
         let url = options.guildID
-            ? `${apiUrl}/applications/${this.clientID}/guilds/${options.guildID}/commands`
-            : `${apiUrl}/applications/${this.clientID}/commands`;
+            ? `${dsCommandEditor.apiURL}/applications/${this.clientID}/guilds/${options.guildID}/commands`
+            : `${dsCommandEditor.apiURL}/applications/${this.clientID}/commands`;
 
         // Option
         if (options.commandID) { url += `/${options.commandID}`; };
@@ -137,8 +137,8 @@ class InteractionsClient {
 
         // URL
         const url = guildID
-            ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands`
-            : `${apiUrl}/applications/${this.clientID}/commands`;
+            ? `${dsCommandEditor.apiURL}/applications/${this.clientID}/guilds/${guildID}/commands`
+            : `${dsCommandEditor.apiURL}/applications/${this.clientID}/commands`;
 
         // Send Command
         const res = await axios.post(url, options, {
@@ -178,8 +178,8 @@ class InteractionsClient {
 
         // URL
         const url = guildID
-            ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}`
-            : `${apiUrl}/applications/${this.clientID}/commands/${commandID}`;
+            ? `${dsCommandEditor.apiURL}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}`
+            : `${dsCommandEditor.apiURL}/applications/${this.clientID}/commands/${commandID}`;
 
         // Send Command
         const res = await axios.patch(url, options, {
@@ -201,8 +201,8 @@ class InteractionsClient {
 
         // URL
         const url = guildID
-            ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}`
-            : `${apiUrl}/applications/${this.clientID}/commands/${commandID}`;
+            ? `${dsCommandEditor.apiURL}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}`
+            : `${dsCommandEditor.apiURL}/applications/${this.clientID}/commands/${commandID}`;
 
         // Delete
         const res = await axios.delete(url, {
