@@ -205,7 +205,8 @@ if (
                     // Send Form
                     dsCommandEditor.submitBotToken({
                         remember: $('#remember-me').is(':checked'),
-                        token: $('#bottoken').val()
+                        token: $('#bottoken').val(),
+                        client_id: $('#client_id').val()
                     });
 
                     // Nothing
