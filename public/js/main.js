@@ -1,7 +1,7 @@
 $(() => {
 
     // Exist Storage
-    if (typeof (Storage) !== "undefined") {
+    if (typeof (localStorage) !== "undefined") {
 
         // Template made by dimi130473 (https://bootsnipp.com/snippets/bxzmb)
 
@@ -134,11 +134,11 @@ $(() => {
         const startMenu = function () {
 
             // Get TOS Status
-            const tosVersionAgreed = Storage.getItem('tosVersionAgreed');
+            const tosVersionAgreed = localStorage.getItem('tosVersionAgreed');
             if (tosVersionAgreed < 1) {
 
                 // Set TOS Agreed
-                Storage.setItem(tosVersionAgreed, 1);
+                localStorage.setItem('tosVersionAgreed', 1);
                 dsCommandEditor.tos();
 
             }
