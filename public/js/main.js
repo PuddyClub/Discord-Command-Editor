@@ -229,7 +229,7 @@ $(() => {
 
             // Nothing
             else {
-                eModal.alert({ message: 'Invalid Request! ', title: 'Error!' });
+                eModal.alert({ message: 'Invalid Request!', title: 'Error!' });
                 startMenu();
             }
 
