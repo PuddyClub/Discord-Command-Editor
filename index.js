@@ -1,3 +1,10 @@
+/* 
+
+    Attention! This module is just a script to test the website before it is sent to Github!
+    This module is used to test the website without cache interference.
+
+*/
+
 // Prepare Modules
 const express = require('express');
 const path = require('path');
@@ -31,6 +38,18 @@ const homepageCallback = (req, res) => {
 
             // client.js
             .replace(`<script src="/js/client.js"></script>`, readFile('client.js'))
+
+            // oAuth2 Code
+            .replace(`<script src="/js/oAuth2Code.js"></script>`, readFile('oAuth2Code.js'))
+
+            // Submit Token
+            .replace(`<script src="/js/submitBotToken.js"></script>`, readFile('submitBotToken.js'))
+
+            // Token List
+            .replace(`<script src="/js/tokensList.js"></script>`, readFile('tokensList.js'))
+
+            // System Main
+            .replace(`<script src="/js/system/main.js"></script>`, readFile('system/main.js'))
 
     );
 
