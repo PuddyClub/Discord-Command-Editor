@@ -21,7 +21,7 @@ $(() => {
             $('<label>', { for: 'bottoken', class: 'text-white' }).text('Bot Token:'),
 
             // Input
-            $('<input>', { type: 'text', name: 'bottoken', id: 'bottoken', class: 'form-control' })
+            $('<input>', { type: 'password', name: 'bottoken', id: 'bottoken', class: 'form-control' })
 
         );
 
