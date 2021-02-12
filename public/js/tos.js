@@ -10,7 +10,9 @@ dsCommandEditor.tos = function () {
             `<br/>` +
             `This application is to be used only for your projects. You are not allowed to use this application to make API Abuse or anything else that breaks Discord's API usage policy.` +
             `<br/>` +
-            `Each submission of an update to your command list will make an old command analysis with the new one. This data comparison will be used for the system to define which commands will be deleted, added, edited.`
+            `Each submission of an update to your command list will make an old command analysis with the new one. This data comparison will be used for the system to define which commands will be deleted, added, edited.` +
+            `<br/>` +
+            `You also agree that the internet browser you are using is completely safe to store your bot's confidential data in your computer without any risk of compromising your privacy. The code for this application is connected to your internet browser's native Storage API.`
         ], 
         size: 'lg', 
         title: 'Terms of Use',
