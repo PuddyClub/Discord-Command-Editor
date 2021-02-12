@@ -1,1 +1,10 @@
-dsCommandEditor.tokenList = {};
+dsCommandEditor.tokenList = {
+
+    // Open
+    open: function () {
+
+        
+
+    }
+
+};
