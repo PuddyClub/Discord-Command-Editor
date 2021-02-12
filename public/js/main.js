@@ -166,8 +166,8 @@ if (
             const startMenu = function () {
 
                 // Get TOS Status
-                const tosVersionAgreed = localStorage.getItem('tosVersionAgreed');
-                if (tosVersionAgreed < 1) {
+                const tosVersionAgreed = Number(localStorage.getItem('tosVersionAgreed'));
+                if (isNaN(tosVersionAgreed) || !isFinite(tosVersionAgreed) || tosVersionAgreed < 1) {
 
                     // Set TOS Agreed
                     localStorage.setItem('tosVersionAgreed', 1);
