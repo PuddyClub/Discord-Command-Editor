@@ -1,4 +1,4 @@
-dsCommandEditor.oAuth2Code = function (queryURL) {
+dsCommandEditor.oAuth2Code = function (data) {
 
     console.log(data);
 
