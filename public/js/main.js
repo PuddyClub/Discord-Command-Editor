@@ -177,10 +177,13 @@ $(() => {
             // Command OAuth2
             if (queryURL.type === "commandOauth2") {
 
+                // Get Client ID Again
                 eModal.prompt({
                     message: "Enter your bot\'s client id again:",
                     title: 'Client Secret'
                 }).then(function (client_id) {
+
+                    // Get Client Secret
                     eModal.prompt({
                         message: "Enter your bot\'s client secret:",
                         title: 'Client Secret'
@@ -203,7 +206,7 @@ $(() => {
                         })
                             .then(function (response) {
                                 response.json().then(data => {
-                                    dsCommandEditor.oAuth2Code({ type: queryURL.type, data: data });
+                                    dsCommandEditor.oAuth2Code({ type: queryURL.type, data: data, client_secret: client_id, client_id: client_id });
                                 })
                             });
 
