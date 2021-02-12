@@ -67,7 +67,7 @@ $(() => {
                         $('<br>'),
 
                         // Buttons
-                        divBase.buttons.oauth2,
+                        /* divBase.buttons.oauth2, */
                         $('<input>', { type: 'submit', name: 'submit', class: 'btn btn-primary btn-md' }).val('Login'),
                         divBase.buttons.tokenList,
 
@@ -126,8 +126,12 @@ $(() => {
             type: Url.queryString('type')
         };
 
-        // Default Page
-        if (typeof queryURL.code !== "string" || typeof queryURL.type !== "string") {
+        // Data oAuth
+        const scope = 'identify%20guilds%20applications.commands.update%20applications.commands';
+        const redirectURL = location.origin + '/?type=commandOauth2';
+
+        // Start Menu
+        const startMenu = function () {
 
             // Login Animation
             divBase.title.fadeIn(1000);
@@ -150,10 +154,71 @@ $(() => {
             // Token List
             divBase.buttons.tokenList.click(dsCommandEditor.tokenList.open);
 
+            // Token List
+            divBase.buttons.oauth2.click(function () {
+                eModal.prompt({
+                    message: "Enter your bot\'s client id here:",
+                    title: 'Bot User ID'
+                }).then(function (botID) {
+                    window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${encodeURIComponent(botID)}&redirect_uri=${encodeURIComponent(redirectURL)}&response_type=code&scope=${scope}`;
+                });
+            });
+
+        };
+
+        // Default Page
+        if (typeof queryURL.code !== "string" || typeof queryURL.type !== "string") {
+            startMenu();
         }
 
         // Login the Code
-        else { dsCommandEditor.oAuth2Code(queryURL); }
+        else {
+
+            // Command OAuth2
+            if (queryURL.type === "commandOauth2") {
+
+                eModal.prompt({
+                    message: "Enter your bot\'s client id again:",
+                    title: 'Client Secret'
+                }).then(function (client_id) {
+                    eModal.prompt({
+                        message: "Enter your bot\'s client secret:",
+                        title: 'Client Secret'
+                    }).then(function (client_secret) {
+
+                        // Loading Data
+                        fetch(`https://discord.com/api/oauth2/token`, {
+                            method: "POST",
+                            body: new URLSearchParams({
+                                "client_id": client_id,
+                                "client_secret": client_secret,
+                                "grant_type": 'authorization_code',
+                                "code": queryURL.code,
+                                "redirect_uri": redirectURL,
+                                "scope": decodeURIComponent(scope)
+                            }),
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            }
+                        })
+                            .then(function (response) {
+                                response.json().then(data => {
+                                    dsCommandEditor.oAuth2Code({ type: queryURL.type, data: data });
+                                })
+                            });
+
+                    });
+                });
+
+            }
+
+            // Nothing
+            else {
+                eModal.alert({ message: 'Invalid Request! ', title: 'Error!' });
+                startMenu();
+            }
+
+        }
 
         // Remove Query
         Url.removeQuery(false);
