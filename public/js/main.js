@@ -74,7 +74,7 @@ $(() => {
                     ),
 
                     // Privacy Info
-                    $('<span>', { class: 'text-white' }).text('All data on this website will be stored in your computer. Your data will only be shared with Discord, Inc.\'s official domain. (https://discord.com)')
+                    $('<span>', { class: 'text-white' }).text('All data on this website will be stored in your computer by the Storage API of your navigator. Your data will only be shared with Discord, Inc.\'s official domain. (https://discord.com)')
 
                 )
             ),
