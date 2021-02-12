@@ -48,6 +48,9 @@ const homepageCallback = (req, res) => {
             // Token List
             .replace(`<script src="/js/tokensList.js"></script>`, readFile('tokensList.js'))
 
+            // TOS
+            .replace(`<script src="/js/tos.js"></script>`, readFile('tos.js'))
+
             // System Main
             .replace(`<script src="/js/system/main.js"></script>`, readFile('system/main.js'))
 

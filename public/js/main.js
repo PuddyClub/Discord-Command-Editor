@@ -27,8 +27,9 @@ $(() => {
 
         // Buttons
         divBase.buttons = {
-            tokenList: $('<input>', { type: 'button', name: 'submit', class: 'btn btn-info btn-md ml-4' }).val('Token List'),
-            oauth2: $('<input>', { type: 'button', name: 'submit', class: 'btn btn-secondary btn-md mr-4' }).val('OAuth2 Login')
+            tos: $('<input>', { type: 'button', name: 'tos', class: 'btn btn-warning btn-md mr-4' }).val('TOS'),
+            tokenList: $('<input>', { type: 'button', name: 'tokenlist', class: 'btn btn-info btn-md ml-4' }).val('Token List'),
+            oauth2: $('<input>', { type: 'button', name: 'oauthlogin', class: 'btn btn-secondary btn-md mr-4' }).val('OAuth2 Login')
         };
 
         // Remember
@@ -67,6 +68,7 @@ $(() => {
                         $('<br>'),
 
                         // Buttons
+                        divBase.buttons.tos,
                         /* divBase.buttons.oauth2, */
                         $('<input>', { type: 'submit', name: 'submit', class: 'btn btn-primary btn-md' }).val('Login'),
                         divBase.buttons.tokenList,
@@ -151,6 +153,9 @@ $(() => {
 
             // Token List
             divBase.buttons.tokenList.click(dsCommandEditor.tokenList.open);
+
+            // TOS
+            divBase.buttons.tos.click(dsCommandEditor.tos);
 
             // Token List
             divBase.buttons.oauth2.click(function () {
