@@ -3,18 +3,28 @@ dsCommandEditor.system = {
     // Initialize
     initialize: function () {
 
-        // Exist Root
-        if (dsCommandEditor.root) {
+        // Start Loading
+        $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
+        divBase.root.fadeOut(500, function () {
 
-            /* Start the Root here */
-            console.log(dsCommandEditor.root);
+            // Exist Root
+            if (dsCommandEditor.root) {
 
-        }
+                /* Start the Root here */
+                console.log(dsCommandEditor.root);
 
-        // Nope
-        else {
-            eModal.alert({ message: 'Could not start the root! The information is incorrect!', title: '<i class="fas fa-exclamation-triangle"></i> Error!' });
-        }
+                // Finish the Load
+                $.LoadingOverlay("hide");
+
+            }
+
+            // Nope
+            else {
+                eModal.alert({ message: 'Could not start the root! The information is incorrect!', title: '<i class="fas fa-exclamation-triangle"></i> Error!' });
+                divBase.root.fadeIn(500);
+            }
+
+        });
 
     },
 
@@ -48,7 +58,10 @@ dsCommandEditor.system = {
     // Load Data
     insertTokenData: function (type, userID, token) {
 
-        // Remember Data
+        // Prepare JSON
+        if ($.localStorage.isEmpty('tokenList')) { $.localStorage.set('tokenList', {}); }
+
+        // Insert Data
         if (typeof userID === "string" && userID.length > 0 && typeof token === "string") {
             $.localStorage.set('tokenList', userID, {
                 token: token,

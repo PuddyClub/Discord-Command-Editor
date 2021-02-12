@@ -13,19 +13,16 @@ dsCommandEditor.submitBotToken = function (data) {
     // Perfect!
     else {
 
-        // Start Loading
-        $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
-
         // Remember
         if (data.remember) {
             dsCommandEditor.system.insertTokenData('bot_token', data.client_id, data.token);
         }
 
-        // Start System
+        // Start Root
         dsCommandEditor.system.startRoot('bot_token', data.client_id, data.token);
-
-        // Finish the Load
-        $.LoadingOverlay("hide");
+        
+        // Initialize
+        dsCommandEditor.system.initialize();
 
     }
 
