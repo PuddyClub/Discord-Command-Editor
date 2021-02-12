@@ -1,10 +1,5 @@
-dsCommandEditor.submitBotToken = function() {
+dsCommandEditor.submitBotToken = function (data) {
 
-    /* 
-    
-        remember
-        token
-    
-    */    
+    console.log(data);
 
 };

@@ -1,10 +1,5 @@
-dsCommandEditor.oAuth2Code = function(queryURL) {
+dsCommandEditor.oAuth2Code = function (queryURL) {
 
-    /* 
-    
-        code
-        type
-    
-    */
+    console.log(data);
 
 };
