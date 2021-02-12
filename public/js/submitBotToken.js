@@ -5,10 +5,15 @@ dsCommandEditor.submitBotToken = function (data) {
 
         // Start Loading
         $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
-        dsCommandEditor.system.insert('bot_token', data.client_id, data.token, data.remember);
-       
+
+        // Remember
+        if (data.remember) {
+            dsCommandEditor.system.insertTokenData('bot_token', data.client_id, data.token);
+        }
+
         // Start System
-       
+        dsCommandEditor.system.startRoot('bot_token', data.client_id, data.token);
+
         // Finish the Load
         $.LoadingOverlay("hide");
 
