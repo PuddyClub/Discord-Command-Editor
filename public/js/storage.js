@@ -58,6 +58,34 @@ class tinyStorage {
     }
 
     // Get All
+    getData(data = []) {
+
+        // Result
+        const result = {};
+
+        // Is Array
+        if (Array.isArray(data)) {
+            for (const item in data) {
+                if(typeof data[item] === "string") {
+
+                    // Data
+                    const value = this.get(data[item]);
+
+                    // Get Value
+                    if(typeof value !== "undefined" && value !== null) {
+                        result[data[item]] = value;
+                    }
+
+                }
+            }
+        }
+
+        // Send Result
+        return result;
+
+    }
+
+    // Get All
     getAll() {
 
         // Values
