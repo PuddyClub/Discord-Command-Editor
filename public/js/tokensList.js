@@ -1,1 +1,1 @@
-/* Pudding */
+dsCommandEditor.tokenList = {};
