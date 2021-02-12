@@ -133,6 +133,16 @@ $(() => {
         // Start Menu
         const startMenu = function () {
 
+            // Get TOS Status
+            const tosVersionAgreed = Storage.getItem('tosVersionAgreed');
+            if (tosVersionAgreed < 1) {
+
+                // Set TOS Agreed
+                Storage.setItem(tosVersionAgreed, 1);
+                dsCommandEditor.tos();
+
+            }
+
             // Login Animation
             divBase.title.fadeIn(1000);
             divBase.container.fadeIn(1500);
@@ -163,10 +173,11 @@ $(() => {
                     message: "Enter your bot\'s client id here:",
                     title: 'Bot User ID'
                 }).then(function (botID) {
-                    $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"});
+                    $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
                     window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${encodeURIComponent(botID)}&redirect_uri=${encodeURIComponent(redirectURL)}&response_type=code&scope=${scope}`;
                 });
             });
+
 
         };
 
