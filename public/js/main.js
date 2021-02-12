@@ -117,8 +117,6 @@ $(() => {
 
         // Start Login Form
         $('body').append(divBase.root);
-        /* $.LoadingOverlay("hide");
-        $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"}); */
 
         // Get Query
         const queryURL = {
@@ -160,6 +158,7 @@ $(() => {
                     message: "Enter your bot\'s client id here:",
                     title: 'Bot User ID'
                 }).then(function (botID) {
+                    $.LoadingOverlay("show", {background: "rgba(0,0,0, 0.5)"});
                     window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${encodeURIComponent(botID)}&redirect_uri=${encodeURIComponent(redirectURL)}&response_type=code&scope=${scope}`;
                 });
             });
