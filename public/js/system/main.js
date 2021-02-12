@@ -1,6 +1,6 @@
 dsCommandEditor.system = {
 
-    start: function (client_id, type, token) {
+    start: function (type, client_id, token) {
 
         // Validator
         if (typeof client_id === "string") {
@@ -8,23 +8,9 @@ dsCommandEditor.system = {
             // Prepare Start
             let prepareStart = {};
 
-            // From Storage
-            if (typeof type !== "string" || typeof token !== "string") {
-
-                // Load from Cache
-                const client_data = $.localStorage.get('tokenList', client_id);
-                prepareStart[client_data.type] = client_data.token;
-
-            }
-
-            // Manual
-            else if (typeof type === "string" && typeof token === "string") {
-
-                // Bot Token
-                if (type === "bot_token") {
-                    prepareStart[type] = token;
-                }
-
+            // Bot Token
+            if (typeof type === "string" && type === "bot_token" && typeof token === "string") {
+                prepareStart[type] = token;
             }
 
             // Client ID
