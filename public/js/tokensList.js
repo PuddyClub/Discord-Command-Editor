@@ -3,7 +3,7 @@ dsCommandEditor.tokenList = {
     // Open
     open: function () {
 
-        console.log('Token List clicked!');
+        eModal.alert({ message: 'No tokens were found!', title: 'Error!' });
 
     }
 
