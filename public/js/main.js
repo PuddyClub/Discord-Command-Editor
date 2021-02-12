@@ -153,8 +153,25 @@ $(() => {
         // Remove Query
         Url.removeQuery(false);
 
-    } else {
-        swal("Storage API not found!", "Your browser does not support Storage API!", "error")
+    } 
+    
+    // Nope
+    else {
+        
+        eModal.alert({
+            message: $('<center>').append(
+    
+                // Error Image
+                $('<img>', {src: '/img/error.png', class: 'img-fluid', alt: 'Error Image'}),
+    
+                // Error Message
+                $('<div>').text('Your browser does not support Storage API!')
+    
+            ),
+            title: 'Storage API not found!',
+            size: 'lg modal-dialog-centered'
+        });
+
     }
 
 });
