@@ -171,7 +171,7 @@ $(() => {
             divBase.buttons.oauth2.click(function () {
                 eModal.prompt({
                     message: "Enter your bot\'s client id here:",
-                    title: 'Bot User ID'
+                    title: '<i class="fab fa-discord"></i> Bot User ID'
                 }).then(function (botID) {
                     $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
                     window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${encodeURIComponent(botID)}&redirect_uri=${encodeURIComponent(redirectURL)}&response_type=code&scope=${scope}`;
@@ -194,26 +194,26 @@ $(() => {
 
                 // Cancel Operation
                 const cancelOperation = function () {
-                    eModal.alert({ message: 'You canceled the operation!', title: 'Error!' });
+                    eModal.alert({ message: 'You canceled the operation!', title: '<i class="fas fa-exclamation-triangle"></i> Error!' });
                     startMenu();
                 };
 
                 // Error Code
                 const errorCode = err => {
-                    eModal.alert({ message: err.message, title: `Error ${err.code}!` });
+                    eModal.alert({ message: err.message, title: `<i class="fas fa-exclamation-triangle"></i> Error ${err.code}!` });
                     startMenu();
                 };
 
                 // Get Client ID Again
                 eModal.prompt({
                     message: "Enter your bot\'s client id again:",
-                    title: 'Client Secret'
+                    title: '<i class="fab fa-discord"></i> Client Secret'
                 }).then(function (client_id) {
 
                     // Get Client Secret
                     eModal.prompt({
                         message: "Enter your bot\'s client secret:",
-                        title: 'Client Secret'
+                        title: '<i class="fab fa-discord"></i> Client Secret'
                     }).then(function (client_secret) {
 
                         // Loading Data
@@ -245,7 +245,7 @@ $(() => {
 
             // Nothing
             else {
-                eModal.alert({ message: 'Invalid Request!', title: 'Error!' });
+                eModal.alert({ message: 'Invalid Request!', title: '<i class="fas fa-exclamation-triangle"></i> Error!' });
                 startMenu();
             }
 
@@ -269,7 +269,7 @@ $(() => {
                 $('<div>').text('Your browser does not support Storage API!')
 
             ),
-            title: 'Storage API not found!',
+            title: '<i class="fas fa-exclamation-triangle"></i> Storage API not found!',
             size: 'lg modal-dialog-centered'
         });
 

@@ -1,5 +1,5 @@
 dsCommandEditor.tos = function () {
-    eModal.alert({ 
+    eModal.alert({
         message: [
             `The use of this application is at your own risk.` +
             `It is recommended that you always test the application's functionality in a test bot before actually using this application for production.` +
@@ -13,12 +13,12 @@ dsCommandEditor.tos = function () {
             `Each submission of an update to your command list will make an old command analysis with the new one. This data comparison will be used for the system to define which commands will be deleted, added, edited.` +
             `<br/>` +
             `You also agree that the internet browser you are using is completely safe to store your bot's confidential data in your computer without any risk of compromising your privacy. The code for this application is connected to your internet browser's native Storage API.`
-        ], 
-        size: 'lg', 
-        title: 'Terms of Use',
+        ],
+        size: 'lg',
+        title: '<i class="fas fa-file-signature"></i> Terms of Use',
         subtitle: 'You are agreeing the TOS when using this application!',
         buttons: [
-            {text: 'Okay', style: 'primary',   close: true }
+            { text: 'Okay', style: 'primary', close: true }
         ]
- });
+    });
 };

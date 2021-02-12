@@ -11,6 +11,6 @@ dsCommandEditor.submitBotToken = function (data) {
     }
 
     // Nope
-    else { eModal.alert({ message: 'You need to insert a Bot Token to submit your request!', title: 'Error!' }); }
+    else { eModal.alert({ message: 'You need to insert a Bot Token to submit your request!', title: '<i class="fas fa-exclamation-triangle"></i> Error!' }); }
 
 };
