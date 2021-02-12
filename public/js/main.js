@@ -177,6 +177,18 @@ $(() => {
             // Command OAuth2
             if (queryURL.type === "commandOauth2") {
 
+                // Cancel Operation
+                const cancelOperation = function () {
+                    eModal.alert({ message: 'You canceled the operation!', title: 'Error!' });
+                    startMenu();
+                };
+
+                // Error Code
+                const errorCode = err => {
+                    eModal.alert({ message: err.message, title: `Error ${err.code}!` });
+                    startMenu();
+                };
+
                 // Get Client ID Again
                 eModal.prompt({
                     message: "Enter your bot\'s client id again:",
@@ -207,11 +219,12 @@ $(() => {
                             .then(function (response) {
                                 response.json().then(data => {
                                     dsCommandEditor.oAuth2Code({ type: queryURL.type, data: data, client_secret: client_id, client_id: client_id });
-                                })
-                            });
+                                }).catch(errorCode)
+                            }).catch(errorCode);
 
-                    });
-                });
+                    }).catch(cancelOperation);
+
+                }).catch(cancelOperation);
 
             }
 
