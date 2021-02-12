@@ -41,7 +41,7 @@ if (
         // Exist Storage
         if ($.localStorage) {
 
-            // Template made by dimi130473 (https://bootsnipp.com/snippets/bxzmb)
+            // Login Template made by dimi130473 (https://bootsnipp.com/snippets/bxzmb)
 
             // Div Base
             const divBase = {};
@@ -51,6 +51,17 @@ if (
 
             // Sub Title
             divBase.subTitle = $('<h3>', { class: 'text-center text-white' }).text('Login');
+
+            // Bot Token
+            divBase.client_id = $('<div>', { class: 'form-group' }).append(
+
+                // Label
+                $('<label>', { for: 'client_id', class: 'text-white' }).text('Client ID:'),
+
+                // Input
+                $('<input>', { type: 'text', name: 'client_id', id: 'client_id', class: 'form-control' })
+
+            );
 
             // Bot Token
             divBase.bottoken = $('<div>', { class: 'form-group' }).append(
@@ -88,6 +99,9 @@ if (
 
                 // Sub Title
                 divBase.subTitle,
+
+                // Client ID
+                divBase.client_id,
 
                 // Username
                 divBase.bottoken,
