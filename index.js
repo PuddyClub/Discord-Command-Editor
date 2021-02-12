@@ -33,9 +33,6 @@ const homepageCallback = (req, res) => {
         // Web File
         webpage
 
-            // storage.js
-            .replace(`<script src="/js/storage.js"></script>`, readFile('storage.js'))
-
             // main.js
             .replace(`<script src="/js/main.js"></script>`, readFile('main.js'))
 

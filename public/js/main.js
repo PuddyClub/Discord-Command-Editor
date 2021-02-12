@@ -4,6 +4,9 @@ if (
     // Jquery
     $ &&
 
+    // Jquery Storage
+    $.alwaysUseJsonInStorage &&
+
     // Lodash
     _ &&
 
@@ -30,10 +33,13 @@ if (
 
 ) {
 
+    // Set Jquery Plugin
+    $.alwaysUseJsonInStorage(true);
+
     $(() => {
 
         // Exist Storage
-        if (appStorage) {
+        if ($.localStorage) {
 
             // Template made by dimi130473 (https://bootsnipp.com/snippets/bxzmb)
 
@@ -166,11 +172,11 @@ if (
             const startMenu = function () {
 
                 // Get TOS Status
-                const tosVersionAgreed = Number(appStorage.get('tosVersionAgreed'));
+                const tosVersionAgreed = Number($.localStorage.get('tosVersionAgreed'));
                 if (isNaN(tosVersionAgreed) || !isFinite(tosVersionAgreed) || tosVersionAgreed < 1) {
 
                     // Set TOS Agreed
-                    appStorage.set('tosVersionAgreed', 1);
+                    $.localStorage.set('tosVersionAgreed', 1);
                     dsCommandEditor.tos();
 
                 }
