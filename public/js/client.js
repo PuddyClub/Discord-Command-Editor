@@ -114,7 +114,7 @@ class InteractionsClient {
 
         // Send Command
         const res = await axios.get(url, {
-            headers: { Authorization: `${this.token.type} ${this.token.value}` }
+            headers: { Authorization: `${this.token.type} ${this.token.value}`, 'Access-Control-Allow-Origin': '*' }
         });
 
         // Complete

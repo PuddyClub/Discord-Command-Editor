@@ -3,13 +3,35 @@ dsCommandEditor.system = {
     // Load Command List
     loadCommandList: function (guildID) {
 
-        // Start Loading
-        $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
+        // System Config
+        const tinyCfg = {};
+        if (typeof guildID === "string") { tinyCfg.guildID = guildID; }
 
-        console.log(dsCommandEditor.root);
+        // Load Command List
+        dsCommandEditor.root.getCommands(tinyCfg).then(data => {
 
-        // Finish the Load
-        $.LoadingOverlay("hide");
+            console.log(data);
+
+            // Finish the Load
+            $.LoadingOverlay("hide");
+
+        })
+
+            // Error
+            .catch(err => {
+
+                console.error(err);
+                console.log(dsCommandEditor.errorModalMessage(err.message));
+                eModal.alert({
+                    message: dsCommandEditor.errorModalMessage(err.message),
+                    title: '<i class="fas fa-exclamation-triangle"></i> Error!',
+                    size: 'lg modal-dialog-centered'
+                });
+
+                $.LoadingOverlay("hide");
+                dsCommandEditor.startMenu();
+
+            });
 
     },
 
@@ -41,7 +63,18 @@ dsCommandEditor.system = {
                         { text: 'Cancel', style: 'info', close: true, click: function () { completeModalAction(); dsCommandEditor.startMenu(); } },
 
                         // GLobal
-                        { text: 'Global', style: 'primary', close: true, click: function () { completeModalAction(); dsCommandEditor.system.loadCommandList(); } },
+                        {
+                            text: 'Global', style: 'primary', close: false, click: function () {
+
+                                // Start Loading
+                                $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
+
+                                // Complete
+                                completeModalAction();
+                                dsCommandEditor.system.loadCommandList();
+
+                            }
+                        },
 
                         // Guild
                         {
@@ -50,8 +83,16 @@ dsCommandEditor.system = {
                                     message: 'Type the Guild ID:',
                                     title: `<i class="fab fa-discord"></i> Guild ID"`,
                                 }).then(function (guildID) {
-                                    completeModalAction();
-                                    dsCommandEditor.system.loadCommandList(guildID);
+
+                                    // Start Loading
+                                    $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
+
+                                    // Start Loading
+                                    setTimeout(function () {
+                                        completeModalAction();
+                                        dsCommandEditor.system.loadCommandList(guildID);
+                                    }, 1000);
+
                                 }, function () { completeModalAction(); dsCommandEditor.startMenu(); });
                             }
                         }
