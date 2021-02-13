@@ -5,7 +5,11 @@ dsCommandEditor.tokenList = {
 
         // Nothing
         const nothigTokentoShow = function () {
-            eModal.alert({ message: 'No tokens were found!', title: '<i class="fas fa-exclamation-triangle"></i> Error!' });
+            eModal.alert({
+                message: dsCommandEditor.errorModalMessage('No tokens were found!'),
+                title: '<i class="fab fa-discord"></i> Nothing here!',
+                size: 'lg modal-dialog-centered'
+            });
         };
 
         // Get Token List
@@ -67,7 +71,7 @@ dsCommandEditor.tokenList = {
 
                 eModal.alert({
                     message: $('<div>', { class: 'table-responsive' }).append(
-                        $('<table>', { class: 'table' }).append(
+                        $('<table>', { class: 'table table-striped' }).append(
 
                             // Head
                             $('<thead>').append(

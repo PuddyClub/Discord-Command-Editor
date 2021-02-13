@@ -43,6 +43,20 @@ if (
 
             // Login Template made by dimi130473 (https://bootsnipp.com/snippets/bxzmb)
 
+            // Prepare Error Modal
+            dsCommandEditor.errorModalMessage = function (message) {
+                return $('<center>').append(
+
+                    // Error Image
+                    $('<img>', { src: '/img/error.png', class: 'img-fluid', alt: 'Error Image' }),
+
+                    // Error Message
+                    $('<div>').append(message)
+
+                );
+             
+            };
+
             // Div Base
             dsCommandEditor.loginDiv = {};
 
@@ -311,21 +325,11 @@ if (
 
         // Nope
         else {
-
             eModal.alert({
-                message: $('<center>').append(
-
-                    // Error Image
-                    $('<img>', { src: '/img/error.png', class: 'img-fluid', alt: 'Error Image' }),
-
-                    // Error Message
-                    $('<div>').text('Your browser does not support Storage API!')
-
-                ),
+                message: dsCommandEditor.errorModalMessage('Your browser does not support Storage API!'),
                 title: '<i class="fas fa-exclamation-triangle"></i> Storage API not found!',
                 size: 'lg modal-dialog-centered'
             });
-
         }
 
     });
