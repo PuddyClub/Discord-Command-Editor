@@ -1,20 +1,56 @@
 dsCommandEditor.system = {
 
-    // Initialize
-    initialize: function () {
+    // Load Command List
+    loadCommandList: function (guildID) {
 
         // Start Loading
         $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
+
+        console.log(dsCommandEditor.root);
+
+        // Finish the Load
+        $.LoadingOverlay("hide");
+
+    },
+
+    // Initialize
+    initialize: function () {
+
+        // Hide Root
+        dsCommandEditor.loginDiv.title.fadeOut(1000);
+        dsCommandEditor.loginDiv.container.fadeOut(1500);
         dsCommandEditor.loginDiv.root.fadeOut(500, function () {
 
             // Exist Root
             if (dsCommandEditor.root) {
 
-                /* Start the Root here */
-                console.log(dsCommandEditor.root);
+                // Choose Option
+                eModal.alert({
+                    message: 'Choose what type of command list you want to modify. Will you choose Global or a Guild?',
+                    title: `Choose a List"`,
+                    buttons: [
 
-                // Finish the Load
-                $.LoadingOverlay("hide");
+                        // GLobal
+                        {
+                            text: 'Global', style: 'primary', close: false, click: function () {
+                                dsCommandEditor.system.loadCommandList();
+                            }
+                        },
+
+                        // Guild
+                        {
+                            text: 'Guild', style: 'secondary', close: false, click: function () {
+                                eModal.prompt({
+                                    message: 'Type the Guild ID:',
+                                    title: `<i class="fab fa-discord"></i> Guild ID"`,
+                                }).then(function (guildID) {
+                                    dsCommandEditor.system.loadCommandList(guildID);
+                                }, function () { dsCommandEditor.startMenu(); });
+                            }
+                        }
+
+                    ]
+                });
 
             }
 

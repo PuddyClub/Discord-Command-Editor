@@ -197,7 +197,7 @@ if (
             const redirectURL = location.origin + '/?type=commandOauth2';
 
             // Start Menu
-            const startMenu = function () {
+            dsCommandEditor.startMenu = function () {
 
                 // Get TOS Status
                 const tosVersionAgreed = Number($.localStorage.get('tosVersionAgreed'));
@@ -210,6 +210,7 @@ if (
                 }
 
                 // Login Animation
+                dsCommandEditor.loginDiv.root.fadeIn(1);
                 dsCommandEditor.loginDiv.title.fadeIn(1000);
                 dsCommandEditor.loginDiv.container.fadeIn(1500);
 
@@ -250,7 +251,7 @@ if (
 
             // Default Page
             if (typeof queryURL.code !== "string" || typeof queryURL.type !== "string") {
-                startMenu();
+                dsCommandEditor.startMenu();
             }
 
             // Login the Code
@@ -262,13 +263,13 @@ if (
                     // Cancel Operation
                     const cancelOperation = function () {
                         eModal.alert({ message: 'You canceled the operation!', title: '<i class="fas fa-exclamation-triangle"></i> Error!' });
-                        startMenu();
+                        dsCommandEditor.startMenu();
                     };
 
                     // Error Code
                     const errorCode = err => {
                         eModal.alert({ message: err.message, title: `<i class="fas fa-exclamation-triangle"></i> Error ${err.code}!` });
-                        startMenu();
+                        dsCommandEditor.startMenu();
                     };
 
                     // Get Client ID Again
@@ -313,7 +314,7 @@ if (
                 // Nothing
                 else {
                     eModal.alert({ message: 'Invalid Request!', title: '<i class="fas fa-exclamation-triangle"></i> Error!' });
-                    startMenu();
+                    dsCommandEditor.startMenu();
                 }
 
             }
