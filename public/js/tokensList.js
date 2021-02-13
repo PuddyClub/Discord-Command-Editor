@@ -13,7 +13,7 @@ dsCommandEditor.tokenList = {
             // Get Items
             for(const item in tokenList){
 
-                console.log(tokenList[item], tokenList);
+                console.log(tokenList[item], item);
 
             }
 
