@@ -19,8 +19,24 @@ dsCommandEditor.tokenList = {
 
             eModal.alert({
                 message: $('<div>', {class: 'table-responsive'}).append(
-                    $('<table>', {class: 'table'}).append(tokensList)
+                    $('<table>', {class: 'table'}).append(
+
+                        // Head
+                        $('<thead>').append(
+
+                            $('<tr>').append(
+                                $('<th>').text('ID'),
+                                $('<th>').text('Token')
+                            )
+
+                        ),
+
+                        // Body
+                        $('<tbody>').append(tokensList)
+
+                    )
                 ),
+                size: 'lg',
                 title: '<i class="fab fa-discord"></i> Token List'
             })
 
