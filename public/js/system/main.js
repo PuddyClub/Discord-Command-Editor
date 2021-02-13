@@ -26,9 +26,16 @@ dsCommandEditor.system = {
 
                 // Choose Option
                 eModal.alert({
-                    message: 'Choose what type of command list you want to modify. Will you choose Global or a Guild?',
+                    message: $('<span>', {id: 'chooseType'}).text('Choose what type of command list you want to modify. Will you choose Global or a Guild?'),
                     title: `Choose a List"`,
                     buttons: [
+
+                        // Cancel
+                        {
+                            text: 'Cancel', style: 'info', close: true, click: function () {
+                                dsCommandEditor.startMenu();
+                            }
+                        },
 
                         // GLobal
                         {
