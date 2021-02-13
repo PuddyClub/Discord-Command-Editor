@@ -29,14 +29,24 @@ dsCommandEditor.tokenList = {
 
                             // Delete
                             $('<button>', { class: 'btn btn-danger mr-3' }).text('Delete').click(function () {
-                                eModal.confirm('Are you sure you want to remove this token from your list?', `Delete Item ID "${item}"`)
-                                    .then(function () {
+                                eModal.alert({
+                                    message: 'Are you sure you want to remove this token from your list?',
+                                    title: `Delete Item ID "${item}"`,
+                                    buttons: [
+                                        {
+                                            text: 'Yes', style: 'info', close: false, click: function () {
 
-                                        // Remove Item
-                                        $.localStorage.remove('tokenList', item);
-                                        dsCommandEditor.tokenList.open();
+                                                // Remove Item
+                                                $.localStorage.remove('tokenList', item);
+                                                dsCommandEditor.tokenList.open();
 
-                                    });
+                                            }
+                                        },
+                                        { text: 'No', style: 'danger', close: false, click: function () {
+                                            dsCommandEditor.tokenList.open();
+                                        }},
+                                    ]
+                                });
                             }),
 
                             // Login
