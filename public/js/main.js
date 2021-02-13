@@ -44,16 +44,16 @@ if (
             // Login Template made by dimi130473 (https://bootsnipp.com/snippets/bxzmb)
 
             // Div Base
-            const divBase = {};
+            dsCommandEditor.loginDiv = {};
 
             // Title
-            divBase.title = $('<h3>', { class: 'title-base text-center text-white pt-5' }).text('Discord Command Editor');
+            dsCommandEditor.loginDiv.title = $('<h3>', { class: 'title-base text-center text-white pt-5' }).text('Discord Command Editor');
 
             // Sub Title
-            divBase.subTitle = $('<h3>', { class: 'text-center text-white' }).text('Login');
+            dsCommandEditor.loginDiv.subTitle = $('<h3>', { class: 'text-center text-white' }).text('Login');
 
             // Bot Token
-            divBase.client_id = $('<div>', { class: 'form-group' }).append(
+            dsCommandEditor.loginDiv.client_id = $('<div>', { class: 'form-group' }).append(
 
                 // Label
                 $('<label>', { for: 'client_id', class: 'text-white' }).text('Client ID:'),
@@ -64,7 +64,7 @@ if (
             );
 
             // Bot Token
-            divBase.bottoken = $('<div>', { class: 'form-group' }).append(
+            dsCommandEditor.loginDiv.bottoken = $('<div>', { class: 'form-group' }).append(
 
                 // Label
                 $('<label>', { for: 'bottoken', class: 'text-white' }).text('Bot Token:'),
@@ -75,14 +75,14 @@ if (
             );
 
             // Buttons
-            divBase.buttons = {
+            dsCommandEditor.loginDiv.buttons = {
                 tos: $('<input>', { type: 'button', name: 'tos', class: 'btn btn-warning btn-md mr-4' }).val('TOS'),
                 tokenList: $('<input>', { type: 'button', name: 'tokenlist', class: 'btn btn-info btn-md ml-4' }).val('Token List'),
                 oauth2: $('<input>', { type: 'button', name: 'oauthlogin', class: 'btn btn-secondary btn-md mr-4' }).val('OAuth2 Login')
             };
 
             // Remember
-            divBase.remember = $('<label>', { for: 'remember-me', class: 'text-white' }).append(
+            dsCommandEditor.loginDiv.remember = $('<label>', { for: 'remember-me', class: 'text-white' }).append(
 
                 // Text
                 $('<span>', { class: 'mr-2' }).text('Save Token'),
@@ -95,16 +95,16 @@ if (
             );
 
             // Form
-            divBase.loginForm = $('<form>', { id: 'login-form', class: 'form' }).append(
+            dsCommandEditor.loginDiv.loginForm = $('<form>', { id: 'login-form', class: 'form' }).append(
 
                 // Sub Title
-                divBase.subTitle,
+                dsCommandEditor.loginDiv.subTitle,
 
                 // Client ID
-                divBase.client_id,
+                dsCommandEditor.loginDiv.client_id,
 
                 // Username
-                divBase.bottoken,
+                dsCommandEditor.loginDiv.bottoken,
 
                 // Options
                 $('<div>', { class: 'form-group' }).append(
@@ -114,16 +114,16 @@ if (
                         $('<div>', { class: 'mb-4' }).append(
 
                             // Remember
-                            divBase.remember,
+                            dsCommandEditor.loginDiv.remember,
 
                             // BR
                             $('<br>'),
 
                             // Buttons
-                            divBase.buttons.tos,
-                            /* divBase.buttons.oauth2, */
+                            dsCommandEditor.loginDiv.buttons.tos,
+                            /* dsCommandEditor.loginDiv.buttons.oauth2, */
                             $('<input>', { type: 'submit', name: 'submit', class: 'btn btn-primary btn-md' }).val('Login'),
-                            divBase.buttons.tokenList,
+                            dsCommandEditor.loginDiv.buttons.tokenList,
 
                         ),
 
@@ -136,7 +136,7 @@ if (
             );
 
             // Container
-            divBase.container = $('<div>', { class: 'container' }).append(
+            dsCommandEditor.loginDiv.container = $('<div>', { class: 'container' }).append(
 
                 // Row
                 $('<div>', { id: 'login-row', class: 'row justify-content-center align-items-center' }).append(
@@ -148,7 +148,7 @@ if (
                         $('<div>', { id: 'login-box', class: 'col-md-12 mb-5' }).append(
 
                             // Form
-                            divBase.loginForm
+                            dsCommandEditor.loginDiv.loginForm
 
                         )
 
@@ -159,18 +159,18 @@ if (
             );
 
             // Root
-            divBase.root = $('<div>', { id: 'login' }).append(
+            dsCommandEditor.loginDiv.root = $('<div>', { id: 'login' }).append(
 
                 // Title
-                divBase.title.css('display', 'none'),
+                dsCommandEditor.loginDiv.title.css('display', 'none'),
 
                 // Container
-                divBase.container.css('display', 'none')
+                dsCommandEditor.loginDiv.container.css('display', 'none')
 
             );
 
             // Start Login Form
-            $('body').append(divBase.root);
+            $('body').append(dsCommandEditor.loginDiv.root);
 
             // Get Query
             const queryURL = {
@@ -196,11 +196,11 @@ if (
                 }
 
                 // Login Animation
-                divBase.title.fadeIn(1000);
-                divBase.container.fadeIn(1500);
+                dsCommandEditor.loginDiv.title.fadeIn(1000);
+                dsCommandEditor.loginDiv.container.fadeIn(1500);
 
                 // Form Login
-                divBase.loginForm.submit(function () {
+                dsCommandEditor.loginDiv.loginForm.submit(function () {
 
                     // Send Form
                     dsCommandEditor.submitBotToken({
@@ -215,13 +215,13 @@ if (
                 });
 
                 // Token List
-                divBase.buttons.tokenList.click(dsCommandEditor.tokenList.open);
+                dsCommandEditor.loginDiv.buttons.tokenList.click(dsCommandEditor.tokenList.open);
 
                 // TOS
-                divBase.buttons.tos.click(dsCommandEditor.tos);
+                dsCommandEditor.loginDiv.buttons.tos.click(dsCommandEditor.tos);
 
                 // Token List
-                divBase.buttons.oauth2.click(function () {
+                dsCommandEditor.loginDiv.buttons.oauth2.click(function () {
                     eModal.prompt({
                         message: "Enter your bot\'s client id here:",
                         title: '<i class="fab fa-discord"></i> Bot User ID'

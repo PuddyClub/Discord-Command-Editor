@@ -5,7 +5,7 @@ dsCommandEditor.system = {
 
         // Start Loading
         $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
-        divBase.root.fadeOut(500, function () {
+        dsCommandEditor.loginDiv.root.fadeOut(500, function () {
 
             // Exist Root
             if (dsCommandEditor.root) {
@@ -21,7 +21,7 @@ dsCommandEditor.system = {
             // Nope
             else {
                 eModal.alert({ message: 'Could not start the root! The information is incorrect!', title: '<i class="fas fa-exclamation-triangle"></i> Error!' });
-                divBase.root.fadeIn(500);
+                dsCommandEditor.loginDiv.root.fadeIn(500);
             }
 
         });

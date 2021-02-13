@@ -11,15 +11,28 @@ dsCommandEditor.tokenList = {
             const tokensList = [];
 
             // Get Items
-            for(const item in tokenList){
+            for (const item in tokenList) {
 
-                console.log(tokenList[item], item);
+                tokensList.push($('<tr>').append(
+                    $('<td>').text(item),
+                    $('<td>').append(
+                        $('<button>', { class: 'btn btn-secondary' }).text('Login').click(function () {
+
+                            // Start Root
+                            dsCommandEditor.system.startRoot('bot_token', item, tokenList.token);
+
+                            // Initialize
+                            dsCommandEditor.system.initialize();
+
+                        })
+                    )
+                ));
 
             }
 
             eModal.alert({
-                message: $('<div>', {class: 'table-responsive'}).append(
-                    $('<table>', {class: 'table'}).append(
+                message: $('<div>', { class: 'table-responsive' }).append(
+                    $('<table>', { class: 'table' }).append(
 
                         // Head
                         $('<thead>').append(
