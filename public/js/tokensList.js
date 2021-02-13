@@ -7,9 +7,19 @@ dsCommandEditor.tokenList = {
         const tokenList = $.localStorage.get('tokenList');
         if (objType(tokenList, 'object')) {
 
-            eModal.prompt({
+            // Prepare Items
+            const tokensList = [];
+
+            // Get Items
+            for(const item in tokenList){
+
+                console.log(tokenList[item], tokenList);
+
+            }
+
+            eModal.alert({
                 message: $('<div>', {class: 'table-responsive'}).append(
-                    $('<table>', {class: 'table'})
+                    $('<table>', {class: 'table'}).append(tokensList)
                 ),
                 title: '<i class="fab fa-discord"></i> Token List'
             })
