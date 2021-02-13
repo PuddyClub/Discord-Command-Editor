@@ -24,25 +24,24 @@ dsCommandEditor.system = {
             // Exist Root
             if (dsCommandEditor.root) {
 
+                // Complete Medal
+                const completeModalAction = function () {
+                    optionSelected = true;
+                    $(document).off('hide.bs.modal', theModal, closeModalAction);
+                };
+
                 // Choose Option
-                eModal.alert({
-                    message: $('<span>', {id: 'chooseType'}).text('Choose what type of command list you want to modify. Will you choose Global or a Guild?'),
+                let optionSelected = false;
+                const theModal = eModal.alert({
+                    message: $('<span>', { id: 'chooseType' }).text('Choose what type of command list you want to modify. Will you choose Global or a Guild?'),
                     title: `Choose a List"`,
                     buttons: [
 
                         // Cancel
-                        {
-                            text: 'Cancel', style: 'info', close: true, click: function () {
-                                dsCommandEditor.startMenu();
-                            }
-                        },
+                        { text: 'Cancel', style: 'info', close: true, click: function () { completeModalAction(); dsCommandEditor.startMenu(); } },
 
                         // GLobal
-                        {
-                            text: 'Global', style: 'primary', close: false, click: function () {
-                                dsCommandEditor.system.loadCommandList();
-                            }
-                        },
+                        { text: 'Global', style: 'primary', close: true, click: function () { completeModalAction(); dsCommandEditor.system.loadCommandList(); } },
 
                         // Guild
                         {
@@ -51,13 +50,22 @@ dsCommandEditor.system = {
                                     message: 'Type the Guild ID:',
                                     title: `<i class="fab fa-discord"></i> Guild ID"`,
                                 }).then(function (guildID) {
+                                    completeModalAction();
                                     dsCommandEditor.system.loadCommandList(guildID);
-                                }, function () { dsCommandEditor.startMenu(); });
+                                }, function () { completeModalAction(); dsCommandEditor.startMenu(); });
                             }
                         }
 
                     ]
-                });
+                }).element;
+
+                // Close Modal Action
+                const closeModalAction = function (data) {
+                    if (!optionSelected) { dsCommandEditor.startMenu(); }
+                    completeModalAction();
+                };
+
+                $(document).on('hide.bs.modal', theModal, closeModalAction);
 
             }
 
