@@ -12,14 +12,20 @@ dsCommandEditor.tokenList = {
 
             // Get Items
             for (const item in tokenList) {
-
                 tokensList.push($('<tr>').append(
+                    
+                    // ID
                     $('<td>').text(item),
+
+                    // Delete
+                    /* Create Delete Button here */
+                    
+                    // Login
                     $('<td>').append(
-                        $('<button>', { class: 'btn btn-secondary' }).text('Login').click(function () {
+                        $('<button>', { class: 'btn btn-secondary', 'data-dismiss': 'modal' }).text('Login').click(function () {
 
                             // Start Root
-                            dsCommandEditor.system.startRoot('bot_token', item, tokenList.token);
+                            dsCommandEditor.system.startRoot('bot_token', item, tokenList[item].token);
 
                             // Initialize
                             dsCommandEditor.system.initialize();
@@ -27,7 +33,6 @@ dsCommandEditor.tokenList = {
                         })
                     )
                 ));
-
             }
 
             eModal.alert({
