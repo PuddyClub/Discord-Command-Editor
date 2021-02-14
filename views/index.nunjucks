@@ -22,8 +22,8 @@
         {{js.urljs | safe}}
         {{js.emodal | safe}}
         {{js.jquerystorageapi | safe}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.28.2/jsoneditor.min.js" integrity="sha512-bfsUyGahu9QXboUnOAGfGubz8AMLY10PIavnh2q7lc/M5HhR3NOXYqFVTCMS9TcfZqQihbiibdVTtC3woU7gmQ==" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/clone/1.0.4/clone.min.js" integrity="sha512-DnAb1jKHBEwQiL3WNROTHx15qqHPjb5APGfUFopcXO4gjk4T/vGNwLbffnfwFYfle/cCQ1x/fi5u5qsJmKrPAA==" crossorigin="anonymous"></script>
+        {{js.jsoneditor | safe}}
+        {{js.clone | safe}}
 
         <script>
             var dsCommandEditor = {};
@@ -40,32 +40,9 @@
 
         {{css.fontawesome | safe}}
         {{css.bootstrap | safe}}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.28.2/jsoneditor.min.css" integrity="sha512-EBuVURdzGGQq+s6e9pCbguXC9AUnSV+jlW4UWpJ4cgcZmzOLJ9EpirGdooRWyfx0IolJ+Er+D7C9QnfoQVw9+w==" crossorigin="anonymous" />
-
-        <!-- Login Template made by dimi130473 (https://bootsnipp.com/snippets/bxzmb) -->
-        <style>
-
-            body {
-                margin: 0;
-                padding: 0;
-                background-color: #36393f;
-                background-repeat: repeat;
-                background-position: center;
-                background-size: 100%;
-                height: 100vh;
-            }
-            #login .container #login-row #login-column #login-box {
-                margin-top: 40px;
-                max-width: 600px;
-                background-color: #2f3136;
-            }
-            #login .container #login-row #login-column #login-box #login-form {
-                padding: 20px;
-            }
-            #login .container #login-row #login-column #login-box #login-form #register-link {
-                margin-top: -85px;
-            }
-        </style>
+        {{css.jsoneditor | safe}}
+        
+        <link rel="stylesheet" href="/css/index.css" />
 
     </head>
 

@@ -12,12 +12,15 @@ module.exports = function (app, options) {
             'urljs': '<script src="https://cdnjs.cloudflare.com/ajax/libs/urljs/2.5.0/url.min.js" integrity="sha512-quDzRasixBjD7wB9uvc/ApSn9ShS9ERqFrGR214jf0FUjomXQ7wtSxq0w2LZAvHKCC6myJNamVQBKt4tSeNEJQ==" crossorigin="anonymous"></script>',
             'emodal': '<script src="https://cdnjs.cloudflare.com/ajax/libs/eModal/1.2.69/eModal.min.js" integrity="sha512-OO21WN3HthMwsteuxEKk1SNo7XYJedW7Nyy0BO98nCYLRU57jP7seInkztBrs7Ub236jqe18Gw2/x4AbNsJ2/w==" crossorigin="anonymous"></script>',
             'jquerystorageapi': '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-storage-api/1.9.4/jquery.storageapi.min.js" integrity="sha512-rZXftKfJtDmBFPfxFYFjwGM3QadaGJCrOpdaOh3JPkk2wJXSghhUa7bn9CCn7R/UPW29aMuWY0JDnbZEiUYxgQ==" crossorigin="anonymous"></script>',
+            'jsoneditor': '<script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.28.2/jsoneditor.min.js" integrity="sha512-bfsUyGahu9QXboUnOAGfGubz8AMLY10PIavnh2q7lc/M5HhR3NOXYqFVTCMS9TcfZqQihbiibdVTtC3woU7gmQ==" crossorigin="anonymous"></script>',
+            'clone': '<script src="https://cdnjs.cloudflare.com/ajax/libs/clone/1.0.4/clone.min.js" integrity="sha512-DnAb1jKHBEwQiL3WNROTHx15qqHPjb5APGfUFopcXO4gjk4T/vGNwLbffnfwFYfle/cCQ1x/fi5u5qsJmKrPAA==" crossorigin="anonymous"></script>',
         },
 
         // CSS
         css: {
             'fontawesome': '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>',
-            'bootstrap': '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" crossorigin="anonymous"/>'
+            'bootstrap': '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" crossorigin="anonymous"/>',
+            'jsoneditor': '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.28.2/jsoneditor.min.css" integrity="sha512-EBuVURdzGGQq+s6e9pCbguXC9AUnSV+jlW4UWpJ4cgcZmzOLJ9EpirGdooRWyfx0IolJ+Er+D7C9QnfoQVw9+w==" crossorigin="anonymous" />',
         }
 
     });
@@ -31,7 +34,27 @@ module.exports = function (app, options) {
         urlPath.shift();
 
         // File Type
-        res.setHeader('Content-Type', 'application/javascript');
+        let fileType = null;
+
+        // Read File Type
+        const readFileType = function (filePath) {
+
+            // Javascript
+            if (filePath.endsWith('.js')) {
+                res.setHeader('Content-Type', 'application/javascript');
+                fileType = 'js';
+            }
+
+            // CSS
+            else if (filePath.endsWith('.css')) {
+                res.setHeader('Content-Type', 'text/css');
+                fileType = 'css';
+            }
+
+            // Complete
+            return;
+
+        };
 
         // Normal Path
         if (urlPath[0] !== "system") {
@@ -49,10 +72,11 @@ module.exports = function (app, options) {
                 try {
 
                     // Get File Path
-                    const filePath = path.join(jsFolder, './' + urlPath[0]);
+                    const filePath = path.join(clientFolder, './' + urlPath[0]);
+                    readFileType(filePath);
 
                     // Read File
-                    if (filePath.endsWith('.js') && fs.lstatSync(filePath).isFile()) {
+                    if (fileType && fs.lstatSync(filePath).isFile()) {
                         const file = fs.readFileSync(filePath, 'utf-8');
                         res.send(file);
                     }
@@ -76,10 +100,11 @@ module.exports = function (app, options) {
             try {
 
                 // Get File Path
-                const filePath = path.join(jsFolder, './system/' + urlPath[1]);
+                const filePath = path.join(clientFolder, './system/' + urlPath[1]);
+                readFileType(filePath)
 
                 // Read File
-                if (filePath.endsWith('.js') && fs.lstatSync(filePath).isFile()) {
+                if (fileType && fs.lstatSync(filePath).isFile()) {
                     const file = fs.readFileSync(filePath, 'utf-8');
                     res.send(file);
                 }
@@ -116,7 +141,7 @@ module.exports = function (app, options) {
     }));
 
     // JS Folder
-    const jsFolder = path.join(__dirname, './client');
+    const clientFolder = path.join(__dirname, './client');
 
     // Prepare Nunjucks
     const nunjucks = require('nunjucks');
@@ -133,8 +158,9 @@ module.exports = function (app, options) {
 
     app.set('view engine', 'nunjucks');
 
-    // Homepage
+    // JS and CSS
     app.get('/js/*', (req, res) => { return readFile(req, res); });
+    app.get('/css/*', (req, res) => { return readFile(req, res); });
 
     // Homepage
     app.get('*', (req, res) => {

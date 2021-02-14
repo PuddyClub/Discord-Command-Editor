@@ -17,7 +17,13 @@ if (
     Url &&
 
     // Bootstrap Modal
-    $.fn.modal
+    $.fn.modal &&
+
+    // Clone
+    clone,
+
+    // Json Editor
+    JSONEditor
 
 ) {
 

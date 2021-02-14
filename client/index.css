@@ -1,0 +1,26 @@
+/* Login Template made by dimi130473 (https://bootsnipp.com/snippets/bxzmb) */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #36393f;
+    background-repeat: repeat;
+    background-position: center;
+    background-size: 100%;
+    height: 100vh;
+}
+#login .container #login-row #login-column #login-box {
+    margin-top: 40px;
+    max-width: 600px;
+    background-color: #2f3136;
+}
+#login .container #login-row #login-column #login-box #login-form {
+    padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+    margin-top: -85px;
+}
+
+#jsoneditor {
+    height: 100%;
+}

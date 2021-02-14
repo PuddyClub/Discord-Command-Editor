@@ -44,6 +44,11 @@ dsCommandEditor.system = {
                     // Set Commands
                     editor.set(clone(commands.data));
 
+                    // Create Save Button
+                    $('#jsoneditor .jsoneditor-menu').append(
+                        $('<button>', {title: 'Save Command List', class: 'jsoneditor-save-commands'})
+                    );
+
                     // Commands List
                     dsCommandEditor.system.loaded = commands.data;
 
