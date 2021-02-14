@@ -74,6 +74,12 @@ div.jsoneditor-value:hover {
     color: #36393f
 }
 
+.jsoneditor-highlight *,
+.jsoneditor-highlight {
+    color: #c0c0c0 !important;
+    filter: brightness(55%) !important;
+}
+
 /* Borders */
 div.jsoneditor, div.jsoneditor-menu, div.jsoneditor-navigation-bar {
     border: none;
