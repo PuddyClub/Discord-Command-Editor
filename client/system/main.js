@@ -1,5 +1,12 @@
 dsCommandEditor.system = {
 
+    // Save Command List
+    saveCommandList: function (newCommands, oldCommands) {
+
+        console.log(oldCommands, newCommands);
+
+    },
+
     // Load Command List
     loadCommandList: function (guildID) {
 
@@ -46,11 +53,8 @@ dsCommandEditor.system = {
 
                     // Create Save Button
                     $('#jsoneditor .jsoneditor-menu').append(
-                        $('<button>', {title: 'Save Command List', class: 'jsoneditor-save-commands'})
-                    );
-
-                    // Commands List
-                    dsCommandEditor.system.loaded = commands.data;
+                        $('<button>', { title: 'Save Command List', class: 'jsoneditor-save-commands' }).append('<i class="fas fa-save"></i>')
+                    ).click(function () { dsCommandEditor.system.saveCommandList(editor.get(), commands.data); });
 
                     // Complete
                     $.LoadingOverlay("hide");

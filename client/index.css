@@ -28,3 +28,7 @@ body {
 div.jsoneditor-menu>button.jsoneditor-save-commands {
     background-image: none;
 }
+
+div.jsoneditor-menu>button>i {
+    font-size: 19px;
+}
