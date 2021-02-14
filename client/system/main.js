@@ -132,7 +132,7 @@ dsCommandEditor.system = {
                                         dsCommandEditor.system.loadCommandList(guildID);
                                     }, 1000);
 
-                                }, function () { optionSelected = false; $(document).on('hide.bs.modal', theModal, closeModalAction); completeModalAction(); });
+                                }, function () { dsCommandEditor.startMenu(); });
                             }
                         }
 

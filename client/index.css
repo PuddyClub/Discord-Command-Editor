@@ -24,3 +24,7 @@ body {
 #jsoneditor {
     height: 100%;
 }
+
+div.jsoneditor-menu>button.jsoneditor-save-commands {
+    background-image: none;
+}
