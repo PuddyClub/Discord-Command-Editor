@@ -18,6 +18,7 @@ module.exports = function (app, options) {
 
         // CSS
         css: {
+            'index': '<link rel="stylesheet" href="/css/index.css" />',
             'fontawesome': '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>',
             'bootstrap': '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" crossorigin="anonymous"/>',
             'jsoneditor': '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.28.2/jsoneditor.min.css" integrity="sha512-EBuVURdzGGQq+s6e9pCbguXC9AUnSV+jlW4UWpJ4cgcZmzOLJ9EpirGdooRWyfx0IolJ+Er+D7C9QnfoQVw9+w==" crossorigin="anonymous" />',

@@ -42,7 +42,7 @@
         {{css.bootstrap | safe}}
         {{css.jsoneditor | safe}}
         
-        <link rel="stylesheet" href="/css/index.css" />
+        {{css.index | safe}}
 
     </head>
 
