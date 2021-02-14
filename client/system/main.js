@@ -1,5 +1,39 @@
 dsCommandEditor.system = {
 
+    // Fetch
+    fetch: function (url, method, body) {
+        return new Promise(function (resolve, reject) {
+
+            // Options
+            const fetchOptions = {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Authorization': `Bot ${dsCommandEditor.root.bot_token}`,
+                    'Content-Type': 'application/json'
+                }
+            };
+
+            // Exist Body
+            if (body) {
+                body.client_id = dsCommandEditor.root.client_id;
+                fetchOptions.body = JSON.stringify(body);
+            }
+
+            // Fetch Function
+            fetch('/' + url, fetchOptions).then(response => {
+                response.json().then(data => {
+                    resolve(data);
+                }).catch(err => {
+                    reject(err);
+                });
+            }).catch(err => {
+                reject(err);
+            });
+
+        });
+    },
+
     // Save Command List
     saveCommandList: function (newCommands, oldCommands) {
 
@@ -18,57 +52,40 @@ dsCommandEditor.system = {
         };
 
         // System Config
-        if (typeof guildID === "string") { dsCommandEditor.root.guildID = guildID; } else if (typeof dsCommandEditor.root.guildID !== "undefined") {
-            delete dsCommandEditor.root.guildID;
-        }
+        let fetchConfig = {};
+        if (typeof guildID === "string") { fetchConfig.guildID = guildID; }
 
         // Load Command List
-        fetch("/getCommands", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                client_id: dsCommandEditor.root.client_id,
-                guildID: dsCommandEditor.root.guildID
-            }),
-            headers: {
-                'Authorization': `Bot ${dsCommandEditor.root.bot_token}`,
-                'Content-Type': 'application/json'
+        dsCommandEditor.system.fetch("getCommands", 'POST', fetchConfig).then(commands => {
+
+            // Worked
+            if (!commands.error) {
+
+                // create JSON DIV
+                dsCommandEditor.system.div = $('<div>', { id: 'jsoneditor' });
+                $('body').append(dsCommandEditor.system.div);
+
+                // Start JSON
+                const options = {};
+                const editor = new JSONEditor(document.getElementById("jsoneditor"), options);
+
+                // Set Commands
+                editor.set(clone(commands.data));
+
+                // Create Save Button
+                $('#jsoneditor .jsoneditor-menu').append(
+                    $('<button>', { title: 'Save Command List', class: 'jsoneditor-save-commands' }).append('<i class="fas fa-save"></i>')
+                ).click(function () { dsCommandEditor.system.saveCommandList(editor.get(), commands.data); });
+
+                // Complete
+                $.LoadingOverlay("hide");
+
             }
-        }).then(response => {
-            response.json().then(commands => {
 
-                // Worked
-                if (!commands.error) {
-
-                    // create JSON DIV
-                    dsCommandEditor.system.div = $('<div>', { id: 'jsoneditor' });
-                    $('body').append(dsCommandEditor.system.div);
-
-                    // Start JSON
-                    const options = {};
-                    const editor = new JSONEditor(document.getElementById("jsoneditor"), options);
-
-                    // Set Commands
-                    editor.set(clone(commands.data));
-
-                    // Create Save Button
-                    $('#jsoneditor .jsoneditor-menu').append(
-                        $('<button>', { title: 'Save Command List', class: 'jsoneditor-save-commands' }).append('<i class="fas fa-save"></i>')
-                    ).click(function () { dsCommandEditor.system.saveCommandList(editor.get(), commands.data); });
-
-                    // Complete
-                    $.LoadingOverlay("hide");
-
-                }
-
-                // Nope
-                else {
-                    cancelCommandList(commands.error);
-                }
-
-            }).catch(err => {
-                cancelCommandList(err);
-            });
+            // Nope
+            else {
+                cancelCommandList(commands.error);
+            }
         }).catch(err => {
             cancelCommandList(err);
         });
