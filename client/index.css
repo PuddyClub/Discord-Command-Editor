@@ -73,3 +73,8 @@ div.jsoneditor-field:hover,
 div.jsoneditor-value:hover {
     color: #36393f
 }
+
+/* loadingoverlay */
+.loadingoverlay .loadingoverlay_element svg circle {
+    fill: rgb(160 160 160) !important
+}
