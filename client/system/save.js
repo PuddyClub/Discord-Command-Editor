@@ -2,6 +2,8 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands) {
 
     console.log(oldCommands, newCommands);
 
+    // dsCommandEditor.system.fetch("getCommands", 'POST', {});
+
     /* $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
 
     eModal.alert({
