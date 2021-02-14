@@ -27,7 +27,6 @@
             var dsCommandEditor = {};
         </script>
 
-        <script src="/js/client.js"></script>
         <script src="/js/main.js"></script>
         <script src="/js/oAuth2Code.js"></script>
         <script src="/js/submitBotToken.js"></script>

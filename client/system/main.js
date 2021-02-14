@@ -21,7 +21,6 @@ dsCommandEditor.system = {
             .catch(err => {
 
                 console.error(err);
-                console.log(dsCommandEditor.errorModalMessage(err.message));
                 eModal.alert({
                     message: dsCommandEditor.errorModalMessage(err.message),
                     title: '<i class="fas fa-exclamation-triangle"></i> Error!',

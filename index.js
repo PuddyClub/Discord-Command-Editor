@@ -1,75 +1,96 @@
-/* 
+module.exports = function (app) {
 
-    Attention! This module is just a script to test the website before it is sent to Github!
-    This module is used to test the website without cache interference.
+    // Read File
+    const readFile = function (req, res) {
 
-*/
+        // URL Path
+        let urlPath = req.url.split('/');
+        urlPath.shift();
+        urlPath.shift();
 
-// Prepare Modules
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const jsFolder = path.join(__dirname, './public/js');
+        // Normal Path
+        if (urlPath[0] !== "system") {
 
-// Prepare Express
-const app = express();
+            // File
+            try {
+                const file = fs.readFileSync(path.join(jsFolder, './' + urlPath[0]), 'utf-8');
+            } catch (err) {
+                errorPage(res, 404, 'File Data Not Found.');
+            }
 
-app.set('view engine', 'nunjucks');
+        }
 
-// Read File
-const readFile = function (file) {
-    return '<script>' + fs.readFileSync(path.join(jsFolder, './' + file), 'utf-8') + '</script>';
-};
+        // System
+        else if (urlPath[0] === "system") {
 
-// Homepage
-const homepageCallback = (req, res) => {
+            // File
+            try {
+                const file = fs.readFileSync(path.join(jsFolder, './system/' + urlPath[1]), 'utf-8');
+            } catch (err) {
+                errorPage(res, 404, 'File System Data Not Found.');
+            }
 
-    // Webpage
-    const webpage = fs.readFileSync(path.join(__dirname, './public/index.html'), 'utf-8');
+        }
 
-    // Render Page
-    res.send(
+        // Nothing
+        else { errorPage(res, 404, 'File Not Found.'); }
 
-        // Web File
-        webpage
+        // Complete
+        return;
 
-            // main.js
-            .replace(`<script src="/js/main.js"></script>`, readFile('main.js'))
+    };
 
-            // client.js
-            .replace(`<script src="/js/client.js"></script>`, readFile('client.js'))
 
-            // oAuth2 Code
-            .replace(`<script src="/js/oAuth2Code.js"></script>`, readFile('oAuth2Code.js'))
+    // Prepare Modules
+    const path = require('path');
 
-            // Submit Token
-            .replace(`<script src="/js/submitBotToken.js"></script>`, readFile('submitBotToken.js'))
+    // JS Folder
+    const jsFolder = path.join(__dirname, './public/js');
 
-            // Token List
-            .replace(`<script src="/js/tokensList.js"></script>`, readFile('tokensList.js'))
+    // Prepare Nunjucks
+    const nunjucks = require('nunjucks');
+    nunjucks.configure(path.join(__dirname, './views'), {
+        autoescape: true,
+        express: app
+    });
 
-            // TOS
-            .replace(`<script src="/js/tos.js"></script>`, readFile('tos.js'))
+    // Error Page
+    const errorPage = function (res, code, message) {
+        res.status(code);
+        return res.json({ error: code, message: message });
+    };
 
-            // System Main
-            .replace(`<script src="/js/system/main.js"></script>`, readFile('system/main.js'))
+    app.set('view engine', 'nunjucks');
 
-    );
+    // Homepage
+    app.get('/js/*', (req, res) => { return readFile(req, res); });
+
+    // Homepage
+    app.get('*', (req, res) => {
+
+        // Index
+        if (req.url === "/") { res.render('index'); }
+
+        // Nope
+        else { res.redirect('/'); }
+
+        // Complete
+        return;
+
+    });
+
+
+    app.post('*', (req, res) => {
+
+        // Nothing
+        errorPage(res, 404, 'Not Found.');
+
+        // Complete
+        return;
+
+    });
 
     // Complete
     return;
 
 };
-
-app.all('/', homepageCallback);
-app.all('/index.html', homepageCallback);
-
-// Static Files
-app.use(express.static(path.join(__dirname, '/public'), {
-    maxAge: '2592000000' // uses milliseconds per docs
-}));
-
-app.listen(3000, function () {
-    console.log('http://localhost:3000');
-});
-
