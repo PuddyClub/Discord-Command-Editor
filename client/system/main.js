@@ -123,7 +123,10 @@ dsCommandEditor.system = {
                                 try {
 
                                     // Prepare New Commands
-                                    const newCommands = JSON.stringify(fr.result);
+                                    const newCommands = JSON.parse(fr.result);
+
+                                    // Result
+                                    editor.get(newCommands);
 
                                 } 
                                 
@@ -257,7 +260,7 @@ dsCommandEditor.system = {
 
             // Nope
             else {
-                
+
                 eModal.alert({
                     message: dsCommandEditor.errorModalMessage('Could not start the root! The information is incorrect!'),
                     title: '<i class="fas fa-exclamation-triangle"></i> Error!',
