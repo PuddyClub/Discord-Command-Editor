@@ -7,23 +7,11 @@ if (
     // Jquery Storage
     $.alwaysUseJsonInStorage &&
 
-    // Lodash
-    _ &&
-
-    // Moment
-    moment &&
-
-    // Moment JS
-    moment.tz &&
-
     // EModal
     eModal &&
 
     // Loading Overlay
     $.LoadingOverlay &&
-
-    // Axios
-    axios &&
 
     // URLJS
     Url &&
