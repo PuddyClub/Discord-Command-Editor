@@ -94,6 +94,10 @@ dsCommandEditor.system = {
                         // Guild
                         {
                             text: 'Guild', style: 'secondary', close: false, click: function () {
+
+                                // Turn Off
+                                completeModalAction();
+
                                 eModal.prompt({
                                     message: 'Type the Guild ID:',
                                     title: `<i class="fab fa-discord"></i> Guild ID"`,
@@ -101,14 +105,13 @@ dsCommandEditor.system = {
 
                                     // Start Loading
                                     $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
-                                    completeModalAction();
 
                                     // Start Loading
                                     setTimeout(function () {
                                         dsCommandEditor.system.loadCommandList(guildID);
                                     }, 1000);
 
-                                }, function () { completeModalAction(); dsCommandEditor.startMenu(); });
+                                }, function () { optionSelected = false; $(document).on('hide.bs.modal', theModal, closeModalAction); completeModalAction(); });
                             }
                         }
 
