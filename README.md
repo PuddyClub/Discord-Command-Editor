@@ -35,7 +35,7 @@ require('@tinypudding/discord-command-editor')(app, {
         // https://gasparesganga.com/labs/jquery-loading-overlay/
         'jqueryloadingoverlay': '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-loading-overlay/2.1.7/loadingoverlay.min.js" integrity="sha512-hktawXAt9BdIaDoaO9DlLp6LYhbHMi5A36LcXQeHgVKUH6kJMOQsAtIw2kmQ9RERDpnSTlafajo6USh9JUXckw==" crossorigin="anonymous"></script>',
 
-        // https://github.com/jillix/url.js?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_library
+        // https://github.com/jillix/url.js
         // http://jillix.github.io/url.js/
         'urljs': '<script src="https://cdnjs.cloudflare.com/ajax/libs/urljs/2.5.0/url.min.js" integrity="sha512-quDzRasixBjD7wB9uvc/ApSn9ShS9ERqFrGR214jf0FUjomXQ7wtSxq0w2LZAvHKCC6myJNamVQBKt4tSeNEJQ==" crossorigin="anonymous"></script>',
         
