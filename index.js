@@ -10,30 +10,40 @@ module.exports = function (app) {
 
         // File Type
         res.setHeader('Content-Type', 'application/javascript');
-        console.log(urlPath);
 
         // Normal Path
         if (urlPath[0] !== "system") {
 
-            // File
-            try {
-
-                // Get File Path
-                const filePath = path.join(jsFolder, './' + urlPath[0]);
-
-                // Read File
-                if (filePath.endsWith('.js') && fs.lstatSync(filePath).isFile()) {
-                    const file = fs.readFileSync(filePath, 'utf-8');
-                    res.send(file);
-                }
-
-                // Nope
-                else { errorPage(res, 404, 'Invalid Path!'); }
-
+            // Obj Type
+            if (urlPath[0] === "objType.js") {
+                const file = `var objType = ${require('@tinypudding/puddy-lib/get/objType').toString()};`;
+                res.send(file);
             }
 
-            // Error
-            catch (err) { errorPage(res, 404, 'File Data Not Found.'); }
+            // Other
+            else {
+
+                // File
+                try {
+
+                    // Get File Path
+                    const filePath = path.join(jsFolder, './' + urlPath[0]);
+
+                    // Read File
+                    if (filePath.endsWith('.js') && fs.lstatSync(filePath).isFile()) {
+                        const file = fs.readFileSync(filePath, 'utf-8');
+                        res.send(file);
+                    }
+
+                    // Nope
+                    else { errorPage(res, 404, 'Invalid Path!'); }
+
+                }
+
+                // Error
+                catch (err) { errorPage(res, 404, 'File Data Not Found.'); }
+
+            }
 
         }
 
