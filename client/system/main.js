@@ -90,7 +90,7 @@ dsCommandEditor.system = {
                     // Export
                     $('<button>', { title: 'Export Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-download"></i>').click(function () {
                         console.log();
-                        saveAs(new Blob(JSON.stringify(editor.get(), null, 2), { type: "text/plain;charset=utf-8" }), `discord_slash_commands_${dsCommandEditor.root.client_id}.json`);
+                        saveAs(new Blob([JSON.stringify(editor.get(), null, 2)], { type: "text/plain;charset=utf-8" }), `discord_slash_commands_${dsCommandEditor.root.client_id}.json`);
                         $(this).blur();
                     })
 
