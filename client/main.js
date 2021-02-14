@@ -55,7 +55,11 @@ if (
             dsCommandEditor.loginDiv = {};
 
             // Title
-            dsCommandEditor.loginDiv.title = $('<h3>', { class: 'title-base text-center text-white pt-5' }).text('Discord Command Editor');
+            dsCommandEditor.loginDiv.title = $('<h3>', { class: 'title-base text-center text-white pt-5' }).append([
+                'Discord Command Editor<br/>', $('<small>').append(
+                    $('<a>', {href: 'https://github.com/JasminDreasond', target: '_blank'}).text('Made by JasminDreasond')
+                )
+            ]);
 
             // Sub Title
             dsCommandEditor.loginDiv.subTitle = $('<h3>', { class: 'text-center text-white' }).text('Login');
