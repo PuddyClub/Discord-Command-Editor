@@ -8,15 +8,32 @@ module.exports = function (app) {
         urlPath.shift();
         urlPath.shift();
 
+        // File Type
+        res.setHeader('Content-Type', 'application/javascript');
+        console.log(urlPath);
+
         // Normal Path
         if (urlPath[0] !== "system") {
 
             // File
             try {
-                const file = fs.readFileSync(path.join(jsFolder, './' + urlPath[0]), 'utf-8');
-            } catch (err) {
-                errorPage(res, 404, 'File Data Not Found.');
+
+                // Get File Path
+                const filePath = path.join(jsFolder, './' + urlPath[0]);
+
+                // Read File
+                if (filePath.endsWith('.js') && fs.lstatSync(filePath).isFile()) {
+                    const file = fs.readFileSync(filePath, 'utf-8');
+                    res.send(file);
+                }
+
+                // Nope
+                else { errorPage(res, 404, 'Invalid Path!'); }
+
             }
+
+            // Error
+            catch (err) { errorPage(res, 404, 'File Data Not Found.'); }
 
         }
 
@@ -25,10 +42,23 @@ module.exports = function (app) {
 
             // File
             try {
-                const file = fs.readFileSync(path.join(jsFolder, './system/' + urlPath[1]), 'utf-8');
-            } catch (err) {
-                errorPage(res, 404, 'File System Data Not Found.');
+
+                // Get File Path
+                const filePath = path.join(jsFolder, './system/' + urlPath[1]);
+
+                // Read File
+                if (filePath.endsWith('.js') && fs.lstatSync(filePath).isFile()) {
+                    const file = fs.readFileSync(filePath, 'utf-8');
+                    res.send(file);
+                }
+
+                // Nope
+                else { errorPage(res, 404, 'Invalid Path!'); }
+
             }
+
+            // Error
+            catch (err) { errorPage(res, 404, 'File System Data Not Found.'); }
 
         }
 
@@ -43,9 +73,10 @@ module.exports = function (app) {
 
     // Prepare Modules
     const path = require('path');
+    const fs = require('fs');
 
     // JS Folder
-    const jsFolder = path.join(__dirname, './public/js');
+    const jsFolder = path.join(__dirname, './client');
 
     // Prepare Nunjucks
     const nunjucks = require('nunjucks');

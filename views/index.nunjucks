@@ -10,6 +10,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8 X-Content-Type-Options=nosniff">
         <meta http-equiv="Content-Script-Type" content="text/javascript">
+        <meta name="robots" content="noindex" />
+        <meta name="googlebot" content="noindex"/>
+        <meta name="googlebot-news" content="noindex"/>
 
         <!-- <link href="/img/icon.png" rel="icon" type="image/x-icon"/> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>
