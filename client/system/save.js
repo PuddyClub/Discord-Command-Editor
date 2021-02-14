@@ -2,7 +2,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands) {
 
     console.log(oldCommands, newCommands);
 
-    $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
+    /* $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
 
     eModal.alert({
         message: 'Your command list has been successfully saved!',
@@ -10,7 +10,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands) {
         size: 'lg modal-dialog-centered'
     });
 
-    $.LoadingOverlay("hide");
+    $.LoadingOverlay("hide"); */
 
     /* 
     
