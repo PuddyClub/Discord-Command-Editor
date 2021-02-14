@@ -101,10 +101,10 @@ dsCommandEditor.system = {
 
                                     // Start Loading
                                     $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
+                                    completeModalAction();
 
                                     // Start Loading
                                     setTimeout(function () {
-                                        completeModalAction();
                                         dsCommandEditor.system.loadCommandList(guildID);
                                     }, 1000);
 
@@ -116,7 +116,7 @@ dsCommandEditor.system = {
                 }).element;
 
                 // Close Modal Action
-                const closeModalAction = function (data) {
+                const closeModalAction = function () {
                     if (!optionSelected) { dsCommandEditor.startMenu(); }
                     completeModalAction();
                 };
