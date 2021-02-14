@@ -26,7 +26,10 @@ if (
     JSONEditor &&
 
     // File Saver
-    saveAs
+    saveAs &&
+
+    // File API
+    File && FileReader && FileList && Blob
 
 ) {
 

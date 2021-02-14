@@ -44,10 +44,18 @@ dsCommandEditor.system = {
     // Load Command List
     loadCommandList: function (guildID) {
 
+        // Set Page Title
+        document.title += ' - ' + dsCommandEditor.root.client_id;
+        if (typeof guildID === "string") { document.title += ' - ' + guildID; }
+
         // Cancel COmmand List
         const cancelCommandList = function (err) {
             $.LoadingOverlay("hide");
-            eModal.alert({ message: err.message, title: `<i class="fas fa-exclamation-triangle"></i> Error ${err.code}!` });
+            eModal.alert({
+                message: dsCommandEditor.errorModalMessage(err.message),
+                title: `<i class="fas fa-exclamation-triangle"></i> Error ${err.code}!`,
+                size: 'lg modal-dialog-centered'
+            });
             dsCommandEditor.startMenu();
         };
 
@@ -82,9 +90,62 @@ dsCommandEditor.system = {
                     }),
 
                     // Import
-                    $('<button>', { title: 'Import Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-upload"></i>').click(function () {
+                    $('<input>', { class: 'd-none', id: 'import-command-file', type: 'file' }).change(function () {
 
-                        $(this).blur();
+                        // Nothing Files
+                        if (!this.files) {
+                            eModal.alert({
+                                message: dsCommandEditor.errorModalMessage("This browser doesn't seem to support the `files` property of file inputs."),
+                                title: '<i class="fas fa-exclamation-triangle"></i> File was not loaded correctly!',
+                                size: 'lg modal-dialog-centered'
+                            });
+                        }
+
+                        // No FIle
+                        else if (!this.files[0]) {
+                            eModal.alert({
+                                message: dsCommandEditor.errorModalMessage("Please select a file before clicking 'Load'!"),
+                                title: '<i class="fas fa-exclamation-triangle"></i> File was not loaded correctly!',
+                                size: 'lg modal-dialog-centered'
+                            });
+                        }
+
+                        // Okay
+                        else {
+
+                            // Prepare File Reader
+                            const fr = new FileReader();
+
+                            // On Load
+                            fr.onload = function () {
+
+                                // Error!
+                                try {
+
+                                    // Prepare New Commands
+                                    const newCommands = JSON.stringify(fr.result);
+
+                                } 
+                                
+                                // Error
+                                catch (err) {
+                                    eModal.alert({
+                                        message: dsCommandEditor.errorModalMessage(err.message),
+                                        title: '<i class="fas fa-exclamation-triangle"></i> File was not loaded correctly!',
+                                        size: 'lg modal-dialog-centered'
+                                    });
+                                }
+
+                            };
+
+                            // Read File
+                            fr.readAsText(this.files[0]);
+
+                        }
+
+                    }),
+                    $('<button>', { title: 'Import Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-upload"></i>').click(function () {
+                        $('#import-command-file').trigger('click'); $(this).blur();
                     }),
 
                     // Export
@@ -196,7 +257,13 @@ dsCommandEditor.system = {
 
             // Nope
             else {
-                eModal.alert({ message: 'Could not start the root! The information is incorrect!', title: '<i class="fas fa-exclamation-triangle"></i> Error!' });
+                
+                eModal.alert({
+                    message: dsCommandEditor.errorModalMessage('Could not start the root! The information is incorrect!'),
+                    title: '<i class="fas fa-exclamation-triangle"></i> Error!',
+                    size: 'lg modal-dialog-centered'
+                });
+
                 dsCommandEditor.loginDiv.root.fadeIn(500);
             }
 
