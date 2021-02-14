@@ -44,6 +44,7 @@ dsCommandEditor.system = {
 
                     // Title
                     $('<button>', { class: 'jsoneditor-custom-item jsoneditor-title-item-list' }).text('Discord Command Editor').click(function () {
+                        open('https://github.com/TinyPudding/Discord-Command-Editor', '_blank');
                         $(this).blur();
                     })
 

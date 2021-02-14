@@ -3,6 +3,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands) {
     console.log(oldCommands, newCommands);
 
     // dsCommandEditor.system.fetch("getCommands", 'POST', {});
+    // editor.set()
 
     /* $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
 
