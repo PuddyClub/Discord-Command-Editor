@@ -52,6 +52,14 @@ div.jsoneditor-tree button.jsoneditor-button {
     filter: brightness(250%);
 }
 
+div.jsoneditor-tree button.jsoneditor-button,
+div.jsoneditor-tree button.jsoneditor-button:focus,
+div.jsoneditor-tree:focus {
+    background-color: transparent !important;
+    border: 0px solid transparent !important;
+    border-color: transparent !important;
+}
+
 .jsoneditor-schema-error, 
 div.jsoneditor td, 
 div.jsoneditor textarea, 
