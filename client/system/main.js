@@ -42,10 +42,10 @@ dsCommandEditor.system = {
                     const editor = new JSONEditor(document.getElementById("jsoneditor"), options);
 
                     // Set Commands
-                    editor.set(clone(commands));
+                    editor.set(clone(commands.data));
 
                     // Commands List
-                    dsCommandEditor.system.loaded = commands;
+                    dsCommandEditor.system.loaded = commands.data;
 
                     // Complete
                     $.LoadingOverlay("hide");
