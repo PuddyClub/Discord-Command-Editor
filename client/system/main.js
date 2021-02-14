@@ -81,7 +81,14 @@ dsCommandEditor.system = {
                 editor.set(clone(commands.data));
 
                 // Add Buttons
-                $('#jsoneditor .jsoneditor-menu').append(
+                $('#jsoneditor .jsoneditor-menu').prepend(
+
+                    // Title
+                    $('<button>', {class: 'jsoneditor-custom-item jsoneditor-title-item-list'}).text('Discord Command Editor').click(function () {
+                        $(this).blur();
+                    })
+
+                ).append(
 
                     // Save
                     $('<button>', { title: 'Save Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-save"></i>').click(function () {

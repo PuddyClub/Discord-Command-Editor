@@ -38,6 +38,12 @@ div.jsoneditor-menu>button.jsoneditor-custom-item {
     background-image: none;
 }
 
+/* Title Button */
+.jsoneditor-title-item-list {
+    width: 175px;
+    background-image: none;
+}
+
 /* Font Size */
 div.jsoneditor-menu>button>i {
     font-size: 19px;
