@@ -32,8 +32,24 @@ dsCommandEditor.system = {
 
                 // Worked
                 if (!commands.error) {
-                    console.log(commands.data);
+
+                    // create JSON DIV
+                    dsCommandEditor.system.div = $('<div>', { id: 'jsoneditor' });
+                    $('body').append(dsCommandEditor.system.div);
+
+                    // Start JSON
+                    const options = {};
+                    const editor = new JSONEditor(document.getElementById("jsoneditor"), options);
+
+                    // Set Commands
+                    editor.set(clone(commands));
+
+                    // Commands List
+                    dsCommandEditor.system.loaded = commands;
+
+                    // Complete
                     $.LoadingOverlay("hide");
+
                 }
 
                 // Nope
@@ -79,7 +95,7 @@ dsCommandEditor.system = {
 
                         // GLobal
                         {
-                            text: 'Global', style: 'primary', close: false, click: function () {
+                            text: 'Global', style: 'primary', close: true, click: function () {
 
                                 // Start Loading
                                 $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
