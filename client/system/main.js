@@ -76,8 +76,20 @@ dsCommandEditor.system = {
                 $('#jsoneditor .jsoneditor-menu').append(
 
                     // Save
-                    $('<button>', { title: 'Save Command List', class: 'jsoneditor-custom-item jsoneditor-save-commands' }).append('<i class="fas fa-save"></i>').click(function () { 
+                    $('<button>', { title: 'Save Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-save"></i>').click(function () { 
                         dsCommandEditor.system.saveCommandList(editor.get(), commands.data);
+                        $(this).blur(); 
+                    }),
+
+                    // Import
+                    $('<button>', { title: 'Import Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-upload"></i>').click(function () { 
+                        
+                        $(this).blur(); 
+                    }),
+
+                    // Export
+                    $('<button>', { title: 'Export Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-download"></i>').click(function () { 
+                        
                         $(this).blur(); 
                     })
                 
