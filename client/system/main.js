@@ -83,10 +83,8 @@ dsCommandEditor.system = {
             }
 
             // Nope
-            else {
-                cancelCommandList(commands.error);
-            }
-            
+            else { cancelCommandList(commands.error); }
+
         }).catch(err => {
             cancelCommandList(err);
         });
