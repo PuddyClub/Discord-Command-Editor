@@ -126,7 +126,7 @@ dsCommandEditor.system = {
                                     const newCommands = JSON.parse(fr.result);
 
                                     // Result
-                                    editor.get(newCommands);
+                                    editor.set(newCommands);
 
                                 } 
                                 
