@@ -34,13 +34,6 @@ dsCommandEditor.system = {
         });
     },
 
-    // Save Command List
-    saveCommandList: function (newCommands, oldCommands) {
-
-        console.log(oldCommands, newCommands);
-
-    },
-
     // Load Command List
     loadCommandList: function (guildID) {
 

@@ -32,6 +32,7 @@
         <script src="/js/tos.js"></script>
 
         <script src="/js/system/main.js"></script>
+        <script src="/js/system/save.js"></script>
 
         {{css.fontawesome | safe}}
         {{css.bootstrap | safe}}
