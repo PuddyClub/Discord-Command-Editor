@@ -4,17 +4,11 @@
     <head>
 
         <title>Discord Command Editor</title>
-        <meta name="theme-color" content="#506fb4">
-        <meta name="msapplication-navbutton-color" content="#506fb4">
-        <meta name="apple-mobile-web-app-status-bar-style" content="#506fb4">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8 X-Content-Type-Options=nosniff">
         <meta http-equiv="Content-Script-Type" content="text/javascript">
-        <meta name="robots" content="noindex" />
-        <meta name="googlebot" content="noindex"/>
-        <meta name="googlebot-news" content="noindex"/>
 
-        <!-- <link href="/img/icon.png" rel="icon" type="image/x-icon"/> -->
+        {{meta | safe}}
         
         {{js.jquery | safe}}
         {{js.bootstrap | safe}}

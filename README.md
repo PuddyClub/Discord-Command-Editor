@@ -22,6 +22,15 @@ const express = require('express');
 const app = express();
 require('@tinypudding/discord-command-editor')(app, {
 
+    // Meta
+    meta: '<link href="/img/icon.png" rel="icon" type="image/x-icon"/>' +
+        '<meta name="robots" content="noindex" />' +
+        '<meta name="googlebot" content="noindex"/>' +
+        '<meta name="googlebot-news" content="noindex"/>' +
+        '<meta name="theme-color" content="#506fb4">' +
+        '<meta name="msapplication-navbutton-color" content="#506fb4">' +
+        '<meta name="apple-mobile-web-app-status-bar-style" content="#506fb4">',
+
     // JS
     js: {
 
@@ -82,6 +91,12 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, '/public'), {
     maxAge: '2592000000' // uses milliseconds per docs
 }));
+
+/* 
+
+
+
+*/
 
 // Start Server
 app.listen(80);
