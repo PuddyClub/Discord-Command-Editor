@@ -75,13 +75,18 @@ div.jsoneditor-value:hover {
 }
 
 /* Borders */
-div.jsoneditor, div.jsoneditor-menu {
+div.jsoneditor, div.jsoneditor-menu, div.jsoneditor-navigation-bar {
     border: none;
 }
 
 /* Menu */
 div.jsoneditor-menu {
     background-color: #3883fa;
+}
+
+div.jsoneditor-navigation-bar {
+    color: grey;
+    background-color: #ebebeb;
 }
 
 /* JSON Items */
