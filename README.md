@@ -11,7 +11,7 @@
 </div>
 
 # Discord-Command-Editor
-Discord Bot Command List Editor.
+Discord Slash Commands List Editor.
 
 ## How to install
 
