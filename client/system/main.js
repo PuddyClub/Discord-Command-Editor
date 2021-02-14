@@ -84,7 +84,7 @@ dsCommandEditor.system = {
                 $('#jsoneditor .jsoneditor-menu').prepend(
 
                     // Title
-                    $('<button>', {class: 'jsoneditor-custom-item jsoneditor-title-item-list'}).text('Discord Command Editor').click(function () {
+                    $('<button>', { class: 'jsoneditor-custom-item jsoneditor-title-item-list' }).text('Discord Command Editor').click(function () {
                         $(this).blur();
                     })
 
@@ -133,10 +133,19 @@ dsCommandEditor.system = {
                                     const newCommands = JSON.parse(fr.result);
 
                                     // Result
-                                    editor.set(newCommands);
+                                    if (Array.isArray(newCommands)) { editor.set(newCommands); }
 
-                                } 
-                                
+                                    // Nope
+                                    else {
+                                        eModal.alert({
+                                            message: dsCommandEditor.errorModalMessage('Command list files should always start as an Array!'),
+                                            title: '<i class="fas fa-exclamation-triangle"></i> File was not loaded correctly!',
+                                            size: 'lg modal-dialog-centered'
+                                        });
+                                    }
+
+                                }
+
                                 // Error
                                 catch (err) {
                                     eModal.alert({
