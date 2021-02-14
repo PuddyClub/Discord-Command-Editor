@@ -17,13 +17,13 @@ dsCommandEditor.system = {
 
         // Load Command List
         fetch("/getCommands", {
-            method: 'GET',
+            method: 'POST',
             body: new URLSearchParams({
                 client_id: dsCommandEditor.client_id,
                 guildID: dsCommandEditor.guildID
             }),
             headers: {
-                'Authorization': `Bot ${prepareStart.bot_token}`,
+                'Authorization': `Bot ${dsCommandEditor.root.bot_token}`,
                 'Content-Type': 'application/json'
             }
         }).then(response => {

@@ -149,11 +149,16 @@ module.exports = function (app, options) {
         // Get Command List
         if (req.url === "/getCommands") {
 
+            console.log(req);
+
             const newApp = new discordSlashCommandsClient({
                 bot_token: '',
                 client_id: '',
                 user_token: ''
             });
+
+            // Complete
+            res.json({ success: true });
 
         }
 
