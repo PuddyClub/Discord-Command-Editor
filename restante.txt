@@ -1,3 +1,5 @@
+Bug quando carrega guild ID, faz voltar para a tela de login
+
 fetch("/getCommands", {
             method: 'GET',
             body: new URLSearchParams({
