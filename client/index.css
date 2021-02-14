@@ -81,17 +81,22 @@ div.jsoneditor, div.jsoneditor-menu, div.jsoneditor-navigation-bar {
 
 /* Menu */
 div.jsoneditor-menu {
-    background-color: #3883fa;
+    background-color: #202225;
 }
 
 div.jsoneditor-navigation-bar {
-    color: grey;
-    background-color: #ebebeb;
+    color: #e0e0e0;
+    background-color: #202225;
 }
 
 /* JSON Items */
 div.jsoneditor-tree {
     padding: 10px;
+}
+
+/* Search Bar */
+.jsoneditor-search button {
+    filter: brightness(55%);
 }
 
 /* loadingoverlay */
