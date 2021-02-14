@@ -97,7 +97,10 @@ dsCommandEditor.system = {
                     }),
 
                     // Import
-                    $('<input>', { class: 'd-none', id: 'import-command-file', type: 'file' }).change(function () {
+                    $('<input>', { class: 'd-none', id: 'import-command-file', type: 'file', accept: 'application/JSON' }).change(function () {
+
+                        // File Input
+                        const fileInput = $(this);
 
                         // Nothing Files
                         if (!this.files) {
@@ -106,6 +109,7 @@ dsCommandEditor.system = {
                                 title: '<i class="fas fa-exclamation-triangle"></i> File was not loaded correctly!',
                                 size: 'lg modal-dialog-centered'
                             });
+                            fileInput.val('');
                         }
 
                         // No FIle
@@ -115,6 +119,7 @@ dsCommandEditor.system = {
                                 title: '<i class="fas fa-exclamation-triangle"></i> File was not loaded correctly!',
                                 size: 'lg modal-dialog-centered'
                             });
+                            fileInput.val('');
                         }
 
                         // Okay
@@ -154,6 +159,23 @@ dsCommandEditor.system = {
                                         size: 'lg modal-dialog-centered'
                                     });
                                 }
+
+                                // Reset Input
+                                fileInput.val('');
+
+                            };
+
+                            fr.onerror = function (err) {
+
+                                // Error Message
+                                eModal.alert({
+                                    message: dsCommandEditor.errorModalMessage(err.message),
+                                    title: '<i class="fas fa-exclamation-triangle"></i> File was not loaded correctly!',
+                                    size: 'lg modal-dialog-centered'
+                                });
+
+                                // Reset Input
+                                fileInput.val('');
 
                             };
 
