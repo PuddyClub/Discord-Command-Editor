@@ -76,23 +76,24 @@ dsCommandEditor.system = {
                 $('#jsoneditor .jsoneditor-menu').append(
 
                     // Save
-                    $('<button>', { title: 'Save Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-save"></i>').click(function () { 
+                    $('<button>', { title: 'Save Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-save"></i>').click(function () {
                         dsCommandEditor.system.saveCommandList(editor.get(), commands.data);
-                        $(this).blur(); 
+                        $(this).blur();
                     }),
 
                     // Import
-                    $('<button>', { title: 'Import Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-upload"></i>').click(function () { 
-                        
-                        $(this).blur(); 
+                    $('<button>', { title: 'Import Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-upload"></i>').click(function () {
+
+                        $(this).blur();
                     }),
 
                     // Export
-                    $('<button>', { title: 'Export Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-download"></i>').click(function () { 
-                        
-                        $(this).blur(); 
+                    $('<button>', { title: 'Export Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-download"></i>').click(function () {
+                        console.log();
+                        saveAs(new Blob(JSON.stringify(editor.get(), null, 2), { type: "text/plain;charset=utf-8" }), `discord_slash_commands_${dsCommandEditor.root.client_id}.json`);
+                        $(this).blur();
                     })
-                
+
                 );
 
                 // Complete

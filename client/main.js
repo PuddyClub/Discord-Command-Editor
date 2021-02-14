@@ -23,7 +23,10 @@ if (
     clone,
 
     // Json Editor
-    JSONEditor
+    JSONEditor &&
+
+    // File Saver
+    saveAs
 
 ) {
 

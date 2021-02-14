@@ -18,7 +18,7 @@
         {{js.jquerystorageapi | safe}}
         {{js.jsoneditor | safe}}
         {{js.clone | safe}}
-        {{js.filesaver}}
+        {{js.filesaver | safe}}
 
         <script>
             var dsCommandEditor = {};
