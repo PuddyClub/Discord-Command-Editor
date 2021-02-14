@@ -89,9 +89,15 @@ dsCommandEditor.system = {
 
                     // Export
                     $('<button>', { title: 'Export Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-download"></i>').click(function () {
-                        console.log();
-                        saveAs(new Blob([JSON.stringify(editor.get(), null, 2)], { type: "text/plain;charset=utf-8" }), `discord_slash_commands_${dsCommandEditor.root.client_id}.json`);
+
+                        // File Name
+                        let filename = `discord_slash_commands_${dsCommandEditor.root.client_id}`;
+                        if (typeof guildID === "string") { filename += `_${guildID}`; }
+
+                        // Save File
+                        saveAs(new Blob([JSON.stringify(editor.get(), null, 2)], { type: "text/plain;charset=utf-8" }), filename + '.json');
                         $(this).blur();
+
                     })
 
                 );
