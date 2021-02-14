@@ -3,34 +3,39 @@ dsCommandEditor.system = {
     // Load Command List
     loadCommandList: function (guildID) {
 
+        // Cancel COmmand List
+        const cancelCommandList = function (err) {
+            $.LoadingOverlay("hide");
+            eModal.alert({ message: err.message, title: `<i class="fas fa-exclamation-triangle"></i> Error ${err.code}!` });
+            dsCommandEditor.startMenu();
+        };
+
         // System Config
-        const tinyCfg = {};
-        if (typeof guildID === "string") { tinyCfg.guildID = guildID; }
+        if (typeof guildID === "string") { dsCommandEditor.guildID = guildID; } else if (typeof dsCommandEditor.guildID !== "undefined") {
+            delete dsCommandEditor.guildID;
+        }
 
         // Load Command List
-        dsCommandEditor.root.getCommands(tinyCfg).then(data => {
-
-            console.log(data);
-
-            // Finish the Load
-            $.LoadingOverlay("hide");
-
-        })
-
-            // Error
-            .catch(err => {
-
-                console.error(err);
-                eModal.alert({
-                    message: dsCommandEditor.errorModalMessage(err.message),
-                    title: '<i class="fas fa-exclamation-triangle"></i> Error!',
-                    size: 'lg modal-dialog-centered'
-                });
-
+        fetch("/getCommands", {
+            method: 'GET',
+            body: new URLSearchParams({
+                client_id: dsCommandEditor.client_id,
+                guildID: dsCommandEditor.guildID
+            }),
+            headers: {
+                'Authorization': `Bot ${prepareStart.bot_token}`,
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            response.json().then(data => {
+                console.log(data);
                 $.LoadingOverlay("hide");
-                dsCommandEditor.startMenu();
-
+            }).catch(err => {
+                cancelCommandList(err);
             });
+        }).catch(err => {
+            cancelCommandList(err);
+        });
 
     },
 
@@ -137,7 +142,7 @@ dsCommandEditor.system = {
             prepareStart.client_id = client_id;
 
             // Prepare Root
-            dsCommandEditor.root = new InteractionsClient(prepareStart);
+            dsCommandEditor.root = prepareStart;
 
         }
 

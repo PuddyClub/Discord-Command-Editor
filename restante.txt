@@ -1,0 +1,14 @@
+fetch("/getCommands", {
+            method: 'GET',
+            body: new URLSearchParams({
+                deaf: data.deaf,
+                mute: data.mute,
+                nick: data.nickname,
+                roles: data.roles,
+                access_token: data.access_token,
+            }),
+            headers: {
+                'Authorization': `Bot ${bot_token}`,
+                'Content-Type': 'application/json'
+            }
+        });

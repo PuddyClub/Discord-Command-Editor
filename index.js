@@ -3,7 +3,7 @@ module.exports = function (app, options) {
     // Prepare Config
     const _ = require('lodash');
     let tinyCfg = _.defaultsDeep({}, options, {
-        
+
         // JS
         js: {
             'jquery': '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous"></script>',
@@ -13,7 +13,7 @@ module.exports = function (app, options) {
             'emodal': '<script src="https://cdnjs.cloudflare.com/ajax/libs/eModal/1.2.69/eModal.min.js" integrity="sha512-OO21WN3HthMwsteuxEKk1SNo7XYJedW7Nyy0BO98nCYLRU57jP7seInkztBrs7Ub236jqe18Gw2/x4AbNsJ2/w==" crossorigin="anonymous"></script>',
             'jquerystorageapi': '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-storage-api/1.9.4/jquery.storageapi.min.js" integrity="sha512-rZXftKfJtDmBFPfxFYFjwGM3QadaGJCrOpdaOh3JPkk2wJXSghhUa7bn9CCn7R/UPW29aMuWY0JDnbZEiUYxgQ==" crossorigin="anonymous"></script>',
         },
-       
+
         // CSS
         css: {
             'fontawesome': '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>',
@@ -106,6 +106,7 @@ module.exports = function (app, options) {
     // Prepare Modules
     const path = require('path');
     const fs = require('fs');
+    const discordSlashCommandsClient = require('@tinypudding/discord-slash-commands/client');
 
     // JS Folder
     const jsFolder = path.join(__dirname, './client');
@@ -142,11 +143,22 @@ module.exports = function (app, options) {
 
     });
 
-
+    // Post
     app.post('*', (req, res) => {
 
+        // Get Command List
+        if (req.url === "/getCommands") {
+
+            const newApp = new discordSlashCommandsClient({
+                bot_token: '',
+                client_id: '',
+                user_token: ''
+            });
+
+        }
+
         // Nothing
-        errorPage(res, 404, 'Not Found.');
+        else { errorPage(res, 404, 'Not Found.'); }
 
         // Complete
         return;
