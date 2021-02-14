@@ -42,7 +42,7 @@ if (
                     $('<div>').append(message)
 
                 );
-             
+
             };
 
             // Div Base
@@ -186,6 +186,12 @@ if (
 
             // Start Menu
             dsCommandEditor.startMenu = function () {
+
+                // Remove
+                dsCommandEditor.loginDiv.loginForm.off('submit');
+                dsCommandEditor.loginDiv.buttons.tokenList.off('click');
+                dsCommandEditor.loginDiv.buttons.tos.off('click');
+                dsCommandEditor.loginDiv.buttons.oauth2.off('click');
 
                 // Get TOS Status
                 const tosVersionAgreed = Number($.localStorage.get('tosVersionAgreed'));
