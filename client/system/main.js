@@ -11,25 +11,36 @@ dsCommandEditor.system = {
         };
 
         // System Config
-        if (typeof guildID === "string") { dsCommandEditor.guildID = guildID; } else if (typeof dsCommandEditor.guildID !== "undefined") {
-            delete dsCommandEditor.guildID;
+        if (typeof guildID === "string") { dsCommandEditor.root.guildID = guildID; } else if (typeof dsCommandEditor.root.guildID !== "undefined") {
+            delete dsCommandEditor.root.guildID;
         }
 
         // Load Command List
         fetch("/getCommands", {
             method: 'POST',
-            body: new URLSearchParams({
-                client_id: dsCommandEditor.client_id,
-                guildID: dsCommandEditor.guildID
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                client_id: dsCommandEditor.root.client_id,
+                guildID: dsCommandEditor.root.guildID
             }),
             headers: {
                 'Authorization': `Bot ${dsCommandEditor.root.bot_token}`,
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            response.json().then(data => {
-                console.log(data);
-                $.LoadingOverlay("hide");
+            response.json().then(commands => {
+
+                // Worked
+                if (!commands.error) {
+                    console.log(commands.data);
+                    $.LoadingOverlay("hide");
+                }
+
+                // Nope
+                else {
+                    cancelCommandList(commands.error);
+                }
+
             }).catch(err => {
                 cancelCommandList(err);
             });

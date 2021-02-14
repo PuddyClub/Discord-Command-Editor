@@ -106,7 +106,14 @@ module.exports = function (app, options) {
     // Prepare Modules
     const path = require('path');
     const fs = require('fs');
+    const bodyParser = require('body-parser');
     const discordSlashCommandsClient = require('@tinypudding/discord-slash-commands/client');
+
+    // Body Parser
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+        extended: true
+    }));
 
     // JS Folder
     const jsFolder = path.join(__dirname, './client');
@@ -149,16 +156,32 @@ module.exports = function (app, options) {
         // Get Command List
         if (req.url === "/getCommands") {
 
-            console.log(req);
-
-            const newApp = new discordSlashCommandsClient({
-                bot_token: '',
-                client_id: '',
-                user_token: ''
+            // Authorization
+            const authorization = req.headers.authorization.split(' ');
+            const discordApp = new discordSlashCommandsClient({
+                bot_token: authorization[1],
+                client_id: req.body.client_id
             });
 
-            // Complete
-            res.json({ success: true });
+            // Get Coomands
+
+            // Global
+            if (typeof req.body.guildID !== "string") {
+                discordApp.getCommands().then(commands => {
+                    res.json({ error: null, data: commands });
+                }).catch(err => {
+                    res.json({ error: err, data: null });
+                });
+            }
+
+            // Guild
+            else {
+                discordApp.getCommands({ guildID: req.body.guildID }).then(commands => {
+                    res.json({ error: null, data: commands });
+                }).catch(err => {
+                    res.json({ error: err, data: null });
+                });
+            }
 
         }
 

@@ -23,6 +23,7 @@
   "dependencies": {
     "@tinypudding/discord-slash-commands": "^1.0.1",
     "@tinypudding/puddy-lib": "^1.1.17",
+    "body-parser": "^1.19.0",
     "lodash": "^4.17.20",
     "nunjucks": "^3.2.2"
   },
