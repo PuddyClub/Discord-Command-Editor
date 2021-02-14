@@ -40,8 +40,9 @@ div.jsoneditor-menu>button.jsoneditor-custom-item {
 
 /* Title Button */
 .jsoneditor-title-item-list {
-    width: 175px;
-    background-image: none;
+    width: 175px !important;
+    background-image: none !important;
+    cursor: default !important;
 }
 
 /* Font Size */
