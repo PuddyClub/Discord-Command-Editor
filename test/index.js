@@ -1,7 +1,7 @@
 // Prepare Module
 const express = require('express');
 const app = express();
-require('../index')(app);
+require('../index')(app, { meta: '' });
 
 // Path
 const path = require('path');

@@ -92,13 +92,12 @@ app.use(express.static(path.join(__dirname, '/public'), {
     maxAge: '2592000000' // uses milliseconds per docs
 }));
 
-/* 
-
-
-
-*/
-
 // Start Server
 app.listen(80);
 
+```
+
+## Dependent static files
+```
+/img/error.png
 ```
