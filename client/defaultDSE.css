@@ -34,7 +34,7 @@ body {
 }
 
 /* Save Button */
-div.jsoneditor-menu>button.jsoneditor-save-commands {
+div.jsoneditor-menu>button.jsoneditor-custom-item {
     background-image: none;
 }
 

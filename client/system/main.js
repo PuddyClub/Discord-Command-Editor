@@ -72,10 +72,15 @@ dsCommandEditor.system = {
                 // Set Commands
                 editor.set(clone(commands.data));
 
-                // Create Save Button
+                // Add Buttons
                 $('#jsoneditor .jsoneditor-menu').append(
-                    $('<button>', { title: 'Save Command List', class: 'jsoneditor-save-commands' }).append('<i class="fas fa-save"></i>')
-                ).click(function () { dsCommandEditor.system.saveCommandList(editor.get(), commands.data); });
+
+                    // Save
+                    $('<button>', { title: 'Save Command List', class: 'jsoneditor-custom-item jsoneditor-save-commands' }).append('<i class="fas fa-save"></i>').click(function () { 
+                        dsCommandEditor.system.saveCommandList(editor.get(), commands.data); 
+                    })
+                
+                );
 
                 // Complete
                 $.LoadingOverlay("hide");
