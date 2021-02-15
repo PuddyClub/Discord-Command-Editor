@@ -101,7 +101,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
             };
 
             // Editor Type
-            const editorType = dsCommandEditor.system.updateChecker(newCommands, oldCommands);
+            const editorType = dsCommandEditor.system.updateChecker(newCommands, cdex, oldCommands);
 
             // To do something
             if (editorType > 0) {

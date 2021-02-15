@@ -25,7 +25,7 @@ dsCommandEditor.system = {
             if (!commands.error) {
 
                 // Updater Checker
-                dsCommandEditor.system.updateChecker = function (newCommands, oldCommands) {
+                dsCommandEditor.system.updateChecker = function (newCommands, cdex, oldCommands) {
 
                     // Exist New Commands
                     if (Array.isArray(newCommands)) {
@@ -34,7 +34,7 @@ dsCommandEditor.system = {
                         let editorType = 1;
 
                         // Exist OLD Commands
-                        if (Array.isArray(oldCommands)) {
+                        if (Array.isArray(oldCommands) && (typeof cdex === "string" || typeof cdex === "number")) {
 
                             // New Command
                             const newCommand = newCommands[cdex];
@@ -81,6 +81,9 @@ dsCommandEditor.system = {
 
                     // On Change
                     onChangeJSON: function (json) {
+
+                        // Type
+                        dsCommandEditor.system.updateChecker
                         console.log(json);
                     }
 
