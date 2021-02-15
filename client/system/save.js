@@ -49,7 +49,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                         // Check If can delete
                         let canDelete = true;
                         if (Array.isArray(dontDelete) && dontDelete.length > 0) {
-                            if (dontDelete.find(command => command.id === oldCommands[index].id)) {
+                            if (dontDelete.indexOf(oldCommands[index].id) > -1) {
                                 canDelete = false;
                             }
                         }
