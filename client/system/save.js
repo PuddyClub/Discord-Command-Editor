@@ -100,8 +100,14 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
 
             };
 
+            // New Command
+            const newCommand = newCommands[cdex];
+
             // Editor Type
             const editorType = dsCommandEditor.system.updateChecker(newCommands, cdex, oldCommands);
+
+            // Delete Items
+            dsCommandEditor.system.cleanCommand(newCommand);
 
             // To do something
             if (editorType > 0) {
@@ -118,13 +124,6 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                         return;
                     }
                 };
-
-                // Delete Items
-                for (const item in newCommand) {
-                    if (item !== "name" && item !== "description" && item !== "options") {
-                        delete newCommand[item];
-                    }
-                }
 
                 // Create
                 if (editorType === 1) {

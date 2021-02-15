@@ -24,6 +24,20 @@ dsCommandEditor.system = {
             // Worked
             if (!commands.error) {
 
+                // Clean Item
+                dsCommandEditor.system.cleanCommand = function (newCommand) {
+
+                    for (const item in newCommand) {
+                        if (item !== "name" && item !== "description" && item !== "options") {
+                            delete newCommand[item];
+                        }
+                    }
+
+                    // Complete
+                    return newCommand;
+
+                };
+
                 // Updater Checker
                 dsCommandEditor.system.updateChecker = function (newCommands, cdex, oldCommands) {
 
@@ -84,29 +98,31 @@ dsCommandEditor.system = {
                     onChangeJSON: function (newCommands) {
 
                         // Exist OLD
+                        let valueChanched = false;
                         if (oldCommands && Array.isArray(newCommands)) {
+                            const ids = [];
                             for (const item in newCommands) {
+                                if (typeof newCommands[item].id === "string" || typeof newCommands[item].id === "number") {
 
-                                // Get Type
-                                const editorType = dsCommandEditor.system.updateChecker(newCommands, item, oldCommands);
-                                console.log(editorType);
+                                    // ID
+                                    const id = String(newCommands[item].id);
 
-                                // To do something
-                                if (editorType > 0) {
-
-                                    // Create
-                                    if (editorType === 1) {
-
+                                    // Exist ID
+                                    if (ids.indexOf(id) > -1) {
+                                        valueChanched = true;
+                                        dsCommandEditor.system.cleanCommand(newCommands[item]);
                                     }
 
-                                    // Edit
-                                    else if (editorType === 2) {
-
-                                    }
+                                    // Nope
+                                    else { ids.push(id); }
 
                                 }
-
                             }
+                        }
+
+                        // Value Changed
+                        if(valueChanched) {
+                            dsCommandEditor.system.editor.set(newCommands);
                         }
 
                         // Update OLD Commands
