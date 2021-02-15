@@ -19,7 +19,7 @@ dsCommandEditor.system = {
         };
 
         // Load Command List
-        dsCommandEditor.system.fetch("getCommands", 'POST', null, guildID).then(commands => {
+        dsCommandEditor.system.fetch("getCommands", null, guildID).then(commands => {
 
             // Worked
             if (!commands.error) {

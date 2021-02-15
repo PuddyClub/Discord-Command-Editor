@@ -195,16 +195,35 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
             // Complete
             .then(() => {
 
-                // Complete Message
-                $.LoadingOverlay("hide");
-                eModal.alert({
-                    message: 'Your command list has been successfully saved!',
-                    title: '<i class="fas fa-check"></i> Success!',
-                    size: 'lg modal-dialog-centered'
-                });
+                // Get New Command List
+                dsCommandEditor.system.fetch("getCommands", null, guildID).then(commands => {
 
-                // Complete
-                return;
+                    // Complete Message
+                    $.LoadingOverlay("hide");
+                    editor.set(commands);
+                    eModal.alert({
+                        message: 'Your command list has been successfully saved!',
+                        title: '<i class="fas fa-check"></i> Success!',
+                        size: 'lg modal-dialog-centered'
+                    });
+
+                    // Complete
+                    return;
+
+                }).catch(err => {
+
+                    // Error Message
+                    $.LoadingOverlay("hide");
+                    eModal.alert({
+                        message: dsCommandEditor.errorModalMessage(err.message),
+                        title: '<i class="fas fa-exclamation-triangle"></i> Command List Load Error!',
+                        size: 'lg modal-dialog-centered'
+                    });
+
+                    // Complete
+                    return;
+
+                });
 
             })
 
@@ -226,8 +245,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
 
     }
 
-    // dsCommandEditor.system.fetch("getCommands", 'POST', {}, guildID);
-    // editor.set(
+    // dsCommandEditor.system.fetch("getCommands", {}, guildID);
 
     // Nope
     else {

@@ -1,9 +1,9 @@
-dsCommandEditor.system.fetch = function (url, method, body, guildID) {
+dsCommandEditor.system.fetch = function (url, body, guildID) {
     return new Promise(function (resolve, reject) {
 
         // Options
         const fetchOptions = {
-            method: method,
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             headers: {
                 'Authorization': `Bot ${dsCommandEditor.root.bot_token} ${dsCommandEditor.root.client_id}`,
