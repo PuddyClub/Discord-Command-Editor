@@ -21,7 +21,7 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
                     }
                 }
 
-                // Delte
+                // Delete
                 if (canDelete) {
 
                     // Logger Info
@@ -52,6 +52,9 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
                     }
 
                 }
+
+                // Nope
+                else { fn(); }
 
                 // Complete
                 return;
