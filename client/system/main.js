@@ -34,6 +34,7 @@ dsCommandEditor.system = {
 
                 // Set Commands
                 dsCommandEditor.system.editor.set(clone(commands.data));
+                dsCommandEditor.system.editor.expandAll();
 
                 // Add Buttons
                 $('#jsoneditor .jsoneditor-menu').prepend(

@@ -188,6 +188,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                     if (!commands.error) {
 
                         dsCommandEditor.system.editor.set(commands.data);
+                        dsCommandEditor.system.editor.expandAll();
                         eModal.alert({
                             message: 'Your command list has been successfully saved!',
                             title: '<i class="fas fa-check"></i> Success!',
