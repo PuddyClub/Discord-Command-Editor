@@ -39,7 +39,7 @@ dsCommandEditor.system = {
                 };
 
                 // Updater Checker
-                dsCommandEditor.system.updateChecker = function (newCommands, cdex) {
+                dsCommandEditor.system.updateChecker = function (newCommands, cdex, oldCommands) {
 
                     // Exist New Commands
                     if (Array.isArray(newCommands)) {
@@ -48,7 +48,7 @@ dsCommandEditor.system = {
                         let editorType = 1;
 
                         // Exist OLD Commands
-                        if (Array.isArray(dsCommandEditor.system.commands) && (typeof cdex === "string" || typeof cdex === "number")) {
+                        if (Array.isArray(oldCommands) && (typeof cdex === "string" || typeof cdex === "number")) {
 
                             // New Command
                             const newCommand = newCommands[cdex];
@@ -56,7 +56,7 @@ dsCommandEditor.system = {
                             // OLD Command
                             let oldCommand;
                             try {
-                                oldCommand = dsCommandEditor.system.commands.find(command => command.id === newCommand.id);
+                                oldCommand = oldCommands.find(command => command.id === newCommand.id);
                             } catch (err) {
                                 oldCommand = null;
                             }
@@ -91,6 +91,7 @@ dsCommandEditor.system = {
                 $('body').append(dsCommandEditor.system.div);
 
                 // Start JSON
+                let oldCommands = null;
                 dsCommandEditor.system.editor = new JSONEditor(document.getElementById("jsoneditor"), {
 
                     // On Change
@@ -101,7 +102,7 @@ dsCommandEditor.system = {
 
                         // Exist OLD
                         let valueChanched = false;
-                        if (dsCommandEditor.system.commands && Array.isArray(newCommands)) {
+                        if (oldCommands && Array.isArray(newCommands)) {
                             const ids = [];
                             for (const item in newCommands) {
                                 if (typeof newCommands[item].id === "string" || typeof newCommands[item].id === "number") {
@@ -128,7 +129,7 @@ dsCommandEditor.system = {
                         }
 
                         // Update OLD Commands
-                        dsCommandEditor.system.commands = clone(newCommands);
+                        oldCommands = clone(newCommands);
 
                         // Complete
                         return;
@@ -138,7 +139,7 @@ dsCommandEditor.system = {
                 });
 
                 // Set Commands
-                dsCommandEditor.system.commands = commands.data;
+                oldCommands = clone(commands.data);
                 dsCommandEditor.system.editor.set(clone(commands.data));
                 dsCommandEditor.system.editor.expandAll();
 
@@ -155,7 +156,7 @@ dsCommandEditor.system = {
 
                     // Save
                     $('<button>', { title: 'Save Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-save"></i>').click(function () {
-                        dsCommandEditor.system.saveCommandList(dsCommandEditor.system.editor.get(), guildID);
+                        dsCommandEditor.system.saveCommandList(dsCommandEditor.system.editor.get(), commands.data, guildID);
                         $(this).blur();
                     }),
 
