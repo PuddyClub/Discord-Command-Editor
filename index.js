@@ -183,24 +183,8 @@ module.exports = function (app, options) {
     // For Promise
     app.get('/js/forPromise.js', (req, res, next) => {
 
-        // For Promise
-        let forPromise = require('for-promise').toString()
-            .replace(`require('./files/objType')`, require('for-promise/files/objType').toString())
-            .replace(
-                `require('./files/superValidator')`, require('for-promise/files/superValidator').toString()
-                    .replace(`const objType = require('./objType');`, '')
-            )
-            .replace(
-                `require('./files/validateTotal')`, require('for-promise/files/validateTotal').toString()
-                    .replace(
-                        `require('./countObj')`, require('for-promise/files/countObj').toString()
-                            .replace(`const objType = require('./objType');`, '')
-                    )
-                    .replace(`const objType = require('./objType');`, '')
-            );
-
         // Send Data
-        fileCache(res, next, getFileConfig(`var forPromise = ${forPromise};`));
+        fileCache(res, next, getFileConfig(require('for-promise/getBrowserVersion')('var forPromise = ')));
 
         // Complete
         return;
