@@ -19,7 +19,6 @@
     "url": "https://github.com/TinyPudding/Discord-Command-Editor/issues"
   },
   "homepage": "https://github.com/TinyPudding/Discord-Command-Editor#readme",
-  "private": true,
   "dependencies": {
     "@tinypudding/discord-slash-commands": "^1.0.1",
     "@tinypudding/puddy-lib": "^1.1.18",
