@@ -70,7 +70,6 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
         await forPromise({ data: newCommands }, function (cdex, fn, fn_error, extra) {
 
             // Execute Clear
-            console.log(newCommands[cdex]);
             const executeClear = function () {
 
                 // Delete Item
