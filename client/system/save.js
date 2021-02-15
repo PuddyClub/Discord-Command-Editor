@@ -95,7 +95,8 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
             const editorType = dsCommandEditor.system.updateChecker(newCommands, cdex, oldCommands);
 
             // Delete Items
-            if (typeof newCommand.id === "string" || typeof newCommand.id === "number") { dontDelete.push(newCommand.id); }
+            let commandID = null;
+            if (typeof newCommand.id === "string" || typeof newCommand.id === "number") { dontDelete.push(newCommand.id); commandID = newCommand.id; }
             dsCommandEditor.system.cleanCommand(newCommand);
 
             // To do something
@@ -127,6 +128,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                 else if (editorType === 2) {
 
                     // Send Result
+                    newCommand.id = commandID;
                     console.log(`New command edited to the app ${dsCommandEditor.root.client_id}!`, newCommand);
                     dsCommandEditor.system.fetch("editCommand", newCommand, guildID).then(final_result.then).catch(final_result.catch);
 
