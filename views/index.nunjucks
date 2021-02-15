@@ -19,6 +19,7 @@
         {{js.jsoneditor | safe}}
         {{js.clone | safe}}
         {{js.filesaver | safe}}
+        {{js.objecthash | safe}}
 
         <script>
             var dsCommandEditor = {};
