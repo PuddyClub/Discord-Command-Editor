@@ -28,6 +28,9 @@ if (
     // File Saver
     saveAs &&
 
+    // Hash
+    objectHash &&
+
     // File API
     File && FileReader && FileList && Blob
 
