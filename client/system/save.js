@@ -1,4 +1,7 @@
-dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommands, guildID) {
+dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, guildID) {
+
+    // Start Loading
+    $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
 
     // Is Array
     if (Array.isArray(newCommands)) {
@@ -67,7 +70,7 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
         // Check New Commands
         const dontDelete = [];
         const newCommandsCount = newCommands.length - 1;
-        await forPromise({ data: newCommands }, function (cdex, fn, fn_error, extra) {
+        forPromise({ data: newCommands }, function (cdex, fn, fn_error, extra) {
 
             // Execute Clear
             const executeClear = function () {
@@ -187,32 +190,44 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
             // Complete
             return;
 
-        });
+        })
+
+            // Complete
+            .then(() => {
+
+                // Complete Message
+                $.LoadingOverlay("hide");
+                eModal.alert({
+                    message: 'Your command list has been successfully saved!',
+                    title: '<i class="fas fa-check"></i> Success!',
+                    size: 'lg modal-dialog-centered'
+                });
+
+                // Complete
+                return;
+
+            })
+
+            // Error
+            .catch(err => {
+
+                // Error Message
+                $.LoadingOverlay("hide");
+                eModal.alert({
+                    message: dsCommandEditor.errorModalMessage(err.message),
+                    title: '<i class="fas fa-exclamation-triangle"></i> Command Upload Error!',
+                    size: 'lg modal-dialog-centered'
+                });
+
+                // Complete
+                return;
+
+            });
 
     }
 
     // dsCommandEditor.system.fetch("getCommands", 'POST', {}, guildID);
-    // editor.set()
-
-    /* $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
- 
-    eModal.alert({
-        message: 'Your command list has been successfully saved!',
-        title: '<i class="fas fa-check"></i> Success!',
-        size: 'lg modal-dialog-centered'
-    });
- 
-    $.LoadingOverlay("hide"); */
-
-    /* 
-    
-    eModal.alert({
-        message: dsCommandEditor.errorModalMessage('Your browser does not support Storage API!'),
-        title: '<i class="fas fa-exclamation-triangle"></i> Storage API not found!',
-        size: 'lg modal-dialog-centered'
-    });
-    
-    */
+    // editor.set(
 
     // Nope
     else {
@@ -221,9 +236,8 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
             title: '<i class="fas fa-exclamation-triangle"></i> Command Upload Error!',
             size: 'lg modal-dialog-centered'
         });
+        $.LoadingOverlay("hide");
     }
-
-    console.log('Complete!');
 
     // Complete
     return;
