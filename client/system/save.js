@@ -13,8 +13,8 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
                 // Check If can delete
                 let canDelete = true;
                 if (Array.isArray(dontDelete) && dontDelete.length > 0) {
-                    for (const item in dontDelete) {
-                        if (oldCommands.find(command => command.id === dontDelete[item].id)) {
+                    for (const item in oldCommands) {
+                        if (dontDelete.find(command => command.id === oldCommands[item].id)) {
                             canDelete = false;
                             break;
                         }
@@ -96,7 +96,12 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
             const newCommand = newCommands[cdex];
 
             // OLD Command
-            const oldCommand = oldCommands.find(command => command.id === newCommand.id);
+            let oldCommand;
+            try {
+                oldCommand = oldCommands.find(command => command.id === newCommand.id);
+            } catch (err) {
+                oldCommand = null;
+            }
 
             // Exist OLD Command
             if (oldCommand) {
