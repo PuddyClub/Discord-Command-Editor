@@ -89,6 +89,7 @@ div.jsoneditor-value.jsoneditor-string:hover,
 div.jsoneditor td, div.jsoneditor textarea:hover, 
 div.jsoneditor th:hover, 
 div.jsoneditor-field:hover, 
+div.jsoneditor-field:focus,
 div.jsoneditor-value:hover {
     color: #36393f
 }
