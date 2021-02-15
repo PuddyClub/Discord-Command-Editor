@@ -153,6 +153,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                     // Success
                     if (!commands.error) {
 
+                        oldCommands = commands.data;
                         dsCommandEditor.system.editor.set(commands.data);
                         dsCommandEditor.system.editor.expandAll();
                         eModal.alert({
