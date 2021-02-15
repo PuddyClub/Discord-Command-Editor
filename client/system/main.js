@@ -24,6 +24,54 @@ dsCommandEditor.system = {
             // Worked
             if (!commands.error) {
 
+                // Updater Checker
+                dsCommandEditor.system.updateChecker = function (newCommands, oldCommands) {
+
+                    // Exist New Commands
+                    if (Array.isArray(newCommands)) {
+
+                        // Set Editor Type to Create
+                        let editorType = 1;
+
+                        // Exist OLD Commands
+                        if (Array.isArray(oldCommands)) {
+
+                            // New Command
+                            const newCommand = newCommands[cdex];
+
+                            // OLD Command
+                            let oldCommand;
+                            try {
+                                oldCommand = oldCommands.find(command => command.id === newCommand.id);
+                            } catch (err) {
+                                oldCommand = null;
+                            }
+
+                            // Exist OLD Command
+                            if (oldCommand) {
+
+                                // Set Editor Type to Edit
+                                if (objectHash.sha1(newCommand) !== objectHash.sha1(oldCommand)) {
+                                    editorType = 2;
+                                }
+
+                                // Set Editor Type to Nothing
+                                else { editorType = 0; }
+
+                            }
+
+                        }
+
+                        // Result
+                        return editorType;
+
+                    }
+
+                    // Nope
+                    else { return 0; }
+
+                };
+
                 // create JSON DIV
                 dsCommandEditor.system.div = $('<div>', { id: 'jsoneditor' });
                 $('body').append(dsCommandEditor.system.div);
@@ -32,8 +80,8 @@ dsCommandEditor.system = {
                 dsCommandEditor.system.editor = new JSONEditor(document.getElementById("jsoneditor"), {
 
                     // On Change
-                    onChange: function(jsonString) {
-                        console.log(jsonString);
+                    onChangeJSON: function (json) {
+                        console.log(json);
                     }
 
                 });

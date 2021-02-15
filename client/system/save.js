@@ -100,32 +100,8 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
 
             };
 
-            // Set Editor Type to Create
-            let editorType = 1;
-
-            // New Command
-            const newCommand = newCommands[cdex];
-
-            // OLD Command
-            let oldCommand;
-            try {
-                oldCommand = oldCommands.find(command => command.id === newCommand.id);
-            } catch (err) {
-                oldCommand = null;
-            }
-
-            // Exist OLD Command
-            if (oldCommand) {
-
-                // Set Editor Type to Edit
-                if (objectHash.sha1(newCommand) !== objectHash.sha1(oldCommand)) {
-                    editorType = 2;
-                }
-
-                // Set Editor Type to Nothing
-                else { editorType = 0; }
-
-            }
+            // Editor Type
+            const editorType = dsCommandEditor.system.updateChecker(newCommands, oldCommands);
 
             // To do something
             if (editorType > 0) {
