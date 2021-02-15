@@ -254,9 +254,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
             .catch(err => { emergencyBackup(err); return; });
 
     }
-
-    // dsCommandEditor.system.fetch("getCommands", {}, guildID);
-
+    
     // Nope
     else {
         eModal.alert({
