@@ -95,7 +95,10 @@ dsCommandEditor.system = {
                 dsCommandEditor.system.editor = new JSONEditor(document.getElementById("jsoneditor"), {
 
                     // On Change
-                    onChangeJSON: function (newCommands) {
+                    onEvent: function () {
+
+                        // Get JSON
+                        const newCommands = dsCommandEditor.system.editor.get();
 
                         // Exist OLD
                         let valueChanched = false;
@@ -122,8 +125,7 @@ dsCommandEditor.system = {
 
                         // Value Changed
                         if (valueChanched) {
-                            dsCommandEditor.system.editor.set(newCommands);
-                            dsCommandEditor.system.editor.expandAll();
+                            dsCommandEditor.system.editor.update(newCommands);
                         }
 
                         // Update OLD Commands
