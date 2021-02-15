@@ -48,7 +48,7 @@ dsCommandEditor.system = {
 
                     // Save
                     $('<button>', { title: 'Save Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-save"></i>').click(function () {
-                        dsCommandEditor.system.saveCommandList(editor.get(), commands.data);
+                        dsCommandEditor.system.saveCommandList(editor.get(), commands.data, guildID);
                         $(this).blur();
                     }),
 

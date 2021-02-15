@@ -1,8 +1,8 @@
-dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands) {
+dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, guildID) {
 
     console.log(oldCommands, newCommands);
 
-    // dsCommandEditor.system.fetch("getCommands", 'POST', {});
+    // dsCommandEditor.system.fetch("getCommands", 'POST', {}, guildID);
     // editor.set()
 
     /* $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
