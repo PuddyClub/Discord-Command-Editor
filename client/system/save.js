@@ -31,53 +31,6 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
 
         };
 
-        // Delte Commands Script
-        const deleteCommandsScript = function (dontDelete, fn, fn_error, extra) {
-
-            // Run Delete Commands
-            const deleteCommands = extra({ data: oldCommands });
-            deleteCommands.run(function (index, fn, fn_error) {
-
-                // Check If can delete
-                let canDelete = true;
-                if (Array.isArray(dontDelete) && dontDelete.length > 0) {
-                    if (dontDelete.find(command => command.id === oldCommands[index].id)) {
-                        canDelete = false;
-                    }
-                }
-
-                // Delete
-                if (canDelete) {
-
-                    // Logger Info
-                    console.log(`OLD command deleted from the app ${dsCommandEditor.root.client_id}!`, oldCommands[index]);
-
-                    // Send Result
-                    dsCommandEditor.system.fetch("deleteCommand", { id: oldCommands[index].id }, guildID).then(() => {
-                        fn();
-                        return;
-                    }).catch(err => {
-                        console.error(err);
-                        fn_error(err);
-                        return;
-                    });
-
-                }
-
-                // Nope
-                else { fn(); }
-
-                // Complete
-                return;
-
-            });
-
-            // Complete
-            fn();
-            return;
-
-        };
-
         // Check New Commands
         const dontDelete = [];
         const newCommandsCount = newCommands.length - 1;
@@ -86,12 +39,47 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
             // Execute Clear
             const executeClear = function () {
 
-                // Delete Item
-                dontDelete.push(newCommand);
-
-                // Script
+                // Detele Commands
                 if (cdex >= newCommandsCount) {
-                    deleteCommandsScript(dontDelete, fn, fn_error, extra);
+
+                    // Run Delete Commands
+                    const deleteCommands = extra({ data: oldCommands });
+                    deleteCommands.run(function (index, fn, fn_error) {
+
+                        // Check If can delete
+                        let canDelete = true;
+                        if (Array.isArray(dontDelete) && dontDelete.length > 0) {
+                            if (dontDelete.find(command => command.id === oldCommands[index].id)) {
+                                canDelete = false;
+                            }
+                        }
+
+                        // Delete
+                        if (canDelete) {
+
+                            // Logger Info
+                            console.log(`OLD command deleted from the app ${dsCommandEditor.root.client_id}!`, oldCommands[index]);
+
+                            // Send Result
+                            dsCommandEditor.system.fetch("deleteCommand", { id: oldCommands[index].id }, guildID).then(() => {
+                                fn();
+                                return;
+                            }).catch(err => {
+                                console.error(err);
+                                fn_error(err);
+                                return;
+                            });
+
+                        }
+
+                        // Nope
+                        else { fn(); }
+
+                        // Complete
+                        return;
+
+                    });
+
                 }
 
                 // Complete
@@ -107,6 +95,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
             const editorType = dsCommandEditor.system.updateChecker(newCommands, cdex, oldCommands);
 
             // Delete Items
+            if (typeof newCommand.id === "string" || typeof newCommand.id === "number") { dontDelete.push(newCommand.id); }
             dsCommandEditor.system.cleanCommand(newCommand);
 
             // To do something
