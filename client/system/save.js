@@ -36,7 +36,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
 
             // Run Delete Commands
             const deleteCommands = extra({ data: oldCommands });
-            deleteCommands.run(function (index, fn) {
+            deleteCommands.run(function (index, fn, fn_error) {
 
                 // Check If can delete
                 let canDelete = true;
@@ -53,28 +53,14 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                     console.log(`OLD command deleted from the app ${dsCommandEditor.root.client_id}!`, oldCommands[index]);
 
                     // Global
-                    if (typeof guildID !== "string") {
+                    dsCommandEditor.system.fetch("deleteCommand", { id: oldCommands[index].id }, guildID).then(() => {
                         fn();
-                        /* client.deleteCommand(oldCommands[index].id).then(() => {
-                            fn();
-                            return;
-                        }).catch(err => {
-                            fn();
-                            return;
-                        }); */
-                    }
-
-                    // Guild
-                    else {
-                        fn();
-                        /* client.deleteCommand(oldCommands[index].id, guildID).then(() => {
-                            fn();
-                            return;
-                        }).catch(err => {
-                            fn();
-                            return;
-                        }); */
-                    }
+                        return;
+                    }).catch(err => {
+                        console.error(err);
+                        fn_error(err);
+                        return;
+                    });
 
                 }
 
@@ -146,13 +132,13 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
 
                 // Final Result
                 const final_result = {
-                    then: result => {
+                    then: () => {
                         executeClear();
                         return;
                     },
                     catch: err => {
                         console.error(err);
-                        executeClear();
+                        fn_error(err);
                         return;
                     }
                 };
@@ -162,18 +148,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
 
                     // console Info
                     console.log(`New command added to the app ${dsCommandEditor.root.client_id}!`, newCommand);
-
-                    // Global
-                    if (typeof guildID !== "string" && typeof guildID !== "number") {
-                        executeClear();
-                        //client.createCommand(newCommand).then(final_result.then).catch(final_result.catch);
-                    }
-
-                    // Guild
-                    else {
-                        executeClear();
-                        //client.createCommand(newCommand, guildID).then(final_result.then).catch(final_result.catch);
-                    }
+                    dsCommandEditor.system.fetch("createCommand", newCommand, guildID).then(final_result.then).catch(final_result.catch);
 
                 }
 
@@ -182,28 +157,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
 
                     // console Info
                     console.log(`New command edited to the app ${dsCommandEditor.root.client_id}!`, newCommand);
-
-                    // Global
-                    if (typeof guildID !== "string" && typeof guildID !== "number") {
-                        if (typeof commandID === "string") {
-                            executeClear();
-                            //client.editCommand(newCommand, commandID).then(final_result.then).catch(final_result.catch);
-                        } else {
-                            executeClear();
-                            //client.createCommand(newCommand).then(final_result.then).catch(final_result.catch);
-                        }
-                    }
-
-                    // Guild
-                    else {
-                        if (typeof commandID === "string") {
-                            executeClear();
-                            //client.editCommand(newCommand, commandID, guildID).then(final_result.then).catch(final_result.catch);
-                        } else {
-                            executeClear();
-                            //client.createCommand(newCommand, guildID).then(final_result.then).catch(final_result.catch);
-                        }
-                    }
+                    dsCommandEditor.system.fetch("editCommand", newCommand, guildID).then(final_result.then).catch(final_result.catch);
 
                 }
 
@@ -234,7 +188,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                         });
 
                         $.LoadingOverlay("hide");
-                    
+
                     }
 
                     // Nope
@@ -254,7 +208,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
             .catch(err => { emergencyBackup(err); return; });
 
     }
-    
+
     // Nope
     else {
         eModal.alert({
