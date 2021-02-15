@@ -1,4 +1,4 @@
-module.exports = function (app, options) {
+module.exports = function (app, options, callbackApp) {
 
     // Prepare Config
     const _ = require('lodash');
@@ -149,10 +149,21 @@ module.exports = function (app, options) {
 
     };
 
-
-    // Prepare Modules
+    // Prepare Default Modules
     const path = require('path');
     const fs = require('fs');
+
+    // Callback App
+    if (typeof callbackApp === "function") { callbackApp(); } else {
+
+        // Static Files
+        app.use(express.static(path.join(__dirname, '/test/public'), {
+            maxAge: String(tinyCfg.fileMaxAge) // uses milliseconds per docs
+        }));
+
+    }
+
+    // Prepare Modules
     const bodyParser = require('body-parser');
     const discordSlashCommandsClient = require('@tinypudding/discord-slash-commands/client');
 
