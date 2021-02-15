@@ -77,19 +77,50 @@ dsCommandEditor.system = {
                 $('body').append(dsCommandEditor.system.div);
 
                 // Start JSON
+                let oldCommands = null;
                 dsCommandEditor.system.editor = new JSONEditor(document.getElementById("jsoneditor"), {
 
                     // On Change
-                    onChangeJSON: function (json) {
+                    onChangeJSON: function (newCommands) {
 
-                        // Type
-                        dsCommandEditor.system.updateChecker
-                        console.log(json);
+                        // Exist OLD
+                        if (oldCommands && Array.isArray(newCommands)) {
+                            for (const item in newCommands) {
+
+                                // Get Type
+                                const editorType = dsCommandEditor.system.updateChecker(newCommands, item, oldCommands);
+                                console.log(editorType);
+
+                                // To do something
+                                if (editorType > 0) {
+
+                                    // Create
+                                    if (editorType === 1) {
+
+                                    }
+
+                                    // Edit
+                                    else if (editorType === 2) {
+
+                                    }
+
+                                }
+
+                            }
+                        }
+
+                        // Update OLD Commands
+                        oldCommands = clone(newCommands);
+
+                        // Complete
+                        return;
+
                     }
 
                 });
 
                 // Set Commands
+                oldCommands = clone(commands.data);
                 dsCommandEditor.system.editor.set(clone(commands.data));
                 dsCommandEditor.system.editor.expandAll();
 
