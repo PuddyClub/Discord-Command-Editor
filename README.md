@@ -11,7 +11,7 @@
 </div>
 
 # Discord-Command-Editor
-Discord Slash Commands List Editor.
+Discord Slash Commands Editor.
 
 <hr/>
 
