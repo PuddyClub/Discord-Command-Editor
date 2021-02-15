@@ -29,8 +29,14 @@ dsCommandEditor.system = {
                 $('body').append(dsCommandEditor.system.div);
 
                 // Start JSON
-                const options = {};
-                dsCommandEditor.system.editor = new JSONEditor(document.getElementById("jsoneditor"), options);
+                dsCommandEditor.system.editor = new JSONEditor(document.getElementById("jsoneditor"), {
+
+                    // On Change
+                    onChange: function(jsonString) {
+                        console.log(jsonString);
+                    }
+
+                });
 
                 // Set Commands
                 dsCommandEditor.system.editor.set(clone(commands.data));
