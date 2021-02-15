@@ -24,6 +24,7 @@
             var dsCommandEditor = {};
         </script>
 
+        <script src="/js/forPromise.js"></script>
         <script src="/js/objType.js"></script>
         <script src="/js/main.js"></script>
         <script src="/js/oAuth2Code.js"></script>

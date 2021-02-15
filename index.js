@@ -169,6 +169,34 @@ module.exports = function (app, options) {
 
     app.set('view engine', 'nunjucks');
 
+    // For Promise
+    app.get('/js/forPromise.js', (req, res) => {
+
+        // For Promise
+        let forPromise = require('for-promise').toString()
+            .replace(`require('./files/objType')`, require('for-promise/files/objType').toString())
+            .replace(
+                `require('./files/superValidator')`, require('for-promise/files/superValidator').toString()
+                    .replace(`const objType = require('./objType');`, '')
+            )
+            .replace(
+                `require('./files/validateTotal')`, require('for-promise/files/validateTotal').toString()
+                    .replace(
+                        `require('./countObj')`, require('for-promise/files/countObj').toString()
+                            .replace(`const objType = require('./objType');`, '')
+                    )
+                    .replace(`const objType = require('./objType');`, '')
+            );
+
+        // Send Data
+        res.setHeader('Content-Type', 'application/javascript');
+        res.send(`var forPromise = ${forPromise};`);
+
+        // Complete
+        return;
+
+    });
+
     // JS and CSS
     app.get('/js/*', (req, res) => { return readFile(req, res); });
     app.get('/css/*', (req, res) => { return readFile(req, res); });
@@ -290,7 +318,7 @@ module.exports = function (app, options) {
                         }
 
                     }
-                    
+
                     // Nope
                     else { errorPage(res, 404, 'Command ID not found.'); }
 
