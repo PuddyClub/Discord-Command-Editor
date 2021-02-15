@@ -13,11 +13,8 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
                 // Check If can delete
                 let canDelete = true;
                 if (Array.isArray(dontDelete) && dontDelete.length > 0) {
-                    for (const item in oldCommands) {
-                        if (dontDelete.find(command => command.id === oldCommands[item].id)) {
-                            canDelete = false;
-                            break;
-                        }
+                    if (dontDelete.find(command => command.id === oldCommands[index].id)) {
+                        canDelete = false;
                     }
                 }
 
