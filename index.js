@@ -2,6 +2,7 @@ module.exports = function (app, options) {
 
     // Prepare Config
     const _ = require('lodash');
+    const fileCache = require('@tinypudding/puddy-lib/http/fileCache');
     let tinyCfg = _.defaultsDeep({}, options, {
 
         // Meta
@@ -36,6 +37,17 @@ module.exports = function (app, options) {
 
     });
 
+    // Get File Config
+    const getFileConfig = function (file, contentType = 'application/javascript') {
+        return {
+            file: file,
+            contentType: contentType,
+            date: { year: 2021, month: 2, day: 14, hour: 23, minute: 50 },
+            timezone: 'America/Sao_Paulo',
+            fileMaxAge: '2592000000'
+        };
+    };
+
     // Read File
     const readFile = function (req, res) {
 
@@ -52,14 +64,12 @@ module.exports = function (app, options) {
 
             // Javascript
             if (filePath.endsWith('.js')) {
-                res.setHeader('Content-Type', 'application/javascript');
-                fileType = 'js';
+                fileType = 'application/javascript';
             }
 
             // CSS
             else if (filePath.endsWith('.css')) {
-                res.setHeader('Content-Type', 'text/css');
-                fileType = 'css';
+                fileType = 'text/css';
             }
 
             // Complete
@@ -73,7 +83,7 @@ module.exports = function (app, options) {
             // Obj Type
             if (urlPath[0] === "objType.js") {
                 const file = `var objType = ${require('@tinypudding/puddy-lib/get/objType').toString()};`;
-                res.send(file);
+                fileCache(res, next, getFileConfig(file));
             }
 
             // Other
@@ -89,7 +99,7 @@ module.exports = function (app, options) {
                     // Read File
                     if (fileType && fs.lstatSync(filePath).isFile()) {
                         const file = fs.readFileSync(filePath, 'utf-8');
-                        res.send(file);
+                        fileCache(res, next, getFileConfig(file, fileType));
                     }
 
                     // Nope
@@ -117,7 +127,7 @@ module.exports = function (app, options) {
                 // Read File
                 if (fileType && fs.lstatSync(filePath).isFile()) {
                     const file = fs.readFileSync(filePath, 'utf-8');
-                    res.send(file);
+                    fileCache(res, next, getFileConfig(file, fileType));
                 }
 
                 // Nope
@@ -189,8 +199,7 @@ module.exports = function (app, options) {
             );
 
         // Send Data
-        res.setHeader('Content-Type', 'application/javascript');
-        res.send(`var forPromise = ${forPromise};`);
+        fileCache(res, next, getFileConfig(`var forPromise = ${forPromise};`));
 
         // Complete
         return;
