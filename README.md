@@ -37,7 +37,7 @@ The express Module from require(). If you don't use the callback, this option wi
 The express app made by express().
 
 ### options (Object)
-Configuration of website customization.
+Configuration of the website customization.
 
 ### callback (Function)
 Here you can send more methods to your Express application. Example? It is recommended that you define the static file folder here. 
