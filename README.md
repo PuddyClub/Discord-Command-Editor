@@ -22,7 +22,7 @@ const express = require('express');
 const app = express();
 require('@tinypudding/discord-command-editor')(app, {
 
-    // File Cache
+    // File Cache (You need to install the "moment-timezone" module for this configuration to work.)
     fileMaxAge: 2592000000,
 
     // Meta
