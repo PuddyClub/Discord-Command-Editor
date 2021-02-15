@@ -225,6 +225,9 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
 
                 });
 
+                // Complete
+                return;
+
             })
 
             // Error
