@@ -11,7 +11,7 @@
     "url": "git+https://github.com/TinyPudding/Discord-Command-Editor.git"
   },
   "keywords": [
-    "discord", "command", "website", "express", "customizable", "slash", "editor", "json"
+    "discord", "command", "website", "express", "customizable", "slash-commands", "editor", "json"
   ],
   "author": "Yasmin Seidel (JasminDreasond)",
   "license": "MIT",
