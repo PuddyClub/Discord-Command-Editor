@@ -210,11 +210,13 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
 
                     // Nope
                     else {
+
                         eModal.alert({
                             message: dsCommandEditor.errorModalMessage(commands.error.message),
                             title: '<i class="fas fa-exclamation-triangle"></i> Command List Load Error!',
                             size: 'lg modal-dialog-centered'
                         });
+
                         dsCommandEditor.system.editor.destroy();
                         dsCommandEditor.startMenu();
                     }
@@ -228,12 +230,16 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                 }).catch(err => {
 
                     // Error Message
-                    $.LoadingOverlay("hide");
                     eModal.alert({
                         message: dsCommandEditor.errorModalMessage(err.message),
                         title: '<i class="fas fa-exclamation-triangle"></i> Command List Load Error!',
                         size: 'lg modal-dialog-centered'
                     });
+
+                    dsCommandEditor.system.editor.destroy();
+                    dsCommandEditor.startMenu();
+
+                    $.LoadingOverlay("hide");
 
                     // Complete
                     return;
