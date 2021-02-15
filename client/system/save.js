@@ -143,6 +143,13 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                     }
                 };
 
+                // Delete Items
+                for (const item in newCommand) {
+                    if (item !== "name" && item !== "description" && item !== "options") {
+                        delete newCommand[item];
+                    }
+                }
+
                 // Create
                 if (editorType === 1) {
 
@@ -154,13 +161,6 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
 
                 // Edit
                 else if (editorType === 2) {
-
-                    // Delte Items
-                    for(const item in newCommand){
-                        if(item !== "name" && item !== "description" && item !== "options"){
-                            delete newCommand[item];
-                        }
-                    }
 
                     // Send Result
                     console.log(`New command edited to the app ${dsCommandEditor.root.client_id}!`, newCommand);
