@@ -90,7 +90,7 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
             if (oldCommand) {
 
                 // Set Editor Type to Edit
-                if (hash(newCommand) !== hash(oldCommand)) {
+                if (objectHash.sha1(newCommand) !== objectHash.sha1(oldCommand)) {
                     editorType = 2;
                 }
 
