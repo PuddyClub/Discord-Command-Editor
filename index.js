@@ -268,23 +268,62 @@ module.exports = function (app, options) {
                     // Get Command ID
                     const commandID = req.body.id;
 
-                    // Global
-                    if (typeof guildID !== "string") {
-                        discordApp.editCommand(req.body, commandID).then(commands => {
-                            res.json({ error: null, data: commands });
-                        }).catch(err => {
-                            res.json({ error: err, data: null });
-                        });
+                    // Exist
+                    if (typeof commandID === "string") {
+
+                        // Global
+                        if (typeof guildID !== "string") {
+                            discordApp.editCommand(req.body, commandID).then(commands => {
+                                res.json({ error: null, data: commands });
+                            }).catch(err => {
+                                res.json({ error: err, data: null });
+                            });
+                        }
+
+                        // Guild
+                        else {
+                            discordApp.editCommand(req.body, commandID, guildID).then(commands => {
+                                res.json({ error: null, data: commands });
+                            }).catch(err => {
+                                res.json({ error: err, data: null });
+                            });
+                        }
+
+                    }
+                    
+                    // Nope
+                    else { errorPage(res, 404, 'Command ID not found.'); }
+
+                }
+
+                // Delete Command
+                else if (req.url === "/deleteCommand") {
+
+                    // Check
+                    if (typeof req.body.id === "string") {
+
+                        // Global
+                        if (typeof guildID !== "string") {
+                            discordApp.deleteCommand(req.body.id).then(commands => {
+                                res.json({ error: null, data: commands });
+                            }).catch(err => {
+                                res.json({ error: err, data: null });
+                            });
+                        }
+
+                        // Guild
+                        else {
+                            discordApp.deleteCommand(req.body.id, guildID).then(commands => {
+                                res.json({ error: null, data: commands });
+                            }).catch(err => {
+                                res.json({ error: err, data: null });
+                            });
+                        }
+
                     }
 
-                    // Guild
-                    else {
-                        discordApp.editCommand(req.body, commandID, guildID).then(commands => {
-                            res.json({ error: null, data: commands });
-                        }).catch(err => {
-                            res.json({ error: err, data: null });
-                        });
-                    }
+                    // Nope
+                    else { errorPage(res, 404, 'Command ID not found.'); }
 
                 }
 
