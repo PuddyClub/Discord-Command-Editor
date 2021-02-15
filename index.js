@@ -1,4 +1,4 @@
-module.exports = function (app, options, callbackApp) {
+module.exports = function (express, app, options, callbackApp) {
 
     // Prepare Config
     const _ = require('lodash');

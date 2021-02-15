@@ -20,7 +20,7 @@ Discord Slash Commands List Editor.
 // Prepare Module
 const express = require('express');
 const app = express();
-require('@tinypudding/discord-command-editor')(app, {
+require('@tinypudding/discord-command-editor')(express, app, {
 
     // File Cache (You need to install the "moment-timezone" module for this configuration to work.)
     fileMaxAge: 2592000000,
