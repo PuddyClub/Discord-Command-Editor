@@ -28,6 +28,9 @@ dsCommandEditor.tokenList = {
                         // ID
                         $('<td>').text(item),
 
+                        // Name
+                        $('<td>').text(tokenList[item].name),
+
                         // Actions
                         $('<td>').append(
 
@@ -46,11 +49,20 @@ dsCommandEditor.tokenList = {
 
                                             }
                                         },
-                                        { text: 'No', style: 'danger', close: false, click: function () {
-                                            dsCommandEditor.tokenList.open();
-                                        }},
+                                        {
+                                            text: 'No', style: 'danger', close: false, click: function () {
+                                                dsCommandEditor.tokenList.open();
+                                            }
+                                        },
                                     ]
                                 });
+                            }),
+
+                            // Login
+                            $('<button>', { class: 'btn btn-info mr-3' }).text('Rename').click(function () {
+
+
+
                             }),
 
                             // Login
@@ -78,6 +90,7 @@ dsCommandEditor.tokenList = {
 
                                 $('<tr>').append(
                                     $('<th>').text('ID'),
+                                    $('<th>').text('Name'),
                                     $('<th>').text('Actions')
                                 )
 
