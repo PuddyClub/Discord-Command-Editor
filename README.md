@@ -31,7 +31,7 @@ commandEditor(express, app, options, callback);
 ```
 
 ### express (Express Module)
-The express Module from require().
+The express Module from require(). If you don't use the callback, this option will be used to use the module's default image folder.
 
 ### app (Express App)
 The express app made by express().
@@ -41,6 +41,13 @@ Configuration of website customization.
 
 ### callback (Function)
 Here you can send more methods to your Express application. Example? It is recommended that you define the static file folder here. 
+
+<hr/>
+
+## Dependent static files
+```
+/img/error.png
+```
 
 <hr/>
 
@@ -136,9 +143,4 @@ require('@tinypudding/discord-command-editor')(express, app, {
 // Start Server
 app.listen(80);
 
-```
-
-## Dependent static files
-```
-/img/error.png
 ```
