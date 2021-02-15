@@ -346,7 +346,7 @@ dsCommandEditor.system = {
 
                                 eModal.prompt({
                                     message: 'Type the Guild ID:',
-                                    title: `<i class="fab fa-discord"></i> Guild ID"`,
+                                    title: `<i class="fab fa-discord"></i> Guild ID`,
                                 }).then(function (guildID) {
 
                                     // Start Loading
