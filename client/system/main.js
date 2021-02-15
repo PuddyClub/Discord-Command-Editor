@@ -317,7 +317,7 @@ dsCommandEditor.system = {
                 let optionSelected = false;
                 const theModal = eModal.alert({
                     message: $('<span>', { id: 'chooseType' }).text('Choose what type of command list you want to modify. Will you choose Global or a Guild?'),
-                    title: `Choose a List"`,
+                    title: `Choose a List`,
                     buttons: [
 
                         // Cancel
