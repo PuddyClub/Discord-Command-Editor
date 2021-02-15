@@ -6,6 +6,26 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
     // Is Array
     if (Array.isArray(newCommands)) {
 
+        // Emergency Backup
+        const emergencyBackup = function (err) {
+
+            // Error Message
+            eModal.alert({
+                message: dsCommandEditor.errorModalMessage(err.message),
+                title: '<i class="fas fa-exclamation-triangle"></i> Command List Load Error!',
+                size: 'lg modal-dialog-centered'
+            });
+
+            dsCommandEditor.system.editor.destroy();
+            dsCommandEditor.startMenu();
+
+            $.LoadingOverlay("hide");
+
+            // Complete
+            return;
+
+        };
+
         // Delte Commands Script
         const deleteCommandsScript = function (dontDelete, fn, fn_error, extra) {
 
@@ -209,42 +229,12 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                     }
 
                     // Nope
-                    else {
-
-                        eModal.alert({
-                            message: dsCommandEditor.errorModalMessage(commands.error.message),
-                            title: '<i class="fas fa-exclamation-triangle"></i> Command List Load Error!',
-                            size: 'lg modal-dialog-centered'
-                        });
-
-                        dsCommandEditor.system.editor.destroy();
-                        dsCommandEditor.startMenu();
-                    }
-
-                    // Complete Message
-                    $.LoadingOverlay("hide");
+                    else { emergencyBackup(commands.error); }
 
                     // Complete
                     return;
 
-                }).catch(err => {
-
-                    // Error Message
-                    eModal.alert({
-                        message: dsCommandEditor.errorModalMessage(err.message),
-                        title: '<i class="fas fa-exclamation-triangle"></i> Command List Load Error!',
-                        size: 'lg modal-dialog-centered'
-                    });
-
-                    dsCommandEditor.system.editor.destroy();
-                    dsCommandEditor.startMenu();
-
-                    $.LoadingOverlay("hide");
-
-                    // Complete
-                    return;
-
-                });
+                }).catch(err => { emergencyBackup(err); return; });
 
                 // Complete
                 return;
@@ -252,20 +242,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
             })
 
             // Error
-            .catch(err => {
-
-                // Error Message
-                $.LoadingOverlay("hide");
-                eModal.alert({
-                    message: dsCommandEditor.errorModalMessage(err.message),
-                    title: '<i class="fas fa-exclamation-triangle"></i> Command Upload Error!',
-                    size: 'lg modal-dialog-centered'
-                });
-
-                // Complete
-                return;
-
-            });
+            .catch(err => { emergencyBackup(err); return; });
 
     }
 
