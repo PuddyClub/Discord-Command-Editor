@@ -4,6 +4,7 @@ dsCommandEditor.system = {
     loadCommandList: function (guildID) {
 
         // Set Page Title
+        if (typeof dsCommandEditor.appName === "string") { document.title = 'DCE - ' + dsCommandEditor.appName; }
         document.title += ' - ' + dsCommandEditor.root.client_id;
         if (typeof guildID === "string") { document.title += ' - ' + guildID; }
 
@@ -391,7 +392,7 @@ dsCommandEditor.system = {
     },
 
     // Start Root
-    startRoot: function (type, client_id, token) {
+    startRoot: function (type, client_id, token, itemName) {
 
         // Validator
         if (typeof client_id === "string") {
@@ -410,10 +411,16 @@ dsCommandEditor.system = {
             // Prepare Root
             dsCommandEditor.root = prepareStart;
 
+            // App Name
+            if (typeof itemName === "string") { dsCommandEditor.appName = itemName; }
+
         }
 
         // Nope
-        else { dsCommandEditor.root = null; }
+        else { 
+            dsCommandEditor.root = null; 
+            if (typeof dsCommandEditor.appName === "string") {delete dsCommandEditor.appName; } 
+        }
 
     },
 

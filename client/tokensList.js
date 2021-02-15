@@ -83,7 +83,7 @@ dsCommandEditor.tokenList = {
                             $('<button>', { class: 'btn btn-secondary', 'data-dismiss': 'modal' }).text('Login').click(function () {
 
                                 // Start Root
-                                dsCommandEditor.system.startRoot('bot_token', item, tokenList[item].token);
+                                dsCommandEditor.system.startRoot('bot_token', item, tokenList[item].token, tokenList[item].name);
 
                                 // Initialize
                                 dsCommandEditor.system.initialize();
