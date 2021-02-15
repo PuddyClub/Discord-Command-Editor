@@ -13,8 +13,38 @@
 # Discord-Command-Editor
 Discord Slash Commands List Editor.
 
-## How to install
+<hr/>
 
+## How to install
+```js
+
+// Prepare Express
+const express = require('express');
+const app = express();
+
+// Prepare Module
+const commandEditor = require('@tinypudding/discord-command-editor');
+
+// Start Module
+commandEditor(express, app, options, callback);
+
+```
+
+### express (Express Module)
+The express Module from require().
+
+### app (Express App)
+The express app made by express().
+
+### options (Object)
+Configuration of website customization.
+
+### callback (Function)
+Here you can send more methods to your Express application. Example? It is recommended that you define the static file folder here. 
+
+<hr/>
+
+## Example
 ```js
 
 // Prepare Module
