@@ -225,12 +225,16 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
 
                     // Success
                     if (!commands.error) {
+
                         dsCommandEditor.system.editor.set(commands.data);
                         eModal.alert({
                             message: 'Your command list has been successfully saved!',
                             title: '<i class="fas fa-check"></i> Success!',
                             size: 'lg modal-dialog-centered'
                         });
+
+                        $.LoadingOverlay("hide");
+                    
                     }
 
                     // Nope
