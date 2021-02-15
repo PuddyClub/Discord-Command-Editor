@@ -193,61 +193,79 @@ module.exports = function (app, options) {
         // Exist Authorization
         if (typeof req.headers.authorization === "string") {
 
-            // Authorization
+            // Prepare Authorization
             const authorization = req.headers.authorization.split(' ');
-            const discordApp = new discordSlashCommandsClient({
-                bot_token: authorization[1],
-                client_id: req.body.client_id
-            });
 
-            // Get Command List
-            if (req.url === "/getCommands") {
+            // Type
+            const type = authorization[0];
 
-                // Global
-                if (typeof req.body.guildID !== "string") {
-                    discordApp.getCommands().then(commands => {
-                        res.json({ error: null, data: commands });
-                    }).catch(err => {
-                        res.json({ error: err, data: null });
-                    });
+            // Token Data
+            const token = authorization[1];
+
+            // Client ID
+            const client_id = authorization[2];
+
+            // Check
+            if (typeof type === "string" && typeof token === "string" && typeof client_id === "string") {
+
+                const discordApp = new discordSlashCommandsClient({
+                    bot_token: token,
+                    client_id: client_id
+                });
+
+                // Get Command List
+                if (req.url === "/getCommands") {
+
+                    // Global
+                    if (typeof req.body.guildID !== "string") {
+                        discordApp.getCommands().then(commands => {
+                            res.json({ error: null, data: commands });
+                        }).catch(err => {
+                            res.json({ error: err, data: null });
+                        });
+                    }
+
+                    // Guild
+                    else {
+                        discordApp.getCommands({ guildID: req.body.guildID }).then(commands => {
+                            res.json({ error: null, data: commands });
+                        }).catch(err => {
+                            res.json({ error: err, data: null });
+                        });
+                    }
+
+                },
+
+                // Create Command
+                if (req.url === "/createCommand") {
+
+                    // Global
+                    if (typeof req.body.guildID !== "string") {
+                        discordApp.createCommand().then(commands => {
+                            res.json({ error: null, data: commands });
+                        }).catch(err => {
+                            res.json({ error: err, data: null });
+                        });
+                    }
+
+                    // Guild
+                    else {
+                        discordApp.createCommand({ guildID: req.body.guildID }).then(commands => {
+                            res.json({ error: null, data: commands });
+                        }).catch(err => {
+                            res.json({ error: err, data: null });
+                        });
+                    }
+
                 }
 
-                // Guild
-                else {
-                    discordApp.getCommands({ guildID: req.body.guildID }).then(commands => {
-                        res.json({ error: null, data: commands });
-                    }).catch(err => {
-                        res.json({ error: err, data: null });
-                    });
-                }
-
-            },
-
-            // Create Command
-            if (req.url === "/createCommand") {
-
-                // Global
-                if (typeof req.body.guildID !== "string") {
-                    discordApp.createCommand().then(commands => {
-                        res.json({ error: null, data: commands });
-                    }).catch(err => {
-                        res.json({ error: err, data: null });
-                    });
-                }
-
-                // Guild
-                else {
-                    discordApp.createCommand({ guildID: req.body.guildID }).then(commands => {
-                        res.json({ error: null, data: commands });
-                    }).catch(err => {
-                        res.json({ error: err, data: null });
-                    });
-                }
+                // Nothing
+                else { errorPage(res, 404, 'Not Found.'); }
 
             }
 
-            // Nothing
-            else { errorPage(res, 404, 'Not Found.'); }
+            // Nope
+            else { errorPage(res, 401, 'Unauthorized! Your request needs to be a valid authorization!'); }
 
         }
 

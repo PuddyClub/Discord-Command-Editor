@@ -6,16 +6,13 @@ dsCommandEditor.system.fetch = function (url, method, body) {
             method: method,
             headers: { 'Content-Type': 'application/json' },
             headers: {
-                'Authorization': `Bot ${dsCommandEditor.root.bot_token}`,
+                'Authorization': `Bot ${dsCommandEditor.root.bot_token} ${dsCommandEditor.root.client_id}`,
                 'Content-Type': 'application/json'
             }
         };
 
         // Exist Body
-        if (body) {
-            body.client_id = dsCommandEditor.root.client_id;
-            fetchOptions.body = JSON.stringify(body);
-        }
+        if (body) { fetchOptions.body = JSON.stringify(body); }
 
         // Fetch Function
         fetch('/' + url, fetchOptions).then(response => {
