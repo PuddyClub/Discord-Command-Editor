@@ -1,6 +1,5 @@
 dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommands, guildID) {
 
-    console.log(oldCommands, newCommands);
     // Is Array
     if (Array.isArray(newCommands)) {
 
@@ -30,6 +29,7 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
 
                     // Global
                     if (typeof guildID !== "string") {
+                        fn();
                         /* client.deleteCommand(oldCommands[index].id).then(() => {
                             fn();
                             return;
@@ -41,6 +41,7 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
 
                     // Guild
                     else {
+                        fn();
                         /* client.deleteCommand(oldCommands[index].id, guildID).then(() => {
                             fn();
                             return;
@@ -64,16 +65,19 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
         };
 
         // Check New Commands
-        await forPromise({ data: newCommands }, function (index3, fn, fn_error, extra) {
+        const dontDelete = [];
+        const newCommandsCount = newCommands.length - 1;
+        await forPromise({ data: newCommands }, function (cdex, fn, fn_error, extra) {
 
             // Execute Clear
+            console.log(newCommands[cdex]);
             const executeClear = function () {
 
                 // Delete Item
                 dontDelete.push(newCommand);
 
                 // Script
-                if (existClear && index3 >= newCommandsCount) {
+                if (cdex >= newCommandsCount) {
                     deleteCommandsScript(dontDelete, fn, fn_error, extra);
                 }
 
@@ -85,6 +89,12 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
 
             // Set Editor Type to Create
             let editorType = 1;
+
+            // New Command
+            const newCommand = clone(newCommands[cdex]);
+
+            // OLD Command
+            const oldCommand = clone(oldCommands.find(command => command.name === newCommand.name));
 
             // Exist OLD Command
             if (oldCommand) {
@@ -123,11 +133,13 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
 
                     // Global
                     if (typeof guildID !== "string" && typeof guildID !== "number") {
+                        executeClear();
                         //client.createCommand(newCommand).then(final_result.then).catch(final_result.catch);
                     }
 
                     // Guild
                     else {
+                        executeClear();
                         //client.createCommand(newCommand, guildID).then(final_result.then).catch(final_result.catch);
                     }
 
@@ -142,8 +154,10 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
                     // Global
                     if (typeof guildID !== "string" && typeof guildID !== "number") {
                         if (typeof commandID === "string") {
+                            executeClear();
                             //client.editCommand(newCommand, commandID).then(final_result.then).catch(final_result.catch);
                         } else {
+                            executeClear();
                             //client.createCommand(newCommand).then(final_result.then).catch(final_result.catch);
                         }
                     }
@@ -151,8 +165,10 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
                     // Guild
                     else {
                         if (typeof commandID === "string") {
+                            executeClear();
                             //client.editCommand(newCommand, commandID, guildID).then(final_result.then).catch(final_result.catch);
                         } else {
+                            executeClear();
                             //client.createCommand(newCommand, guildID).then(final_result.then).catch(final_result.catch);
                         }
                     }
@@ -202,6 +218,8 @@ dsCommandEditor.system.saveCommandList = async function (newCommands, oldCommand
             size: 'lg modal-dialog-centered'
         });
     }
+
+    console.log('Complete!');
 
     // Complete
     return;
