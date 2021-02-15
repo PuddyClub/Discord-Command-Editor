@@ -196,6 +196,9 @@ module.exports = function (app, options) {
             // Prepare Authorization
             const authorization = req.headers.authorization.split(' ');
 
+            // Guild ID
+            const guildID = req.headers['guild-id'];
+
             // Type
             const type = authorization[0];
 
@@ -217,7 +220,7 @@ module.exports = function (app, options) {
                 if (req.url === "/getCommands") {
 
                     // Global
-                    if (typeof req.body.guildID !== "string") {
+                    if (typeof guildID !== "string") {
                         discordApp.getCommands().then(commands => {
                             res.json({ error: null, data: commands });
                         }).catch(err => {
@@ -227,20 +230,20 @@ module.exports = function (app, options) {
 
                     // Guild
                     else {
-                        discordApp.getCommands({ guildID: req.body.guildID }).then(commands => {
+                        discordApp.getCommands({ guildID: guildID }).then(commands => {
                             res.json({ error: null, data: commands });
                         }).catch(err => {
                             res.json({ error: err, data: null });
                         });
                     }
 
-                },
+                }
 
                 // Create Command
-                if (req.url === "/createCommand") {
+                else if (req.url === "/createCommand") {
 
                     // Global
-                    if (typeof req.body.guildID !== "string") {
+                    if (typeof guildID !== "string") {
                         discordApp.createCommand().then(commands => {
                             res.json({ error: null, data: commands });
                         }).catch(err => {
@@ -250,7 +253,7 @@ module.exports = function (app, options) {
 
                     // Guild
                     else {
-                        discordApp.createCommand({ guildID: req.body.guildID }).then(commands => {
+                        discordApp.createCommand({ guildID: guildID }).then(commands => {
                             res.json({ error: null, data: commands });
                         }).catch(err => {
                             res.json({ error: err, data: null });

@@ -18,12 +18,8 @@ dsCommandEditor.system = {
             dsCommandEditor.startMenu();
         };
 
-        // System Config
-        let fetchConfig = {};
-        if (typeof guildID === "string") { fetchConfig.guildID = guildID; }
-
         // Load Command List
-        dsCommandEditor.system.fetch("getCommands", 'POST', fetchConfig).then(commands => {
+        dsCommandEditor.system.fetch("getCommands", 'POST', null, guildID).then(commands => {
 
             // Worked
             if (!commands.error) {

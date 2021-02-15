@@ -1,4 +1,4 @@
-dsCommandEditor.system.fetch = function (url, method, body) {
+dsCommandEditor.system.fetch = function (url, method, body, guildID) {
     return new Promise(function (resolve, reject) {
 
         // Options
@@ -10,6 +10,9 @@ dsCommandEditor.system.fetch = function (url, method, body) {
                 'Content-Type': 'application/json'
             }
         };
+
+        // Exist Guild ID
+        if (typeof guildID === "string") { fetchOptions.headers['Guild-Id'] = guildID; }
 
         // Exist Body
         if (body) { fetchOptions.body = JSON.stringify(body); }
