@@ -244,7 +244,7 @@ module.exports = function (app, options) {
 
                     // Global
                     if (typeof guildID !== "string") {
-                        discordApp.createCommand().then(commands => {
+                        discordApp.createCommand(req.body).then(commands => {
                             res.json({ error: null, data: commands });
                         }).catch(err => {
                             res.json({ error: err, data: null });
@@ -253,7 +253,33 @@ module.exports = function (app, options) {
 
                     // Guild
                     else {
-                        discordApp.createCommand({ guildID: guildID }).then(commands => {
+                        discordApp.createCommand(req.body, guildID).then(commands => {
+                            res.json({ error: null, data: commands });
+                        }).catch(err => {
+                            res.json({ error: err, data: null });
+                        });
+                    }
+
+                }
+
+                // Edit Command
+                else if (req.url === "/editCommand") {
+
+                    // Get Command ID
+                    const commandID = req.body.id;
+
+                    // Global
+                    if (typeof guildID !== "string") {
+                        discordApp.editCommand(req.body, commandID).then(commands => {
+                            res.json({ error: null, data: commands });
+                        }).catch(err => {
+                            res.json({ error: err, data: null });
+                        });
+                    }
+
+                    // Guild
+                    else {
+                        discordApp.editCommand(req.body, commandID, guildID).then(commands => {
                             res.json({ error: null, data: commands });
                         }).catch(err => {
                             res.json({ error: err, data: null });
