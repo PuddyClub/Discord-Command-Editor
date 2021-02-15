@@ -198,14 +198,29 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                 // Get New Command List
                 dsCommandEditor.system.fetch("getCommands", null, guildID).then(commands => {
 
+                    // Success
+                    if (!commands.error) {
+                        dsCommandEditor.system.editor.set(commands.data);
+                        eModal.alert({
+                            message: 'Your command list has been successfully saved!',
+                            title: '<i class="fas fa-check"></i> Success!',
+                            size: 'lg modal-dialog-centered'
+                        });
+                    }
+
+                    // Nope
+                    else {
+                        eModal.alert({
+                            message: dsCommandEditor.errorModalMessage(commands.error.message),
+                            title: '<i class="fas fa-exclamation-triangle"></i> Command List Load Error!',
+                            size: 'lg modal-dialog-centered'
+                        });
+                        dsCommandEditor.system.editor.destroy();
+                        dsCommandEditor.startMenu();
+                    }
+
                     // Complete Message
                     $.LoadingOverlay("hide");
-                    dsCommandEditor.system.editor.set(commands);
-                    eModal.alert({
-                        message: 'Your command list has been successfully saved!',
-                        title: '<i class="fas fa-check"></i> Success!',
-                        size: 'lg modal-dialog-centered'
-                    });
 
                     // Complete
                     return;
