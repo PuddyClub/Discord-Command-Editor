@@ -30,10 +30,10 @@ dsCommandEditor.system = {
 
                 // Start JSON
                 const options = {};
-                const editor = new JSONEditor(document.getElementById("jsoneditor"), options);
+                dsCommandEditor.system.editor = new JSONEditor(document.getElementById("jsoneditor"), options);
 
                 // Set Commands
-                editor.set(clone(commands.data));
+                dsCommandEditor.system.editor.set(clone(commands.data));
 
                 // Add Buttons
                 $('#jsoneditor .jsoneditor-menu').prepend(
@@ -48,7 +48,7 @@ dsCommandEditor.system = {
 
                     // Save
                     $('<button>', { title: 'Save Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-save"></i>').click(function () {
-                        dsCommandEditor.system.saveCommandList(editor.get(), commands.data, guildID);
+                        dsCommandEditor.system.saveCommandList(dsCommandEditor.system.editor.get(), commands.data, guildID);
                         $(this).blur();
                     }),
 
@@ -94,7 +94,7 @@ dsCommandEditor.system = {
                                     const newCommands = JSON.parse(fr.result);
 
                                     // Result
-                                    if (Array.isArray(newCommands)) { editor.set(newCommands); }
+                                    if (Array.isArray(newCommands)) { dsCommandEditor.system.editor.set(newCommands); }
 
                                     // Nope
                                     else {
@@ -153,7 +153,7 @@ dsCommandEditor.system = {
                         if (typeof guildID === "string") { filename += `_${guildID}`; }
 
                         // Save File
-                        saveAs(new Blob([JSON.stringify(editor.get(), null, 2)], { type: "text/plain;charset=utf-8" }), filename + '.json');
+                        saveAs(new Blob([JSON.stringify(dsCommandEditor.system.editor.get(), null, 2)], { type: "text/plain;charset=utf-8" }), filename + '.json');
                         $(this).blur();
 
                     })

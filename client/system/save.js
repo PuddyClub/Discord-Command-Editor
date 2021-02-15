@@ -200,7 +200,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
 
                     // Complete Message
                     $.LoadingOverlay("hide");
-                    editor.set(commands);
+                    dsCommandEditor.system.editor.set(commands);
                     eModal.alert({
                         message: 'Your command list has been successfully saved!',
                         title: '<i class="fas fa-check"></i> Success!',
