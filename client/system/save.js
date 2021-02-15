@@ -16,6 +16,11 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                 size: 'lg modal-dialog-centered'
             });
 
+            // Save Backup
+            let filename = `auto_discord_slash_commands_${dsCommandEditor.root.client_id}`;
+            if (typeof guildID === "string") { filename += `_${guildID}`; }
+            saveAs(new Blob([JSON.stringify(dsCommandEditor.system.editor.get(), null, 2)], { type: "text/plain;charset=utf-8" }), filename + '.json');
+
             dsCommandEditor.system.editor.destroy();
             dsCommandEditor.startMenu();
 
