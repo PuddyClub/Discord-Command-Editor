@@ -121,7 +121,7 @@ dsCommandEditor.system = {
                         }
 
                         // Value Changed
-                        if(valueChanched) {
+                        if (valueChanched) {
                             dsCommandEditor.system.editor.set(newCommands);
                             dsCommandEditor.system.editor.expandAll();
                         }
@@ -260,6 +260,19 @@ dsCommandEditor.system = {
 
                         // Save File
                         saveAs(new Blob([JSON.stringify(dsCommandEditor.system.editor.get(), null, 2)], { type: "text/plain;charset=utf-8" }), filename + '.json');
+                        $(this).blur();
+
+                    }),
+
+                    // Export
+                    $('<button>', { title: 'New Command', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-plus-circle"></i>').click(function () {
+
+                        // Add New Command
+                        const newCommands = dsCommandEditor.system.editor.get();
+                        newCommands.push({ name: 'example', description: 'Tiny Example here.' });
+
+                        // Updaste
+                        dsCommandEditor.system.editor.update(newCommands);
                         $(this).blur();
 
                     })
