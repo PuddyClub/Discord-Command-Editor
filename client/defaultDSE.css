@@ -93,6 +93,8 @@ div.jsoneditor-value:hover {
     color: #36393f
 }
 
+.jsoneditor-selected *,
+.jsoneditor-selected,
 .jsoneditor-highlight *,
 .jsoneditor-highlight {
     color: #c0c0c0 !important;
