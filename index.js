@@ -44,12 +44,12 @@ module.exports = function (app, options) {
             contentType: contentType,
             date: { year: 2021, month: 2, day: 14, hour: 23, minute: 50 },
             timezone: 'America/Sao_Paulo',
-            fileMaxAge: '2592000000'
+            fileMaxAge: tinyCfg.fileMaxAge
         };
     };
 
     // Read File
-    const readFile = function (req, res) {
+    const readFile = function (req, res, next) {
 
         // URL Path
         let urlPath = req.url.split('/');
@@ -180,7 +180,7 @@ module.exports = function (app, options) {
     app.set('view engine', 'nunjucks');
 
     // For Promise
-    app.get('/js/forPromise.js', (req, res) => {
+    app.get('/js/forPromise.js', (req, res, next) => {
 
         // For Promise
         let forPromise = require('for-promise').toString()
@@ -207,8 +207,8 @@ module.exports = function (app, options) {
     });
 
     // JS and CSS
-    app.get('/js/*', (req, res) => { return readFile(req, res); });
-    app.get('/css/*', (req, res) => { return readFile(req, res); });
+    app.get('/js/*', (req, res, next) => { return readFile(req, res, next); });
+    app.get('/css/*', (req, res, next) => { return readFile(req, res, next); });
 
     // Homepage
     app.get('*', (req, res) => {

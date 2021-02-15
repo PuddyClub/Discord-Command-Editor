@@ -22,6 +22,9 @@ const express = require('express');
 const app = express();
 require('@tinypudding/discord-command-editor')(app, {
 
+    // File Cache
+    fileMaxAge: 2592000000,
+
     // Meta
     meta: '<link href="/img/icon.png" rel="icon" type="image/x-icon"/>' +
         '<meta name="robots" content="noindex" />' +
