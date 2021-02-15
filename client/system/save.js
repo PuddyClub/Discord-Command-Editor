@@ -52,7 +52,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                     // Logger Info
                     console.log(`OLD command deleted from the app ${dsCommandEditor.root.client_id}!`, oldCommands[index]);
 
-                    // Global
+                    // Send Result
                     dsCommandEditor.system.fetch("deleteCommand", { id: oldCommands[index].id }, guildID).then(() => {
                         fn();
                         return;
@@ -146,7 +146,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                 // Create
                 if (editorType === 1) {
 
-                    // console Info
+                    // Send Result
                     console.log(`New command added to the app ${dsCommandEditor.root.client_id}!`, newCommand);
                     dsCommandEditor.system.fetch("createCommand", newCommand, guildID).then(final_result.then).catch(final_result.catch);
 
@@ -155,7 +155,14 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                 // Edit
                 else if (editorType === 2) {
 
-                    // console Info
+                    // Delte Items
+                    for(const item in newCommand){
+                        if(item !== "name" && item !== "description" && item !== "options"){
+                            delete newCommand[item];
+                        }
+                    }
+
+                    // Send Result
                     console.log(`New command edited to the app ${dsCommandEditor.root.client_id}!`, newCommand);
                     dsCommandEditor.system.fetch("editCommand", newCommand, guildID).then(final_result.then).catch(final_result.catch);
 
