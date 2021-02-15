@@ -72,7 +72,10 @@ dsCommandEditor.tokenList = {
                                     $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
                                     $.localStorage.set('tokenList', item, 'name', newName);
                                     setTimeout(function () { $.LoadingOverlay("hide"); dsCommandEditor.tokenList.open(); }, 500);
-                                }, () => { setTimeout(function () { dsCommandEditor.tokenList.open(); }, 500); });
+                                }, () => {
+                                    $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
+                                    setTimeout(function () { $.LoadingOverlay("hide"); dsCommandEditor.tokenList.open(); }, 500);
+                                });
 
                             }),
 
