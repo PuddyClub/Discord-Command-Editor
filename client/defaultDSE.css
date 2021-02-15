@@ -66,6 +66,11 @@ div.jsoneditor-tree:focus {
     border-color: transparent !important;
 }
 
+div.jsoneditor-value.jsoneditor-array:hover, 
+div.jsoneditor-value.jsoneditor-object:hover {
+    color: #e4e4e4;
+}
+
 .jsoneditor-schema-error, 
 div.jsoneditor td, 
 div.jsoneditor textarea, 
