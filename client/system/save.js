@@ -1,4 +1,4 @@
-dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, guildID) {
+dsCommandEditor.system.saveCommandList = function (newCommands, guildID) {
 
     // Start Loading
     $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
@@ -43,13 +43,13 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                 if (cdex >= newCommandsCount) {
 
                     // Run Delete Commands
-                    const deleteCommands = extra({ data: oldCommands });
+                    const deleteCommands = extra({ data: dsCommandEditor.system.oldCommands });
                     deleteCommands.run(function (index, fn, fn_error) {
 
                         // Check If can delete
                         let canDelete = true;
                         if (Array.isArray(dontDelete) && dontDelete.length > 0) {
-                            if (dontDelete.indexOf(oldCommands[index].id) > -1) {
+                            if (dontDelete.indexOf(dsCommandEditor.system.oldCommands[index].id) > -1) {
                                 canDelete = false;
                             }
                         }
@@ -58,10 +58,10 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                         if (canDelete) {
 
                             // Logger Info
-                            console.log(`OLD command deleted from the app ${dsCommandEditor.root.client_id}!`, oldCommands[index]);
+                            console.log(`OLD command deleted from the app ${dsCommandEditor.root.client_id}!`, dsCommandEditor.system.oldCommands[index]);
 
                             // Send Result
-                            dsCommandEditor.system.fetch("deleteCommand", { id: oldCommands[index].id }, guildID).then(() => {
+                            dsCommandEditor.system.fetch("deleteCommand", { id: dsCommandEditor.system.oldCommands[index].id }, guildID).then(() => {
                                 fn();
                                 return;
                             }).catch(err => {
@@ -92,7 +92,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
             const newCommand = newCommands[cdex];
 
             // Editor Type
-            const editorType = dsCommandEditor.system.updateChecker(newCommands, cdex, oldCommands);
+            const editorType = dsCommandEditor.system.updateChecker(newCommands, cdex, dsCommandEditor.system.oldCommands);
 
             // Delete Items
             let commandID = null;
@@ -153,7 +153,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, oldCommands, gui
                     // Success
                     if (!commands.error) {
 
-                        oldCommands = commands.data;
+                        dsCommandEditor.system.oldCommands = commands.data;
                         dsCommandEditor.system.editor.set(commands.data);
                         dsCommandEditor.system.editor.expandAll();
                         eModal.alert({

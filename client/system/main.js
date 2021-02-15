@@ -140,6 +140,7 @@ dsCommandEditor.system = {
 
                 // Set Commands
                 oldCommands = clone(commands.data);
+                dsCommandEditor.system.oldCommands = commands.data;
                 dsCommandEditor.system.editor.set(clone(commands.data));
                 dsCommandEditor.system.editor.expandAll();
 
@@ -156,7 +157,7 @@ dsCommandEditor.system = {
 
                     // Save
                     $('<button>', { title: 'Save Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-save"></i>').click(function () {
-                        dsCommandEditor.system.saveCommandList(dsCommandEditor.system.editor.get(), commands.data, guildID);
+                        dsCommandEditor.system.saveCommandList(dsCommandEditor.system.editor.get(), guildID);
                         $(this).blur();
                     }),
 
