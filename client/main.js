@@ -318,9 +318,9 @@ if (
                                     }).catch(errorCode)
                                 }).catch(errorCode);
 
-                        }).catch(cancelOperation);
+                        }, cancelOperation);
 
-                    }).catch(cancelOperation);
+                    }, cancelOperation);
 
                 }
 

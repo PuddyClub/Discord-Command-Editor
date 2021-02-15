@@ -58,10 +58,21 @@ dsCommandEditor.tokenList = {
                                 });
                             }),
 
-                            // Login
+                            // Rename
                             $('<button>', { class: 'btn btn-info mr-3' }).text('Rename').click(function () {
 
+                                let nameSpace = item;
+                                if (typeof tokenList[item].name === "string") { nameSpace = `${tokenList[item].name} (${item})`; }
 
+                                // Prompt
+                                eModal.prompt({
+                                    message: `Enter the name of the application:`,
+                                    title: `<i class="fas fa-font"></i> Rename "${nameSpace}"`
+                                }).then(function (newName) {
+                                    $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
+                                    $.localStorage.set('tokenList', item, 'name', newName);
+                                    setTimeout(function () { $.LoadingOverlay("hide"); dsCommandEditor.tokenList.open(); }, 500);
+                                }, () => { setTimeout(function () { dsCommandEditor.tokenList.open(); }, 500); });
 
                             }),
 
