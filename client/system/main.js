@@ -123,6 +123,7 @@ dsCommandEditor.system = {
                         // Value Changed
                         if(valueChanched) {
                             dsCommandEditor.system.editor.set(newCommands);
+                            dsCommandEditor.system.editor.expandAll();
                         }
 
                         // Update OLD Commands
