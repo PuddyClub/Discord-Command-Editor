@@ -227,12 +227,10 @@ module.exports = function (express, app, options, callbackApp) {
             // Time Now
             const now = moment();
 
-            if (!check_version.t || check_version.t.diff(now, 'hours') > 0) {
+            if (!check_version.t || now.diff(check_version.t, 'hours') > 0) {
                 check_version.t = now.add(1, 'hours');
                 check_version.v = await latestVersion(package.name);
             }
-
-            console.log(check_version.t.diff(now, 'hours'));
 
             // Check Version
             tinyCfg.version = {
@@ -240,6 +238,8 @@ module.exports = function (express, app, options, callbackApp) {
                 now: package.version,
                 new: check_version.v
             };
+
+            console.log(tinyCfg.version);
 
             // Render Page
             res.render('index', tinyCfg);
