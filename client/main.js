@@ -63,10 +63,44 @@ if (
             // Div Base
             dsCommandEditor.loginDiv = {};
 
+            // Update Div
+            if (dsCommandEditor.version.needUpdate || typeof dsCommandEditor.version.new === "string" || typeof dsCommandEditor.version.now === "string") {
+
+                // Prepare Base
+                dsCommandEditor.loginDiv.needUpdate = $('<span>', { id: 'appVersion' }).text(' ');
+
+                // Version
+                if (typeof typeof dsCommandEditor.version.now === "string") {
+                    dsCommandEditor.loginDiv.needUpdate.append($('<a>', { class: 'badge badge-secondary', href: 'https://www.npmjs.com/package/@tinypudding/discord-command-editor/v/' + dsCommandEditor.version.now, target: '_blank' }).text(dsCommandEditor.version.now));
+                }
+
+                // New Version
+                if (dsCommandEditor.version.needUpdate) {
+
+                    // Add BR
+                    dsCommandEditor.loginDiv.needUpdate.append('<br/>');
+
+                    // Exist Version String
+                    if (typeof typeof dsCommandEditor.version.new === "string") {
+                        dsCommandEditor.loginDiv.needUpdate.append($('<a>', { class: 'ml-3 badge badge-primary', href: 'https://www.npmjs.com/package/@tinypudding/discord-command-editor', target: '_blank' }).text('NEW UPDATE ' + dsCommandEditor.version.new));
+                    }
+
+                    // Nope
+                    else {
+                        dsCommandEditor.loginDiv.needUpdate.append($('<a>', { class: 'ml-3 badge badge-primary', href: 'https://www.npmjs.com/package/@tinypudding/discord-command-editor', target: '_blank' }).text('NEW UPDATE'));
+                    }
+
+                }
+
+            }
+
+            // Nope
+            else { dsCommandEditor.loginDiv.updateWarn = ''; }
+
             // Title
             dsCommandEditor.loginDiv.title = $('<h3>', { class: 'title-base text-center text-white pt-5' }).append([
-                'Discord Command Editor<br/>', $('<small>').append(
-                    $('<a>', {href: 'https://github.com/JasminDreasond', target: '_blank'}).text('Made by JasminDreasond')
+                'Discord Command Editor', dsCommandEditor.loginDiv.needUpdate, '<br/>', $('<small>').append(
+                    $('<a>', { href: 'https://github.com/JasminDreasond', target: '_blank' }).text('Made by JasminDreasond')
                 )
             ]);
 
