@@ -15,6 +15,20 @@ Discord Slash Commands Editor.
 
 <hr/>
 
+## How to use
+By entering the website for the first time, you will agree to the terms of use of the application.
+Your next step is to get your bot client ID and your bot token to login.
+After you log in, you will have to choose where you want to open your command editor: Global commands or Guild commands (Guild is a Discord Server).
+
+To get a guild ID, you need to activate developer mode in your Discord Configuration and right click on the guild icon.
+After you choose where you want to use your command editor, you will see a JSON editor.
+
+The JSON shown is the list of commands installed in your bot. Here you will have your complete freedom to edit your command list. Do not forget that the list of commands is always made through an Array, and you will also have buttons to export or import a list of commands.
+
+
+
+<hr/>
+
 ## How to install
 ```js
 
