@@ -1,5 +1,11 @@
 module.exports = function (express, app, options, callbackApp) {
 
+    // Package Prepare
+    const package = require('./package.json');
+    const latestVersion = require('latest-version');
+    const compareVersions = require('compare-versions');
+    const moment = require('moment');
+
     // Prepare Config
     const _ = require('lodash');
     const fileCache = require('@tinypudding/puddy-lib/http/fileCache');
@@ -206,11 +212,39 @@ module.exports = function (express, app, options, callbackApp) {
     app.get('/js/*', (req, res, next) => { return readFile(req, res, next); });
     app.get('/css/*', (req, res, next) => { return readFile(req, res, next); });
 
+    // Check Version
+    const check_version = {
+        v: null,
+        t: null
+    };
+
     // Homepage
-    app.get('*', (req, res) => {
+    app.get('*', async (req, res) => {
 
         // Index
-        if (req.url === "/") { res.render('index', tinyCfg); }
+        if (req.url === "/") {
+
+            // Time Now
+            const now = moment();
+
+            if (!check_version.t || check_version.t.diff(now, 'hours') > 0) {
+                check_version.t = now.add(1, 'hours');
+                check_version.v = await latestVersion(package.name);
+            }
+
+            console.log(check_version.t.diff(now, 'hours'));
+
+            // Check Version
+            tinyCfg.version = {
+                needUpdate: compareVersions.compare(package.version, check_version.v, '<'),
+                now: package.version,
+                new: check_version.v
+            };
+
+            // Render Page
+            res.render('index', tinyCfg);
+
+        }
 
         // Nope
         else { res.redirect('/'); }
