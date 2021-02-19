@@ -11,6 +11,10 @@ module.exports = function (express, app, options, callbackApp) {
     const fileCache = require('@tinypudding/puddy-lib/http/fileCache');
     let tinyCfg = _.defaultsDeep({}, options, {
 
+        // Check Version
+        checkVersion: true,
+        showVersion: true,
+
         // Meta
         meta: '<link href="/img/icon.png" rel="icon" type="image/x-icon"/>' +
             '<meta name="robots" content="noindex" />' +
@@ -233,13 +237,11 @@ module.exports = function (express, app, options, callbackApp) {
             }
 
             // Check Version
-            tinyCfg.version = {
+            tinyCfg.version = JSON.stringify({
                 needUpdate: compareVersions.compare(package.version, check_version.v, '<'),
                 now: package.version,
                 new: check_version.v
-            };
-
-            console.log(tinyCfg.version);
+            });
 
             // Render Page
             res.render('index', tinyCfg);

@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Script-Type" content="text/javascript">
 
         {{meta | safe}}
-        
+
         {{js.jquery | safe}}
         {{js.bootstrap | safe}}
         {{js.jqueryloadingoverlay | safe}}
@@ -22,7 +22,9 @@
         {{js.objecthash | safe}}
 
         <script>
-            var dsCommandEditor = {};
+            var dsCommandEditor = {
+                version: {{version | safe}}
+            };
         </script>
 
         <script src="/js/forPromise.js"></script>
@@ -40,7 +42,7 @@
         {{css.fontawesome | safe}}
         {{css.bootstrap | safe}}
         {{css.jsoneditor | safe}}
-        
+
         {{css.index | safe}}
 
     </head>

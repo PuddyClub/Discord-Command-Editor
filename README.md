@@ -76,6 +76,12 @@ require('@tinypudding/discord-command-editor')(express, app, {
     // File Cache (You need to install the "moment-timezone" module for this configuration to work.)
     fileMaxAge: 2592000000,
 
+    // Allow the application to check the installed version to warn a new version update on the website's homepage.
+    checkVersion: true,
+
+    // Allow the version to be shown on the website's homepage.
+    showVersion: true,
+
     // Meta
     meta: '<link href="/img/icon.png" rel="icon" type="image/x-icon"/>' +
         '<meta name="robots" content="noindex" />' +
