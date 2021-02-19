@@ -25,7 +25,7 @@ After you choose where you want to use your command editor, you will see a JSON 
 
 The JSON shown is the list of commands installed in your bot. Here you will have your complete freedom to edit your command list. Do not forget that the list of commands is always made through an Array, and you will also have buttons to export or import a list of commands.
 
-
+Your entire list of commands needs to be done using what is being said in official Discord Documentation: https://discord.com/developers/docs/interactions/slash-commands#example-walkthrough
 
 <hr/>
 
