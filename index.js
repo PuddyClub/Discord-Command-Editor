@@ -231,17 +231,31 @@ module.exports = function (express, app, options, callbackApp) {
             // Time Now
             const now = moment();
 
-            if (!check_version.t || now.diff(check_version.t, 'hours') > 0) {
-                check_version.t = now.add(1, 'hours');
-                check_version.v = await latestVersion(package.name);
+            // Allowed Check Version
+            if (tinyCfg.checkVersion) {
+
+                // Check Version
+                if (!check_version.t || now.diff(check_version.t, 'hours') > 0) {
+                    check_version.t = now.add(1, 'hours');
+                    check_version.v = await latestVersion(package.name);
+                }
+
+                // Insert Version
+                tinyCfg.version = { needUpdate: compareVersions.compare(package.version, check_version.v, '<') };
+
+                // Allowed Show Version
+                if (tinyCfg.showVersion) {
+                    tinyCfg.version.now = package.version;
+                    tinyCfg.version.new = check_version.v;
+                }
+
             }
 
-            // Check Version
-            tinyCfg.version = JSON.stringify({
-                needUpdate: compareVersions.compare(package.version, check_version.v, '<'),
-                now: package.version,
-                new: check_version.v
-            });
+            // Nope
+            else { tinyCfg.version = { needUpdate: false }; }
+
+            // Convert to String
+            tinyCfg.version = JSON.stringify(tinyCfg.version);
 
             // Render Page
             res.render('index', tinyCfg);
