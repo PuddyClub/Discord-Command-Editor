@@ -247,7 +247,7 @@ module.exports = function (express, app, options, callbackApp) {
         }
 
         // Nope
-        else { res.redirect('/'); }
+        else { require('@tinypudding/puddy-lib/http/HTTP-1.0').send(res, 404); }
 
         // Complete
         return;
