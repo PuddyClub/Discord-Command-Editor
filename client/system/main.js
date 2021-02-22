@@ -40,19 +40,16 @@ dsCommandEditor.system = {
                 };
 
                 // Updater Checker
-                dsCommandEditor.system.updateChecker = function (newCommands, cdex, oldCommands) {
+                dsCommandEditor.system.updateChecker = function (newCommand, oldCommands) {
 
-                    // Exist New Commands
-                    if (Array.isArray(newCommands)) {
+                    // Check New Command
+                    if (objType(newCommand, 'object')) {
 
                         // Set Editor Type to Create
                         let editorType = 1;
 
                         // Exist OLD Commands
-                        if (Array.isArray(oldCommands) && (typeof cdex === "string" || typeof cdex === "number")) {
-
-                            // New Command
-                            const newCommand = newCommands[cdex];
+                        if ((typeof newCommand.id === "string" || typeof newCommand.id === "number") && Array.isArray(oldCommands)) {
 
                             // OLD Command
                             let oldCommand;
@@ -417,9 +414,9 @@ dsCommandEditor.system = {
         }
 
         // Nope
-        else { 
-            dsCommandEditor.root = null; 
-            if (typeof dsCommandEditor.appName === "string") {delete dsCommandEditor.appName; } 
+        else {
+            dsCommandEditor.root = null;
+            if (typeof dsCommandEditor.appName === "string") { delete dsCommandEditor.appName; }
         }
 
     },

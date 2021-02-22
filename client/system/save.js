@@ -92,7 +92,7 @@ dsCommandEditor.system.saveCommandList = function (newCommands, guildID) {
             const newCommand = newCommands[cdex];
 
             // Editor Type
-            const editorType = dsCommandEditor.system.updateChecker(newCommands, cdex, dsCommandEditor.system.oldCommands);
+            const editorType = dsCommandEditor.system.updateChecker(newCommand, dsCommandEditor.system.oldCommands);
 
             // Delete Items
             let commandID = null;
