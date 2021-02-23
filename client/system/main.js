@@ -161,6 +161,9 @@ dsCommandEditor.system = {
 
                     $('<button>', { title: 'Reset Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-trash"></i>').click(function () {
 
+                        // Start Loading
+                        $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
+
                         // Run For Promise
                         forPromise({ data: dsCommandEditor.system.oldCommands }, function (index, fn, fn_error) {
 
@@ -182,6 +185,7 @@ dsCommandEditor.system = {
                                     title: '<i class="fas fa-check"></i> Success!',
                                     size: 'lg modal-dialog-centered'
                                 });
+                                $.LoadingOverlay("hide");
                             })
 
                             // Error
@@ -191,6 +195,7 @@ dsCommandEditor.system = {
                                     title: '<i class="fas fa-exclamation-triangle"></i> Delete all Commands Error!',
                                     size: 'lg modal-dialog-centered'
                                 });
+                                $.LoadingOverlay("hide");
                             });
 
                         // Button
