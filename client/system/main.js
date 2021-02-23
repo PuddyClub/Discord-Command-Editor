@@ -159,6 +159,7 @@ dsCommandEditor.system = {
                         $(this).blur();
                     }),
 
+                    // Delete
                     $('<button>', { title: 'Reset Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-trash"></i>').click(function () {
 
                         // Start Loading
