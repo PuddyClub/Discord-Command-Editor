@@ -159,6 +159,41 @@ dsCommandEditor.system = {
                         $(this).blur();
                     }),
 
+                    $('<button>', { title: 'Reset Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-trash"></i>').click(function () {
+
+                        // Run For Promise
+                        forPromise({ data: dsCommandEditor.system.oldCommands }, function (index, fn, fn_error) {
+
+                            dsCommandEditor.system.fetch("deleteCommand", { id: dsCommandEditor.system.oldCommands[index].id }, guildID).then(() => {
+                                fn();
+                                return;
+                            }).catch(err => {
+                                console.error(err);
+                                fn_error(err);
+                                return;
+                            });
+
+                        })
+                        
+                        // Complete
+                        .then(() => {
+                            
+
+
+                        })
+                        
+                        // Error
+                        .catch(err => {
+
+
+
+                        });
+
+                        // Button
+                        $(this).blur();
+                        
+                    }),
+
                     // Import
                     $('<input>', { class: 'd-none', id: 'import-command-file', type: 'file', accept: 'application/JSON' }).change(function () {
 
