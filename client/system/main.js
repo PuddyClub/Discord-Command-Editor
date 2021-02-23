@@ -204,12 +204,53 @@ dsCommandEditor.system = {
 
                                                             // Complete
                                                             .then(() => {
-                                                                eModal.alert({
-                                                                    message: 'Your command list has been successfully reseted!',
-                                                                    title: '<i class="fas fa-check"></i> Success!',
-                                                                    size: 'lg modal-dialog-centered'
+
+                                                                // Get New Command List
+                                                                dsCommandEditor.system.fetch("getCommands", null, guildID).then(commands => {
+
+                                                                    // Success
+                                                                    if (!commands.error) {
+
+                                                                        dsCommandEditor.system.oldCommands = commands.data;
+                                                                        dsCommandEditor.system.editor.set(commands.data);
+                                                                        dsCommandEditor.system.editor.expandAll();
+
+                                                                        eModal.alert({
+                                                                            message: 'Your command list has been successfully reseted!',
+                                                                            title: '<i class="fas fa-check"></i> Success!',
+                                                                            size: 'lg modal-dialog-centered'
+                                                                        });
+                                                                        $.LoadingOverlay("hide");
+
+                                                                    }
+
+                                                                    // Nope
+                                                                    else {
+
+                                                                        eModal.alert({
+                                                                            message: dsCommandEditor.errorModalMessage(commands.error.message),
+                                                                            title: '<i class="fas fa-exclamation-triangle"></i> Delete all Commands Error! Please, refresh the Page!',
+                                                                            size: 'lg modal-dialog-centered'
+                                                                        });
+                                                                        $.LoadingOverlay("hide");
+
+                                                                    }
+
+                                                                    // Complete
+                                                                    return;
+
+                                                                }).catch(err => {
+
+                                                                    eModal.alert({
+                                                                        message: dsCommandEditor.errorModalMessage(err.message),
+                                                                        title: '<i class="fas fa-exclamation-triangle"></i> Delete all Commands Error! Please, refresh the Page!',
+                                                                        size: 'lg modal-dialog-centered'
+                                                                    });
+                                                                    $.LoadingOverlay("hide");
+
+                                                                    return;
                                                                 });
-                                                                $.LoadingOverlay("hide");
+
                                                             })
 
                                                             // Error
