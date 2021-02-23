@@ -174,24 +174,28 @@ dsCommandEditor.system = {
                             });
 
                         })
-                        
-                        // Complete
-                        .then(() => {
-                            
 
+                            // Complete
+                            .then(() => {
+                                eModal.alert({
+                                    message: 'Your command list has been successfully reseted!',
+                                    title: '<i class="fas fa-check"></i> Success!',
+                                    size: 'lg modal-dialog-centered'
+                                });
+                            })
 
-                        })
-                        
-                        // Error
-                        .catch(err => {
-
-
-
-                        });
+                            // Error
+                            .catch(err => {
+                                eModal.alert({
+                                    message: dsCommandEditor.errorModalMessage(err.message),
+                                    title: '<i class="fas fa-exclamation-triangle"></i> Delete all Commands Error!',
+                                    size: 'lg modal-dialog-centered'
+                                });
+                            });
 
                         // Button
                         $(this).blur();
-                        
+
                     }),
 
                     // Import
