@@ -1,6 +1,6 @@
 {
   "name": "@tinypudding/discord-command-editor",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Discord Slash Commands Editor.",
   "main": "index.js",
   "scripts": {
