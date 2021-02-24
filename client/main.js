@@ -48,7 +48,7 @@ if (
 
             // Prepare Error Modal
             dsCommandEditor.errorModalMessage = function (message) {
-                return $('<center>').append(
+                return $('<center>', { class: 'my-4'}).append(
 
                     // Error Image
                     $('<img>', { src: '/img/error.png', class: 'img-fluid', alt: 'Error Image' }),
