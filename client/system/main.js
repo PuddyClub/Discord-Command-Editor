@@ -247,8 +247,19 @@ dsCommandEditor.system = {
                             dsCommandEditor.system.saveCommandList(newCommands, guildID);
                         }
 
+                        // Delete All Commands
+                        else if(!Array.isArray(dsCommandEditor.system.oldCommands) || dsCommandEditor.system.oldCommands.length > 0) { deleteAllCommands(); }
+
                         // Nope
-                        else { deleteAllCommands(); }
+                        else {
+                            
+                            eModal.alert({
+                                message: dsCommandEditor.errorModalMessage('You have no command to save!'),
+                                title: '<i class="fas fa-exclamation-triangle"></i> Save Error!',
+                                size: 'lg modal-dialog-centered'
+                            });
+
+                        }
 
                         // Complete
                         $(this).blur();
