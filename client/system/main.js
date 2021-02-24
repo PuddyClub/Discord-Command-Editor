@@ -142,6 +142,89 @@ dsCommandEditor.system = {
                 dsCommandEditor.system.editor.set(clone(commands.data));
                 dsCommandEditor.system.editor.expandAll();
 
+                // Delete All Commands
+                const deleteAllCommands = function () {
+
+                    // Start Loading
+                    $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
+
+                    // Run For Promise
+                    forPromise({ data: dsCommandEditor.system.oldCommands }, function (index, fn, fn_error) {
+
+                        dsCommandEditor.system.fetch("deleteCommand", { id: dsCommandEditor.system.oldCommands[index].id }, guildID).then(() => {
+                            fn();
+                            return;
+                        }).catch(err => {
+                            console.error(err);
+                            fn_error(err);
+                            return;
+                        });
+
+                    })
+
+                        // Complete
+                        .then(() => {
+
+                            // Get New Command List
+                            dsCommandEditor.system.fetch("getCommands", null, guildID).then(commands => {
+
+                                // Success
+                                if (!commands.error) {
+
+                                    dsCommandEditor.system.oldCommands = commands.data;
+                                    dsCommandEditor.system.editor.set(commands.data);
+                                    dsCommandEditor.system.editor.expandAll();
+
+                                    eModal.alert({
+                                        message: 'Your command list has been successfully reseted!',
+                                        title: '<i class="fas fa-check"></i> Success!',
+                                        size: 'lg modal-dialog-centered'
+                                    });
+                                    $.LoadingOverlay("hide");
+
+                                }
+
+                                // Nope
+                                else {
+
+                                    eModal.alert({
+                                        message: dsCommandEditor.errorModalMessage(commands.error.message),
+                                        title: '<i class="fas fa-exclamation-triangle"></i> Delete all Commands Error! Please, refresh the Page!',
+                                        size: 'lg modal-dialog-centered'
+                                    });
+                                    $.LoadingOverlay("hide");
+
+                                }
+
+                                // Complete
+                                return;
+
+                            }).catch(err => {
+
+                                eModal.alert({
+                                    message: dsCommandEditor.errorModalMessage(err.message),
+                                    title: '<i class="fas fa-exclamation-triangle"></i> Delete all Commands Error! Please, refresh the Page!',
+                                    size: 'lg modal-dialog-centered'
+                                });
+                                $.LoadingOverlay("hide");
+
+                                return;
+                            });
+
+                        })
+
+                        // Error
+                        .catch(err => {
+                            eModal.alert({
+                                message: dsCommandEditor.errorModalMessage(err.message),
+                                title: '<i class="fas fa-exclamation-triangle"></i> Delete all Commands Error!',
+                                size: 'lg modal-dialog-centered'
+                            });
+                            $.LoadingOverlay("hide");
+                        });
+
+                };
+
                 // Add Buttons
                 $('#jsoneditor .jsoneditor-menu').prepend(
 
@@ -155,12 +238,27 @@ dsCommandEditor.system = {
 
                     // Save
                     $('<button>', { title: 'Save Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-save"></i>').click(function () {
-                        dsCommandEditor.system.saveCommandList(dsCommandEditor.system.editor.get(), guildID);
+
+                        // Get New Command List
+                        const newCommands = dsCommandEditor.system.editor.get();
+
+                        // Validator. Exist Items?
+                        if (Array.isArray(newCommands) && newCommands.length > 0) {
+                            dsCommandEditor.system.saveCommandList(newCommands, guildID);
+                        }
+
+                        // Nope
+                        else { deleteAllCommands(); }
+
+                        // Complete
                         $(this).blur();
+
                     }),
 
                     // Delete
                     $('<button>', { title: 'Reset Command List', class: 'jsoneditor-custom-item' }).append('<i class="fas fa-trash"></i>').click(function () {
+
+                        // Delete Action
 
                         eModal.confirm({
                             message: 'Are you sure you want to delete all commands?',
@@ -185,83 +283,8 @@ dsCommandEditor.system = {
                                                 })
                                                     .then(function () {
 
-                                                        // Start Loading
-                                                        $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)" });
-
-                                                        // Run For Promise
-                                                        forPromise({ data: dsCommandEditor.system.oldCommands }, function (index, fn, fn_error) {
-
-                                                            dsCommandEditor.system.fetch("deleteCommand", { id: dsCommandEditor.system.oldCommands[index].id }, guildID).then(() => {
-                                                                fn();
-                                                                return;
-                                                            }).catch(err => {
-                                                                console.error(err);
-                                                                fn_error(err);
-                                                                return;
-                                                            });
-
-                                                        })
-
-                                                            // Complete
-                                                            .then(() => {
-
-                                                                // Get New Command List
-                                                                dsCommandEditor.system.fetch("getCommands", null, guildID).then(commands => {
-
-                                                                    // Success
-                                                                    if (!commands.error) {
-
-                                                                        dsCommandEditor.system.oldCommands = commands.data;
-                                                                        dsCommandEditor.system.editor.set(commands.data);
-                                                                        dsCommandEditor.system.editor.expandAll();
-
-                                                                        eModal.alert({
-                                                                            message: 'Your command list has been successfully reseted!',
-                                                                            title: '<i class="fas fa-check"></i> Success!',
-                                                                            size: 'lg modal-dialog-centered'
-                                                                        });
-                                                                        $.LoadingOverlay("hide");
-
-                                                                    }
-
-                                                                    // Nope
-                                                                    else {
-
-                                                                        eModal.alert({
-                                                                            message: dsCommandEditor.errorModalMessage(commands.error.message),
-                                                                            title: '<i class="fas fa-exclamation-triangle"></i> Delete all Commands Error! Please, refresh the Page!',
-                                                                            size: 'lg modal-dialog-centered'
-                                                                        });
-                                                                        $.LoadingOverlay("hide");
-
-                                                                    }
-
-                                                                    // Complete
-                                                                    return;
-
-                                                                }).catch(err => {
-
-                                                                    eModal.alert({
-                                                                        message: dsCommandEditor.errorModalMessage(err.message),
-                                                                        title: '<i class="fas fa-exclamation-triangle"></i> Delete all Commands Error! Please, refresh the Page!',
-                                                                        size: 'lg modal-dialog-centered'
-                                                                    });
-                                                                    $.LoadingOverlay("hide");
-
-                                                                    return;
-                                                                });
-
-                                                            })
-
-                                                            // Error
-                                                            .catch(err => {
-                                                                eModal.alert({
-                                                                    message: dsCommandEditor.errorModalMessage(err.message),
-                                                                    title: '<i class="fas fa-exclamation-triangle"></i> Delete all Commands Error!',
-                                                                    size: 'lg modal-dialog-centered'
-                                                                });
-                                                                $.LoadingOverlay("hide");
-                                                            });
+                                                        // Delete All Commands
+                                                        deleteAllCommands();
 
                                                     });
 
@@ -271,7 +294,7 @@ dsCommandEditor.system = {
                                 }, 1000);
                             });
 
-                        // Button
+                        // Complete
                         $(this).blur();
 
                     }),
