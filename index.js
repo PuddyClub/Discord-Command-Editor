@@ -2,9 +2,7 @@ module.exports = function (express, app, options, callbackApp) {
 
     // Package Prepare
     const package = require('./package.json');
-    const latestVersion = require('latest-version');
-    const compareVersions = require('compare-versions');
-    const moment = require('moment');
+    const versionCheck = require('@tinypudding/puddy-lib/get/versionCheck');
 
     // Prepare Config
     const _ = require('lodash');
@@ -216,43 +214,32 @@ module.exports = function (express, app, options, callbackApp) {
     app.get('/js/*', (req, res, next) => { return readFile(req, res, next); });
     app.get('/css/*', (req, res, next) => { return readFile(req, res, next); });
 
-    // Check Version
-    const check_version = {
-        v: null,
-        t: null
-    };
-
     // Homepage
     app.get('*', async (req, res) => {
 
         // Index
         if (req.url === "/") {
 
-            // Time Now
-            const now = moment();
+            // Add Version
+            tinyCfg.version = {};
 
             // Allowed Check Version
             if (tinyCfg.checkVersion) {
 
-                // Check Version
-                if (!check_version.t || now.diff(check_version.t, 'hours') > 0) {
-                    check_version.t = now.add(1, 'hours');
-                    check_version.v = await latestVersion(package.name);
-                }
-
-                // Insert Version
-                tinyCfg.version = { needUpdate: compareVersions.compare(package.version, check_version.v, '<') };
+                // Get Version
+                const theVersion = await versionCheck(package);
+                tinyCfg.version.needUpdate = theVersion.needUpdate;
 
                 // Allowed Show Version
                 if (tinyCfg.showVersion) {
                     tinyCfg.version.now = package.version;
-                    tinyCfg.version.new = check_version.v;
+                    tinyCfg.version.new = theVersion.new;
                 }
 
             }
 
             // Nope
-            else { tinyCfg.version = { needUpdate: false }; }
+            else { tinyCfg.version.needUpdate = false; }
 
             // Convert to String
             tinyCfg.version = JSON.stringify(tinyCfg.version);
