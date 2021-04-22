@@ -29,7 +29,7 @@ dsCommandEditor.system = {
                 dsCommandEditor.system.cleanCommand = function (newCommand) {
 
                     for (const item in newCommand) {
-                        if (item !== "name" && item !== "description" && item !== "options") {
+                        if (item !== "name" && item !== "description" && item !== "options" && item !== "default_permission") {
                             delete newCommand[item];
                         }
                     }
